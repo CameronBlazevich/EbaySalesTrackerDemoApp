@@ -1,0 +1,75 @@
+﻿@model IEnumerable<EbaySalesTracker.Models.Listing>
+
+@{
+    ViewBag.Title = "Listings";
+}
+
+<h2>Listings</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    @Html.ActionLink("Update All Listings", "GetAllListings")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalNetFees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantitySold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ListingStatus)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalNetFees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuantitySold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ListingStatus)
+        </td>
+
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.ItemId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ItemId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ItemId }) |*@
+            @Html.ActionLink("Update Fees", "UpdateFeesById", new { id = item.ItemId })
+        </td>
+    </tr>
+}
+
+</table>

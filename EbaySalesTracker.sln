@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbaySalesTracker", "EbaySalesTracker\EbaySalesTracker.csproj", "{1497F74B-972D-4AED-A348-F15BB00ED539}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbaySalesTracker.Models", "EbaySalesTracker.Models\EbaySalesTracker.Models.csproj", "{37B00012-D6A3-4188-B60C-3C6D4DC4ECBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbaySalesTracker.Repository", "EbaySalesTracker.Repository\EbaySalesTracker.Repository.csproj", "{675E3E39-EF7B-46EB-B970-AEA53B15011B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5EDD76D1-EF56-450B-BD17-374FF1CA3C78}"
+	ProjectSection(SolutionItems) = preProject
+		Grant.sql = Grant.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1497F74B-972D-4AED-A348-F15BB00ED539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1497F74B-972D-4AED-A348-F15BB00ED539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1497F74B-972D-4AED-A348-F15BB00ED539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1497F74B-972D-4AED-A348-F15BB00ED539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37B00012-D6A3-4188-B60C-3C6D4DC4ECBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37B00012-D6A3-4188-B60C-3C6D4DC4ECBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37B00012-D6A3-4188-B60C-3C6D4DC4ECBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37B00012-D6A3-4188-B60C-3C6D4DC4ECBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{675E3E39-EF7B-46EB-B970-AEA53B15011B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{675E3E39-EF7B-46EB-B970-AEA53B15011B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{675E3E39-EF7B-46EB-B970-AEA53B15011B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{675E3E39-EF7B-46EB-B970-AEA53B15011B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

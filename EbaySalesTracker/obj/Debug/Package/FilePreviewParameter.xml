@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Default Web Site/eBaySalesTracker" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\cblaz\\OneDrive\\Documents\\Visual\ Studio\ 2015\\Projects\\EbaySalesTracker\\EbaySalesTracker\\obj\\Debug\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\cblaz\\OneDrive\\Documents\\Visual\ Studio\ 2015\\Projects\\EbaySalesTracker\\EbaySalesTracker\\obj\\Debug\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=desktop-gelvl3n;Initial Catalog=eBaySalesTracker; Integrated Security=True;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\cblaz\\OneDrive\\Documents\\Visual\ Studio\ 2015\\Projects\\EbaySalesTracker\\EbaySalesTracker\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="EbaySalesTracker.Repository.EbaySalesTrackerContext-Web.config Connection String" description="" value="Data Source=desktop-gelvl3n;Initial Catalog=eBaySalesTracker; Integrated Security=True;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\cblaz\\OneDrive\\Documents\\Visual\ Studio\ 2015\\Projects\\EbaySalesTracker\\EbaySalesTracker\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='EbaySalesTracker.Repository.EbaySalesTrackerContext']/@connectionString" />
+  </parameter>
+</parameters>
