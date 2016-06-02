@@ -10,5 +10,10 @@ namespace EbaySalesTracker.Repository
     public interface IInventoryRepository
     {
         List<InventoryItem> GetInventoryItemsByUser(string userId);
+        InventoryItem GetInventoryItemById(int id);
+        void CreateInventoryItem(InventoryItem item);
+        InventoryItem EditInventoryItem(InventoryItem item);
+        void DeleteInventoryItem(int id);
+        double CalculateAverageSalesPrice(int id);
     }
 }

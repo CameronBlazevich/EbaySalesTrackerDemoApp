@@ -16,7 +16,7 @@ var startup = function () {
         var defaultPositions = sceneLayoutService.get();
 
 
-        sceneStateManager.init(defaultPositions);
+        //sceneStateManager.init(defaultPositions);
         sceneStateManager.renderTiles("bd7844bc-b2cb-4ccb-b489-09776e1f69c2");
 
 

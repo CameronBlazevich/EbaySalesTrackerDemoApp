@@ -1,5 +1,5 @@
 ﻿var sceneStateManager = function () {
-    var sceneId = 1,
+    var sceneId = 0,
     animateSpeed = 760,
     tiles,
     init = function (args) {
@@ -41,8 +41,15 @@
     },
 
      renderInventoryTiles = function (data) {
-         $('div.tile[id^="Inventory"]').each(function () {
-             var tileDiv = $(this);
+         //$('div.tile[id^="Inventory"]').each(function () {
+         //    var tileDiv = $(this);
+         //    renderTile(data, tileDiv, 0);
+         //});
+         var i = 0;
+
+         $.each(data, function (index, data) {
+             var tileDiv = $('#InventoryItem' + data.Id);
+             console.log(tileDiv);
              renderTile(data, tileDiv, 0);
          });
 
@@ -67,7 +74,6 @@
      },
 
      renderTile = function (data, tile, fadeInAmount) {
-
          if (fadeInAmount > 0) tile.fadeOut(fadeInAmount);
          if (fadeInAmount > 0) {
              tile.fadeIn(fadeInAmount,
