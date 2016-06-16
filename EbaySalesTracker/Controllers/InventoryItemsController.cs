@@ -66,6 +66,22 @@ namespace EbaySalesTracker.Controllers
             }
             return View(inventoryItem);
         }
+        // GET: InventoryItems/Details/5
+        public ActionResult DetailsPartial(int? id,string viewName)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id));
+            if (inventoryItem == null)
+            {
+                return HttpNotFound();
+            }
+            //return Json(inventoryItem, JsonRequestBehavior.AllowGet);
+
+            return PartialView(viewName, inventoryItem);
+        }
 
         // GET: InventoryItems/Create
         public ActionResult Create()
@@ -82,6 +98,8 @@ namespace EbaySalesTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = UserManager.FindById(User.Identity.GetUserId());
+                inventoryItem.UserId = user.Id;
                 _InventoryRepository.CreateInventoryItem(inventoryItem);
                
                 return RedirectToAction("Index");

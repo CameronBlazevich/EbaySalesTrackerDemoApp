@@ -50,10 +50,12 @@
 @foreach (var item in Model.Listings) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
+            @{string convertedStartDate = item.StartDate.ToString("MM/dd/yyyy");}
+            @Html.DisplayFor(modelItem => convertedStartDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
+            @{string convertedEndDate = item.EndDate.ToString("MM/dd/yyyy");}
+            @Html.DisplayFor(modelItem => convertedEndDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)

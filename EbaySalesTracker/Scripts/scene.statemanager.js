@@ -4,30 +4,61 @@
     tiles,
     init = function (args) {
         tiles = args.tiles;
+        var wellDiv = $('<div/>', { 'class': 'well', 'id': 'well' });
+            wellDiv.appendTo('#container')
+        var carouselDiv = $('<div/>', { 'class': 'carousel slide', 'id': 'myCarousel' });
+            carouselDiv.appendTo('#well');
+        var carouselInnerDiv = $('<div/>', { 'class': 'carousel-inner', 'id': 'carouselInner' });
+            carouselInnerDiv.appendTo('#myCarousel');
+            var carouselItemDiv = $('<div/>', { 'class': 'item', 'id': 'carouselItem' });
+            var carouselRowDiv = $('<div/>', { 'class': 'row', 'id': 'carouselRow' });
+            var leftScroll = $('<a/>', { 'class': 'left carousel-control', 'href': '#myCarousel', 'data-slide': 'prev' });
+            var rightScroll = $('<a/>', { 'class': 'right carousel-control', 'href': '#myCarousel', 'data-slide': 'next' });
+        //var carouselActiveItemDiv = $('<div/>', { 'class': 'active item', 'id': 'carouselItem' });
+            var loopCount = 0;
+            
         $(tiles).each(function (index) {
             //build tiles
-            var tileDiv = $('<div/>', { 'class': 'tile', 'text': this.name, 'id': this.tileId });
-            tileDiv.css('border-top', '5px solid ' + this.scenes[sceneId].borderColor);
-            tileDiv.data(this);
-
-            moveTile(tileDiv, this.scenes[sceneId]);
-            tileDiv.appendTo('#container');
-
-            if (index < 8) {
-                tileDiv.addClass('top-row');
+            if (index == 0)
+            {
+                carouselItemDiv = $('<div/>', { 'class': 'active item', 'id': 'carouselItem' + loopCount });
+                carouselItemDiv.appendTo(carouselInnerDiv);
             }
 
-            tileDiv.draggable({ opacity: 0.9, zIndex: 5000, revert: 'invalid', revertDuration: 500 });
-            tileDiv.droppable({
-                tolerance: 'pointer',
-                drop: function (event, ui) {
-                    swapTiles(ui.draggable, $(this));
-                }
-            });
-        });
+            if (index != 0 && index % 4 == 0)
+            {
+                loopCount++;
+                carouselItemDiv = $('<div/>', { 'class': 'item', 'id': 'carouselItem' + loopCount });
+                carouselItemDiv.appendTo(carouselInnerDiv);
+                
+            }
+            carouselRowDiv = $('<div/>', { 'class': 'row', 'id': 'carouselRow'+loopCount });
+            carouselRowDiv.appendTo('#carouselItem'+loopCount)
+            var tileDiv = $('<div/>', { 'class': 'tile col-sm-3', 'text': this.name, 'id': this.tileId });
+            //tileDiv.css('border-top', '5px solid ' + this.scenes[sceneId].borderColor);
+            tileDiv.data(this);
 
-        $('#left').click(slideRight);
-        $('#right').click(slideLeft);
+            //moveTile(tileDiv, this.scenes[sceneId]);
+            
+            tileDiv.appendTo('#carouselRow'+loopCount);
+
+            //if (index < 8) {
+            //    tileDiv.addClass('top-row');
+            //}
+
+            //tileDiv.draggable({ opacity: 0.9, zIndex: 5000, revert: 'invalid', revertDuration: 500 });
+            //tileDiv.droppable({
+            //    tolerance: 'pointer',
+            //    drop: function (event, ui) {
+            //        swapTiles(ui.draggable, $(this));
+            //    }
+            //});
+        });
+        leftScroll.appendTo('#myCarousel');
+        rightScroll.appendTo('#myCarousel');
+
+        //$('#left').click(slideRight);
+        //$('#right').click(slideLeft);
     },
 
     renderTiles = function (userId) {
@@ -49,7 +80,7 @@
 
          $.each(data, function (index, data) {
              var tileDiv = $('#InventoryItem' + data.Id);
-             console.log(tileDiv);
+
              renderTile(data, tileDiv, 0);
          });
 

@@ -4,7 +4,7 @@ var tileBinder = function () {
     var templateBase = '/Templates/',
 
     bind = function (tileDiv, data, renderer) {
-        console.log(data);
+
         var tileName = tileDiv.attr('id');
         tileName = tileName.slice(0, -1);
         $.get(templateBase + tileName + '.html', function (templates) {
@@ -17,7 +17,7 @@ var tileBinder = function () {
             ];
             tileDiv.data().templates = acctTemplates;
             tileDiv.data().tileData = data;
-            console.log(tileDiv);
+
             renderer(tileDiv);
         });
     },

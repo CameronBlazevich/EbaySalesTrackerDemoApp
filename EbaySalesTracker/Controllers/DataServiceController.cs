@@ -42,7 +42,16 @@ namespace EbaySalesTracker.Controllers
             var user = UserManager.FindById(User.Identity.GetUserId());
             return Json(_InventoryRepository.GetInventoryItemsByUser(user.Id), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetInventoryItemById(int id)
+        {
+            //var user = UserManager.FindById(User.Identity.GetUserId());
+            return Json(_InventoryRepository.GetInventoryItemById(id), JsonRequestBehavior.AllowGet);
+        }
 
+        public ActionResult GetItemSalesDataByMonth(int id)
+        {
+            return Json(_InventoryRepository.CalculateItemProfitByMonth(id), JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

@@ -14,6 +14,8 @@ namespace EbaySalesTracker.Repository
         void CreateInventoryItem(InventoryItem item);
         InventoryItem EditInventoryItem(InventoryItem item);
         void DeleteInventoryItem(int id);
-        double CalculateAverageSalesPrice(int id);
+        double[] CalculateAverageSalesPriceAndProfit(int id);
+        int CalculateQuantitySold(int id);
+        object CalculateItemProfitByMonth(int id);
     }
 }

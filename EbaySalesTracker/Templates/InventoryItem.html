@@ -18,17 +18,24 @@
             {{include tmpl ='#InventoryItemTemplate_Base'/}}
         </section>
     </div>
+
     {{if AverageProfit>0}}
-    <div class="stickyfooter" style="background-color: #00ff21;">
-        {{else}}
-        <div class="stickyfooter" style="background-color: #ff0000;">
-            {{/if}}
-            <div class="Left Bold">Average Profit:</div>
-            <div class="Right">
-                <span class="Currency">{{:AverageProfit}}</span>
+        <div class="stickyfooter" style="background-color: #00ff21;">
+            {{else}}
+            <div class="stickyfooter" style="background-color: #ff0000;">
+                {{/if}}
+                <!--<div class="row">-->
+                    <div class="pull-left">Average Profit:</div>
+                   <!-- <div class="pull-right">Sold</div>-->
+                <!--</div>-->
+                <div class="pull-right">
+                    <span>{{:AverageProfit}}</span>
+                </div>
+                
+                <!--<span class="pull-right">{{:QuantitySold}}</span>-->
+                <div class="Clear" />
             </div>
-            <div class="Clear" />
-        </div>
+
 </script>
 
 <script id="InventoryItemTemplate_Large" type="text/x-jquery-tmpl">

@@ -122,6 +122,10 @@
     <Compile Include="Migrations\201605250249549_listingProfitField.Designer.cs">
       <DependentUpon>201605250249549_listingProfitField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606040010449_AddQuantitySold.cs" />
+    <Compile Include="Migrations\201606040010449_AddQuantitySold.Designer.cs">
+      <DependentUpon>201606040010449_AddQuantitySold.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -994,6 +998,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605250249549_listingProfitField.resx">
       <DependentUpon>201605250249549_listingProfitField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606040010449_AddQuantitySold.resx">
+      <DependentUpon>201606040010449_AddQuantitySold.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
