@@ -4,9 +4,12 @@ var tileBinder = function () {
     var templateBase = '/Templates/',
 
     bind = function (tileDiv, data, renderer) {
+
         var tileName = tileDiv.attr('id');
+        tileName = tileName.slice(0, -1);
         $.get(templateBase + tileName + '.html', function (templates) {
             $('body').append(templates);
+    
             var acctTemplates = [
                 tmpl(tileName, 'Small', data),
                 tmpl(tileName, 'Medium', data),

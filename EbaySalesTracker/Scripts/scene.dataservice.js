@@ -6,27 +6,32 @@ var dataService = new function () {
             $.getJSON(serviceBase + 'GetInventoryItems', {}, function (data) {
                 callback(data);
             });
+        },
         
-    //    getMarketIndexes = function (callback) {
-    //        $.getJSON(serviceBase + 'GetMarketIndexes', function (data) {
-    //            callback(data);
-    //        });
-    //    },
+    getInventoryDetailsPartial = function (id, callback) {
+        console.log("Here");
+        $.getJSON('../InventoryItems/DetailsPartial', { id: id }, function (data) {
+            callback(data);
+        });
 
-    //    getQuote = function (sym, callback) {
-    //        $.getJSON(serviceBase + 'GetQuote', { symbol: sym }, function (data) {
-    //            callback(data);
-    //        });
-    //    },
+    },
+          getInventoryItemById = function (id, callback) {
+              $.getJSON(serviceBase + 'GetInventoryItemById', { id: id }, function (data) {
+                  callback(data);
+              });
+          },
 
-    //    getTickerQuotes = function (callback) {
-    //        $.getJSON(serviceBase + 'GetTickerQuotes', function (data) {
-    //            callback(data);
-    //        });
+        getItemSalesDataByMonth = function (id, callback) {
+            $.getJSON(serviceBase + 'GetItemSalesDataByMonth', { id: id }, function (data) {                
+                    callback(data);               
+            });
         };
 
     return {
         GetInventoryItems: getInventoryItems,
+        GetInventoryDetailsPartial: getInventoryDetailsPartial,
+        GetInventoryItemById: getInventoryItemById,
+        GetItemSalesDataByMonth: getItemSalesDataByMonth
     //    getMarketIndexes: getMarketIndexes,
     //    getQuote: getQuote,
     //    getTickerQuotes: getTickerQuotes

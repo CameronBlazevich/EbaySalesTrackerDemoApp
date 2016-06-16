@@ -2,37 +2,123 @@
 @{
     ViewBag.Title = "Index";
 }
-@*<script id="InventoryItemTemplate" type="text/x-jsrender">
-
-    <div class="content">
-        <header>
-            <span>{{:Description}}</span>
-        </header>
-        <section>
-            <span class="Currency Positive" style="font-size: 20pt">{{:Cost}}</span>
-        </section>
-    </div>
-
-</script>*@
-
-
 
 <h2>Dashboard</h2>
-<div id="container">
-    <div class="InvItem"></div>
-    <div class="InvItem"></div>
-    <div class="InvItem"></div>
 
+
+<div class="container">
+    <div class="col-md-12" style="height:450px; margin-bottom:15px;">
+        <div class="row">
+            <div id="myBarChart"  class="col-md-5" style="height:450px;">
+
+            </div>
+            <div id="avgProfitBarChart" class="col-md-5" style="height:450px;">
+
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<div id="container"></div>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
        // $("#dialog").dialog({ autoOpen: false });
 
+        startup.init('Z485739881');
 
-           startup.init('Z485739881');
+        $('#myCarousel').carousel(
+            {
+            interval: 1000000
+            }
+        );
+
+        //$('#myCarousel').on('slid.bs.carousel', function () {
+        //    //alert("slid");
+        //});
 
     });
+    //function test(data) {
+    //    console.log(data);
+    //}
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+    
+    function drawChart() {
+        // Define the chart to be drawn.
+        var data = new google.visualization.DataTable();
+        var rows = new Array();
 
+        var dataForAvgProfit = new google.visualization.DataTable();
+        var rowsForAvgProfit = new Array();
+
+        dataForAvgProfit.addColumn('string', 'Item');
+        dataForAvgProfit.addColumn('number', 'Avg. Profit');
+
+        data.addColumn('string', 'Item');
+        data.addColumn('number', 'Qty Sold');
+        data.addColumn('number', 'Id');
+        dataService.GetInventoryItems(function (result) {
+            $(result).each(function (index) {
+                
+                rows.push(
+                    [$(this).attr('Description'), $(this).attr('QuantitySold'), $(this).attr('Id')]
+                );
+                rowsForAvgProfit.push(
+                    [$(this).attr('Description'), $(this).attr('AverageProfit')])
+            });            
+            data.addRows(rows);
+            dataForAvgProfit.addRows(rowsForAvgProfit);
+            var options = {
+                'title': 'Sample Inventory Chart',
+                titleFontSize:24
+                //backgroundColor: '#adadad',
+                //chartArea: {
+                //backgroundColor: {
+                //stroke: '#4322c0',
+                //strokeWidth: 3
+                //}
+            //}
+            };
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.BarChart(document.getElementById('myBarChart'));
+            var view = new google.visualization.DataView(data);
+            view.setColumns([0, 1]);
+
+            google.visualization.events.addListener(chart, 'select', selectHandler);
+            chart.draw(view, options);
+
+            var chartForAvgProfit = new google.visualization.ColumnChart(document.getElementById('avgProfitBarChart'));
+            chartForAvgProfit.draw(dataForAvgProfit, options);
+
+            function selectHandler() {
+                var selectedItem = chart.getSelection()[0];
+                if (selectedItem) {                   
+                    //inventory item id of selected bar/column: data.getValue(selectedItem.row, 2)
+                    //console.log(data.getValue(selectedItem.row, 2));                   
+                    //$('#avgProfitBarChart').replaceWith('<div id="invPartial"></div>');
+                    dataService.GetInventoryItemById(data.getValue(selectedItem.row, 2), renderDrillDownTemplate);
+                    //$('#avgProfitBarChart').load("../InventoryItems/DetailsPartial", { id: data.getValue(selectedItem.row, 2), viewName: "_InventoryItemDrillDown" });
+                    };
+               
+                
+            };
+        });
+
+    }
+    function closeDrillDown() {
+        drawChart();
+    }
+
+    function renderDrillDownTemplate(data) {
+
+        $.get('/Templates/InventoryItemDrillDown.html', function (template) {
+            $('body').append(template);
+            var html = $('#InventoryItemDrillDown').render(data);
+            $('#avgProfitBarChart').html(html);         
+        });
+        }
 </script>
 

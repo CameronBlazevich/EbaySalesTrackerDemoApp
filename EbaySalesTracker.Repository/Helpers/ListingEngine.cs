@@ -45,16 +45,13 @@ namespace EbaySalesTracker.Repository.Helpers
         {
             List <Listing> listings = new List<Listing>();
             var context = RequestBuilder.CreateNewApiCall(userToken);
-            GetSellerListCall getSellerListCall = new GetSellerListCall(context);
-            getSellerListCall.Pagination = new PaginationType();
-            getSellerListCall.Pagination.EntriesPerPage = 200;
-            getSellerListCall.Pagination.PageNumber = 1;
-            getSellerListCall.GranularityLevel = GranularityLevelCodeType.Medium;
-            getSellerListCall.StartTimeFrom = startDateFrom;
-            getSellerListCall.StartTimeTo = startDateTo;
-            getSellerListCall.Execute();
+            GetSellerEventsCall getSellerEventsCall = new GetSellerEventsCall(context);
 
-            var results = getSellerListCall.ApiResponse.ItemArray;
+            getSellerEventsCall.StartTimeFrom = startDateFrom;
+            getSellerEventsCall.StartTimeTo = startDateTo;
+            getSellerEventsCall.Execute();
+
+            var results = getSellerEventsCall.ApiResponse.ItemArray;
 
             foreach (ItemType result in results)
             {
@@ -71,16 +68,12 @@ namespace EbaySalesTracker.Repository.Helpers
 
             List<Listing> listings = new List<Listing>();
             var context = RequestBuilder.CreateNewApiCall(userToken);
-            GetSellerListCall getSellerListCall = new GetSellerListCall(context);
-            getSellerListCall.Pagination = new PaginationType();
-            getSellerListCall.Pagination.EntriesPerPage = 200;
-            getSellerListCall.Pagination.PageNumber = 1;
-            getSellerListCall.GranularityLevel = GranularityLevelCodeType.Medium;
-            getSellerListCall.EndTimeFrom = endDateFrom;
-            getSellerListCall.EndTimeTo = endDateTo;
-            getSellerListCall.Execute();
+            GetSellerEventsCall getSellerEventsCall = new GetSellerEventsCall(context);
+            getSellerEventsCall.EndTimeFrom = endDateFrom;
+            getSellerEventsCall.EndTimeTo = endDateTo;
+            getSellerEventsCall.Execute();
 
-            var results = getSellerListCall.ApiResponse.ItemArray;
+            var results = getSellerEventsCall.ApiResponse.ItemArray;
 
             foreach (ItemType result in results)
             {
@@ -102,7 +95,7 @@ namespace EbaySalesTracker.Repository.Helpers
             listing.StartDate = res.ListingDetails.StartTime;
             listing.EndDate = res.ListingDetails.EndTime;
             listing.Title = res.Title;
-            listing.QuantitySold = res.Quantity;
+            listing.QuantitySold = res.SellingStatus.QuantitySold;
             listing.ListingStatus = res.SellingStatus.ListingStatus;
             return listing;
         }

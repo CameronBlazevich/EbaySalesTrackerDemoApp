@@ -264,6 +264,7 @@
     <Content Include="Scripts\Libs\_references.js" />
     <Content Include="Scripts\scene.tile.binder.js" />
     <Content Include="Templates\InventoryItem.html" />
+    <Content Include="Templates\InventoryItemDrillDown.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -310,6 +311,7 @@
     <Content Include="Views\InventoryItems\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Scripts\scene.tile.renderer.js" />
+    <Content Include="Views\InventoryItems\_InventoryItemDrillDown.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

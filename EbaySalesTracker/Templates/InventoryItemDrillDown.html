@@ -1,0 +1,89 @@
+﻿<script id="InventoryItemDrillDown" type="text/x-jquery-tmpl">
+    <style>
+        .panel-body {
+            height: 90%;
+            background-color: darkgray;
+            color: white;
+            margin: 10px;
+        }
+
+            .panel-body h2 {
+                margin-top: 5px;
+            }
+    </style>
+    
+    <div class="row" style="height:22%">
+        <div class="col-md-3 panel-body">
+            <h2>{{:QuantitySold}}</h2>
+            <div class="small">Total Sold</div>
+        </div>
+        <div class="col-md-3 panel-body">
+            <h2>{{:AverageProfit}}</h2>
+            <div class="small">Avg. Profit</div>
+        </div>
+        <div class="col-md-offset-9">
+            <a id="closeDrillDown" class="close" onclick="closeDrillDown()">×</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row" style="height:22%">
+        <div class="col-md-3 panel-body">
+            <h2>0*</h2>
+            <div class="small">Total Fees</div>
+        </div>
+        <div class="col-md-3 panel-body">
+            <h2>{{:(AverageProfit * QuantitySold)}}</h2>
+            <div class="small">Total Profit</div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row" style="height:45%;">
+        <div class="col-md-12 panel-body" id="drillDownChart">
+            <h2>Line Graph of Profit Over Time</h2>
+        </div>
+    </div>
+    <input id="invId" hidden value="{{:Id}}" />
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        dataService.GetItemSalesDataByMonth($('#invId').val(), startChart);
+    }
+    );
+    function startChart(data) {
+
+        //google.charts.load('current', { packages: ['corechart'] });
+        //google.charts.setOnLoadCallback(drawChart);
+        drawChart(data);
+        function drawChart(data) {
+
+            var dataTable = new google.visualization.DataTable();
+            var rows = new Array();
+            var totalProfit = 0;
+
+            dataTable.addColumn('string', 'Month');
+            dataTable.addColumn('number', 'Profit');
+            //dataTable.addColumn('number', 'Cost');
+            //dataTable.addColumn('number', 'Fees');
+            //dataTable.addColumn('number', 'Id');
+            //dataTable.addColumn('number', 'QtySold');
+            //dataTable.addColumn('number', 'TotalSales');
+            $(data).each(function (index) {
+                console.log($(this));
+                //console.log($(this).attr('TotalSales') - $(this).attr('Fees') - $(this).attr('Cost'));
+                totalProfit += ($(this).attr('TotalSales') - $(this).attr('Fees') - $(this).attr('Cost'));
+                //rows.push([$(this).attr('Month').toString(), $(this).attr('TotalSales') - $(this).attr('Fees')]);
+                rows.push([$(this).attr('Month').toString(), totalProfit]);
+            })
+            dataTable.addRows(rows);
+
+            var chart = new google.visualization.LineChart(document.getElementById('drillDownChart'));
+            var view = new google.visualization.DataView(dataTable);
+
+            chart.draw(view);
+
+
+        }
+
+    }
+        
+    </script>

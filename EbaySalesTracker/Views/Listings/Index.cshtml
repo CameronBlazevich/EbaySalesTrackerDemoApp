@@ -50,10 +50,12 @@
 @foreach (var item in Model.Listings) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
+            @{string convertedStartDate = item.StartDate.ToString("MM/dd/yyyy");}
+            @Html.DisplayFor(modelItem => convertedStartDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
+            @{string convertedEndDate = item.EndDate.ToString("MM/dd/yyyy");}
+            @Html.DisplayFor(modelItem => convertedEndDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
@@ -77,7 +79,7 @@
         </td>
         <td>
             @Html.DropDownList("SelectInventoryItem_" + item.ItemId.ToString(), Model.InventoryItems,"Select", new {@onchange ="TestFunc(this.value, this.id)", @class = "form-control"})
-
+            @Html.Hidden("InventoryItemId_" + item.ItemId.ToString(),item.InventoryItemId)
         </td>
 
         <td>
@@ -95,9 +97,14 @@
 
 <script>
 
-    //$(document).ready(function(){
-    //    alert("ready");
-    //});
+    $(document).ready(function(){
+        $('select[id^="SelectInventoryItem"]').each(function() {
+            var listingItemId = $(this).attr('id').split("_");
+           // console.log($('#InventoryItemId_' + listingItemId[1]).val());
+            $(this).val($('#InventoryItemId_'+listingItemId[1]).val());
+
+        });
+    });
     function TestFunc(inventoryItemId, selectListId)
     {
         var listingItemId = selectListId.split("_");

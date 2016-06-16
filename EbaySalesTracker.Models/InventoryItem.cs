@@ -15,5 +15,7 @@ namespace EbaySalesTracker.Models
         public double? AverageSalesPrice { get; set; }
         public double? AverageProfit { get; set; }
         public string UserId { get; set; }
+        public int QuantitySold { get; set; }
+
     }
 }

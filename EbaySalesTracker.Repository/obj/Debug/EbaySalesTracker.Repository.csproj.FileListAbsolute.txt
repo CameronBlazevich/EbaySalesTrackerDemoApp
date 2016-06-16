@@ -47,3 +47,4 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.inventoryItemUserId.resources
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.inventoryItemUserIdIsString.resources
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.listingProfitField.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.AddQuantitySold.resources

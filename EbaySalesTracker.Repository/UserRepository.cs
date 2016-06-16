@@ -10,17 +10,23 @@ namespace EbaySalesTracker.Repository
 {
     public class UserRepository : IUserRepository
     {
+        string sessionId = "";
         private UserEngine engine = new UserEngine();
         public string GetSessionId(string userId)
         {
-            string sessionId = engine.GetSessionId();
-            if (sessionId == null) return null;
-
-            using (var context = new ApplicationDbContext())
+            using (var userContext = new ApplicationDbContext())
             {
-                var user = context.Users.Where(p => p.Id == userId).FirstOrDefault();
-                user.SessionId = sessionId;
-                context.SaveChanges();
+                sessionId = userContext.Users.Where(x => x.Id == userId).Select(u => u.SessionId).FirstOrDefault();
+
+                if (sessionId == "" || sessionId == null)
+                {
+                    sessionId = engine.GetSessionId();
+                    if (sessionId == null) return null;
+
+                    var user = userContext.Users.Where(p => p.Id == userId).FirstOrDefault();
+                    user.SessionId = sessionId;
+                    userContext.SaveChanges();
+                }                
             }
 
             return sessionId;

@@ -18,21 +18,23 @@ namespace EbaySalesTracker.Controllers
         IListingRepository _ListingRepository;
         IListingDetailRepository _ListingDetailRepository;
         IUserRepository _UserRepository;
+        IInventoryRepository _InventoryRepository;
         ApplicationDbContext ApplicationDbContext;
         UserManager<ApplicationUser> UserManager;
        string userId = "";
 
 
-        public HomeController() : this(null,null,null)
+        public HomeController() : this(null,null,null,null)
         {
         }
 
-        public HomeController(IListingRepository listingRepo, IListingDetailRepository listingDetailRepo, IUserRepository userRepo)
+        public HomeController(IListingRepository listingRepo, IListingDetailRepository listingDetailRepo, IUserRepository userRepo, IInventoryRepository inventoryRepo)
         {
             this.ApplicationDbContext = new ApplicationDbContext();
             _ListingRepository = listingRepo ?? ModelContainer.Instance.Resolve<IListingRepository>();
             _ListingDetailRepository = listingDetailRepo ?? ModelContainer.Instance.Resolve<IListingDetailRepository>();
             _UserRepository = userRepo ?? ModelContainer.Instance.Resolve<IUserRepository>();
+            _InventoryRepository = inventoryRepo ?? ModelContainer.Instance.Resolve<IInventoryRepository>();
 
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
         }
@@ -55,7 +57,8 @@ namespace EbaySalesTracker.Controllers
             //return Json(_ListingDetailRepository.GetListingDetailsByItemIdFromEbay(222106907586), JsonRequestBehavior.AllowGet);
            // return Json(_ListingDetailRepository.GetListingDetailsByItemIdFromEbay(222106907586, userToken), JsonRequestBehavior.AllowGet);
 
-            // return Json(_ListingRepository.GetListingsByEndDateFromEbay(new DateTime(2016,03,01), new DateTime(2016,05,20),userToken), JsonRequestBehavior.AllowGet);
+            //return Json(_ListingRepository.GetListingsByEndDateFromEbay(new DateTime(2016,03,01), new DateTime(2016,05,20),userToken), JsonRequestBehavior.AllowGet);
+            return Json(_InventoryRepository.CalculateItemProfitByMonth(1), JsonRequestBehavior.AllowGet);
 
             //return Json(_ListingRepository.GetListingsByStartDateFromEbay(new DateTime(2016,03,01), new DateTime(2016,05,20),userId, userToken), JsonRequestBehavior.AllowGet);
 
@@ -64,7 +67,7 @@ namespace EbaySalesTracker.Controllers
             //ViewBag.Message = "About Page";
             //_UserRepository.TestEbayApiStuff(userToken);
             //return Json(_UserRepository.GetSessionId(), JsonRequestBehavior.AllowGet);
-            return Json(_UserRepository.GetSessionId(userId), JsonRequestBehavior.AllowGet);
+            // return Json(_UserRepository.GetSessionId(userId), JsonRequestBehavior.AllowGet);
             //return Json(_UserRepository.GetUserToken(userId,sessionId), JsonRequestBehavior.AllowGet);
             //return Json();
 
@@ -87,7 +90,11 @@ namespace EbaySalesTracker.Controllers
             userId = user.Id;
             string sessionId = _UserRepository.GetSessionId(userId);
             sessionId = HttpUtility.UrlEncode(sessionId);
-            var url = "https://signin.sandbox.ebay.com/ws/eBayISAPI.dll?SignIn&runame=Cameron_Blazevi-CameronB-EbayFe-dsbmnl&SessID=" + sessionId;
+            //sandbox
+            //var url = "https://signin.sandbox.ebay.com/ws/eBayISAPI.dll?SignIn&runame=Cameron_Blazevi-CameronB-EbayFe-dsbmnl&SessID=" + sessionId;
+
+            //production
+            var url = "https://signin.ebay.com/ws/eBayISAPI.dll?SignIn&runame=Cameron_Blazevi-CameronB-EbayFe-urvcak&amp;SessID=" + sessionId;
 
             return Redirect(url);
             //return View();

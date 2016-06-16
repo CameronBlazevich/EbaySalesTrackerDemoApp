@@ -4,44 +4,45 @@
     var user = (ApplicationUser)ViewData["User"];
 }
 
-<div class="jumbotron">
-    <h1>eBay Sales Tracker</h1>
-    <p class="lead">eBay Sales Tracker provides an intuitive place to track your eBay earnings and profits.</p>
+<div class="container">
+    <div class="jumbotron row col-md-5">
+        <h1>eBay Sales Tracker</h1>
+        <p class="lead">eBay Sales Tracker provides an intuitive place to track your eBay earnings and profits.</p>
+    </div>
 </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                Grant eBaySalesTracker access to your eBay listings.
+            </p>
+            <p><a class="btn btn-primary" href='@Url.Action("GetUserToken", "Home")'>Get Started &raquo;</a></p>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            Grant eBaySalesTracker access to your eBay listings.
-        </p>
-        <p><a class="btn btn-primary" href='@Url.Action("GetUserToken", "Home")'>Get Started &raquo;</a></p>
-
-        @*@{ if (user.UserToken == null)
-            {
-                <h2>Getting started</h2>
-                <p>
-                    Grant eBaySalesTracker access to your eBay listings.
-                </p>
-                <p><a class="btn btn-primary" href='@Url.Action("GetUserToken", "Home")'>Get Started &raquo;</a></p>
-            }
-            else {
-                <p>
-                    You have already authorized eBaySalesTracker to access to your eBay listings.
-                </p>
-                <p><a class="btn btn-success disabled" href='@Url.Action("GetUserToken", "Home")'>Get Started &raquo;</a></p>
-
+            @*@{ if (user.UserToken == null)
+                {
+                    <h2>Getting started</h2>
+                    <p>
+                        Grant eBaySalesTracker access to your eBay listings.
+                    </p>
+                    <p><a class="btn btn-primary" href='@Url.Action("GetUserToken", "Home")'>Get Started &raquo;</a></p>
                 }
-            }*@
-</div>
-    <div class="col-md-4">
-        <h2></h2>
-        <p>View your eBay listings!</p>
-        <p><a class="btn btn-primary" href='@Url.Action("Index", "Listings")'>My Listings &raquo;</a></p>
+                else {
+                    <p>
+                        You have already authorized eBaySalesTracker to access to your eBay listings.
+                    </p>
+                    <p><a class="btn btn-success disabled" href='@Url.Action("GetUserToken", "Home")'>Get Started &raquo;</a></p>
+
+                    }
+                }*@
+        </div>
+        <div class="col-md-4">
+            <h2>View Listings</h2>
+            <p>View your eBay listings!</p>
+            <p><a class="btn btn-primary" href='@Url.Action("Index", "Listings")'>My Listings &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2></h2>
+            <p></p>
+            <p></p>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2></h2>
-        <p></p>
-        <p></p>
-    </div>
-</div>
