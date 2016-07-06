@@ -4,7 +4,7 @@
 }
 
 <h2>Dashboard</h2>
-
+<input type="hidden" id="clickedItemId" />
 
 <div class="container">
     <div class="col-md-12" style="height:450px; margin-bottom:15px;">
@@ -25,62 +25,64 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-       // $("#dialog").dialog({ autoOpen: false });
+                // $("#dialog").dialog({ autoOpen: false });
 
-        startup.init('Z485739881');
+                startup.init('Z485739881');
 
         $('#myCarousel').carousel(
             {
-            interval: 1000000
+                    interval: 1000000
             }
         );
 
-        //$('#myCarousel').on('slid.bs.carousel', function () {
-        //    //alert("slid");
-        //});
-
-    });
+                //$('#myCarousel').on('slid.bs.carousel', function () {
+                //    //alert("slid");
+                //});
+        
+            });
     //function test(data) {
     //    console.log(data);
-    //}
+    //};
     google.charts.load('current', { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawInitialChart);
     
-    function drawChart() {
-        // Define the chart to be drawn.
-        var data = new google.visualization.DataTable();
-        var rows = new Array();
+    function drawInitialChart() {
+            // Define the chart to be drawn.
+            var data = new google.visualization.DataTable();
+            var rows = new Array();
 
-        var dataForAvgProfit = new google.visualization.DataTable();
-        var rowsForAvgProfit = new Array();
+            var dataForAvgProfit = new google.visualization.DataTable();
+            var rowsForAvgProfit = new Array();
 
-        dataForAvgProfit.addColumn('string', 'Item');
-        dataForAvgProfit.addColumn('number', 'Avg. Profit');
+            dataForAvgProfit.addColumn('string', 'Item');
+            dataForAvgProfit.addColumn('number', 'Avg. Profit');
 
-        data.addColumn('string', 'Item');
-        data.addColumn('number', 'Qty Sold');
-        data.addColumn('number', 'Id');
-        dataService.GetInventoryItems(function (result) {
+            data.addColumn('string', 'Item');
+            data.addColumn('number', 'Qty Sold');
+            data.addColumn('number', 'Id');
+            dataService.GetInventoryItems(function (result) {
             $(result).each(function (index) {
-                
-                rows.push(
-                    [$(this).attr('Description'), $(this).attr('QuantitySold'), $(this).attr('Id')]
+
+                    rows.push(
+    
+                        [$(this).attr('Description'), $(this).attr('QuantitySold'), $(this).attr('Id')]
                 );
-                rowsForAvgProfit.push(
-                    [$(this).attr('Description'), $(this).attr('AverageProfit')])
-            });            
-            data.addRows(rows);
-            dataForAvgProfit.addRows(rowsForAvgProfit);
-            var options = {
+                    rowsForAvgProfit.push(
+    
+                        [$(this).attr('Description'), $(this).attr('AverageProfit')])
+            });
+                data.addRows(rows);
+                dataForAvgProfit.addRows(rowsForAvgProfit);
+                var options = {
                 'title': 'Sample Inventory Chart',
                 titleFontSize:24
-                //backgroundColor: '#adadad',
-                //chartArea: {
-                //backgroundColor: {
-                //stroke: '#4322c0',
-                //strokeWidth: 3
-                //}
-            //}
+                    //backgroundColor: '#adadad',
+                    //chartArea: {
+                    //backgroundColor: {
+                    //stroke: '#4322c0',
+                    //strokeWidth: 3
+                    //}
+                    //}
             };
             // Instantiate and draw the chart.
             var chart = new google.visualization.BarChart(document.getElementById('myBarChart'));
@@ -95,21 +97,22 @@
 
             function selectHandler() {
                 var selectedItem = chart.getSelection()[0];
-                if (selectedItem) {                   
+                if (selectedItem) {
+                    $('#clickedItemId').val(data.getValue(selectedItem.row, 2));
                     //inventory item id of selected bar/column: data.getValue(selectedItem.row, 2)
                     //console.log(data.getValue(selectedItem.row, 2));                   
                     //$('#avgProfitBarChart').replaceWith('<div id="invPartial"></div>');
                     dataService.GetInventoryItemById(data.getValue(selectedItem.row, 2), renderDrillDownTemplate);
                     //$('#avgProfitBarChart').load("../InventoryItems/DetailsPartial", { id: data.getValue(selectedItem.row, 2), viewName: "_InventoryItemDrillDown" });
-                    };
-               
-                
+                };
+
+
             };
         });
 
     }
     function closeDrillDown() {
-        drawChart();
+        drawInitialChart();
     }
 
     function renderDrillDownTemplate(data) {
@@ -117,8 +120,8 @@
         $.get('/Templates/InventoryItemDrillDown.html', function (template) {
             $('body').append(template);
             var html = $('#InventoryItemDrillDown').render(data);
-            $('#avgProfitBarChart').html(html);         
+            $('#avgProfitBarChart').html(html);
         });
-        }
+    }
 </script>
 
