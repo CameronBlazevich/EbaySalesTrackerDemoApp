@@ -20,6 +20,11 @@ var dataService = new function () {
                   callback(data);
               });
           },
+          getInventoryItemSalesOverTime = function (invItemId, callback) {
+              $.getJSON(serviceBase + 'GetDataForAverageProfitOverTime', { id: invItemId }, function (data) {
+                  callback(data);
+              });
+          },
 
         getItemSalesDataByMonth = function (id, callback) {
             $.getJSON(serviceBase + 'GetItemSalesDataByMonth', { id: id }, function (data) {                
@@ -31,7 +36,8 @@ var dataService = new function () {
         GetInventoryItems: getInventoryItems,
         GetInventoryDetailsPartial: getInventoryDetailsPartial,
         GetInventoryItemById: getInventoryItemById,
-        GetItemSalesDataByMonth: getItemSalesDataByMonth
+        GetItemSalesDataByMonth: getItemSalesDataByMonth,
+        GetInventoryItemSalesOverTime: getInventoryItemSalesOverTime
     //    getMarketIndexes: getMarketIndexes,
     //    getQuote: getQuote,
     //    getTickerQuotes: getTickerQuotes

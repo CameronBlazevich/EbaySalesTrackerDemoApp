@@ -53,5 +53,13 @@ namespace EbaySalesTracker.Controllers
             return Json(_InventoryRepository.CalculateItemProfitByMonth(id), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetDataForAverageProfitOverTime(int id)
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            var data = _ListingRepository.GetListingDataByInventoryItem(user.Id, id);
+            //test = EbaySalesTracker.Builders.DashboardBuilder.AverageProfitOverTime(user.Id, id);
+            return Json(data, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

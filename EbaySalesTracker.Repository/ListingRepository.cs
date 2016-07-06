@@ -219,7 +219,25 @@ namespace EbaySalesTracker.Repository
             DataContext.SaveChanges();
         }
 
-        //public double CalculateAndSaveProfit(long listingId)
+        public List<Listing> GetListingsByInventoryItem(string userId, int inventoryItemId)
+        {
+            var listings = new List<Listing>();
+            listings = DataContext.Listings.Where(x => x.InventoryItemId == inventoryItemId && x.QuantitySold > 0 && x.UserId == userId).OrderBy(x => x.EndDate).ToList();
+            foreach(var listing in listings)
+            {
+                listing.Profit = CalculateProfit(listing.ItemId);
+            }
+
+            return listings;
+        }
+
+        public object GetListingDataByInventoryItem(string userId, int inventoryItemId)
+        {
+            var listings = GetListingsByInventoryItem(userId, inventoryItemId);
+            var data = listings               
+                .Select(x => new {profit = x.Profit, endDate = x.EndDate});            
+            return data;
+        }
 
         public double CalculateProfit(long listingId)
         {

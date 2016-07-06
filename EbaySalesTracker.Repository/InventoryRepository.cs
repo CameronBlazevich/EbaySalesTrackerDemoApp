@@ -64,7 +64,7 @@ namespace EbaySalesTracker.Repository
             var result = from listing in DataContext.Listings
                          //join details in DataContext.ListingDetails on listing.ItemId equals details.ItemId
                          //join items in DataContext.InventoryItems on listing.InventoryItemId equals items.Id
-                         where (listing.InventoryItemId == id && listing.QuantitySold == 1)
+                         where (listing.InventoryItemId == id && listing.QuantitySold == 1 && listing.TotalNetFees > 0)
                          group listing by listing.EndDate.Month
                          into g
                          select new {Id = id, Cost = cost, Month = g.Key, QtySold = g.Sum(s => s.QuantitySold), TotalSales = g.Sum(s => s.CurrentPrice), Fees = g.Sum(s => s.TotalNetFees)};
@@ -95,7 +95,8 @@ namespace EbaySalesTracker.Repository
             double avgProfitBeforeCost = 0;
             double totalFees = 0;
             double avgTotalFees = 0;
-            List<Listing> listings = DataContext.Listings.Where(x => x.InventoryItemId == id && x.TotalNetFees != 0).ToList();
+            List<Listing> listings = GetListings(id);
+            
             if (listings.Count() == 0)
                 return avgsArray;
 
@@ -113,6 +114,12 @@ namespace EbaySalesTracker.Repository
             avgsArray[0] = avgPrice;
             avgsArray[1] = avgProfitBeforeCost;
             return avgsArray;
+        }
+
+        public virtual List<Listing> GetListings(int id)
+        {
+            List<Listing> listings = DataContext.Listings.Where(x => x.InventoryItemId == id && x.TotalNetFees != 0 && x.QuantitySold > 0).ToList();
+            return listings;
         }
     }
 }

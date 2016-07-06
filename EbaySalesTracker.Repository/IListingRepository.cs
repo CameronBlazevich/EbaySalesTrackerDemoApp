@@ -23,6 +23,7 @@ namespace EbaySalesTracker.Repository
         void DissociateInventoryItem(long listingId);
         double CalculateProfit(long listingId);
         void UpdateProfit(long listingId);
-
+        List<Listing> GetListingsByInventoryItem(string userId, int inventoryItemId);
+        object GetListingDataByInventoryItem(string userId, int inventoryItemId);
     }
 }
