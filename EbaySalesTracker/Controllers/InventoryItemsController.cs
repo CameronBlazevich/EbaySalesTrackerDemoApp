@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EbaySalesTracker.Controllers
 {
+    [Authorize]
     public class InventoryItemsController : Controller
     {
         IListingRepository _ListingRepository;

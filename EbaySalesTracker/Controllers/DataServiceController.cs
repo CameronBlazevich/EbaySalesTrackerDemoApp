@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace EbaySalesTracker.Controllers
 {
+    [Authorize]
     public class DataServiceController : Controller
     {
         //Will be used for ajax calls from dashboard page

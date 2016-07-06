@@ -13,6 +13,7 @@ using EbaySalesTracker.ViewModels;
 
 namespace EbaySalesTracker.Controllers
 {
+    [Authorize]
     public class ListingsController : Controller
     {
         //private EbaySalesTrackerContext db = new EbaySalesTrackerContext();
