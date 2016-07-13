@@ -2,20 +2,32 @@
     <style>
         .panel-body {
             height: 90%;
-            background-color: darkgray;
-            color: white;
+            /*background-color: darkgray;*/
+            /*color: white;*/
             margin: 10px;
         }
 
         .panel-body h2 {
                 margin-top: 5px;
         }
+        div.selectablePanel{
+            background-color: white;
+            margin-top:0px;
+            margin-bottom:20px;
+        }
         div.selectablePanel.active {
-            background-color: blue;    
+            /*background-color: #3366CC;*/  
+            box-shadow:  10px 10px 5px #888888;
+            border:1px solid black;
         }
 
         div.selectablePanel:hover {
-            background-color: aqua;   
+            /*background-color: #f5f5f5;*/
+            box-shadow:  10px 10px 5px #888888;
+            border:1px solid black;   
+        }
+        #drillDownChart {
+            padding:0px;
         }
     </style>
     
@@ -44,7 +56,7 @@
         </div>
     </div>
     <div class="clearfix"></div>
-    <div class="row" style="height:45%;">
+    <div class="row" style="height:50%;">
         <div class="col-md-12 panel-body" id="drillDownChart">
             <!--<h2>Line Graph of Profit Over Time</h2>-->
         </div>
@@ -57,7 +69,8 @@
     });
 
     $(document).on('click', '.selectablePanel', function () {
-        $('.active').not($(this)).removeClass('active');
+        //need to combine this .not() selector...seems tricky when using $this object
+        $('.active').not($(this)).not('#carouselItem0').removeClass('active');
         var callbackFxn = 'draw_' + $(this).attr('id') + '_chart';
         
         //console.log(callbackFxn);
@@ -117,7 +130,8 @@
                 titleFontSize: 18,
                 vAxis: { title: 'Profit ($)' },
                 hAxis: { title: 'Month' },
-                pointSize: 5
+                pointSize: 5,
+                'height':222
             };
         }
 
@@ -143,7 +157,8 @@
                 titleFontSize: 18,
                 vAxis: { title: 'Profit ($)' },
                 //hAxis: { title: 'Listing Number' },
-                pointSize: 5
+                pointSize: 5,
+                'height': 222
             };
         }
         var chart = new google.visualization.LineChart(document.getElementById('drillDownChart'));
