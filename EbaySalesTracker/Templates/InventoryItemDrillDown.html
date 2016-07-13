@@ -70,7 +70,7 @@
 
     $(document).on('click', '.selectablePanel', function () {
         //need to combine this .not() selector...seems tricky when using $this object
-        $('.active').not($(this)).not('#carouselItem0').removeClass('active');
+        $('.active').not($(this)).not('[id^="carouselItem"]').removeClass('active');
         var callbackFxn = 'draw_' + $(this).attr('id') + '_chart';
         
         //console.log(callbackFxn);
