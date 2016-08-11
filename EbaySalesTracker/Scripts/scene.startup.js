@@ -17,7 +17,7 @@ var startup = function () {
 
 
         //sceneStateManager.init(defaultPositions);
-        sceneStateManager.renderTiles("bd7844bc-b2cb-4ccb-b489-09776e1f69c2");
+        
 
 
     };

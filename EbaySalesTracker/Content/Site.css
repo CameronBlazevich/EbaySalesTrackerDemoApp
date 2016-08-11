@@ -24,3 +24,11 @@ select,
 textarea {
     max-width: 280px;
 }
+/*.table-striped>tbody>tr:nth-child(even)>td, 
+.table-striped>tbody>tr:nth-child(even)>th {
+   background-color: #fff;
+ }*/
+
+.topnav {
+    font-size: 14px; 
+}

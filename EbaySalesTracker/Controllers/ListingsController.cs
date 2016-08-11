@@ -51,12 +51,15 @@ namespace EbaySalesTracker.Controllers
            
             var items = _InventoryRepository.GetInventoryItemsByUser(userId).ToList();
             listingsViewModel.Items = items;
-
+            
             foreach (var listing in listingsViewModel.Listings)
             {
                 listing.Profit = _ListingRepository.CalculateProfit(listing.ItemId);
-                //listingsViewModel.InventoryItems = new SelectList(listingsViewModel.Items, "Id", "Description", listing.InventoryItemId);
-
+                if (listing.InventoryItemId != null)
+                {
+                    listing.InventoryItem = items.Where(x => x.Id == listing.InventoryItemId).First();
+                    //listingsViewModel.InventoryItems = new SelectList(listingsViewModel.Items, "Id", "Description", listing.InventoryItemId);
+                }
             }
            
 

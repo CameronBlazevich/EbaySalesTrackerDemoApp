@@ -100,7 +100,29 @@ namespace EbaySalesTracker.Repository.Helpers
             return listing;
         }
 
+        #endregion
 
+        #region sandboxMethods
+        public List<Listing> GetSandboxListingsByEndDateFromEbay(DateTime endDateFrom, DateTime endDateTo, string userToken)
+        {
+
+            List<Listing> listings = new List<Listing>();
+            var context = RequestBuilder.CreateNewSandboxApiCall();
+            GetSellerEventsCall getSellerEventsCall = new GetSellerEventsCall(context);
+            getSellerEventsCall.EndTimeFrom = endDateFrom;
+            getSellerEventsCall.EndTimeTo = endDateTo;
+            getSellerEventsCall.Execute();
+
+            var results = getSellerEventsCall.ApiResponse.ItemArray;
+
+            foreach (ItemType result in results)
+            {
+                Listing listing = new Listing();
+                listing = MapResultToListing(result);
+                listings.Add(listing);
+            }
+            return listings;
+        }
 
 
         #endregion

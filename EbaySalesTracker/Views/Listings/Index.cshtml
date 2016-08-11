@@ -4,129 +4,190 @@
     ViewBag.Title = "Listings";
 }
 
-<h2>Listings</h2>
+<style>
+    .no-underline {
+        text-decoration:none !important;
+    }
+    th {
+        white-space: nowrap;
+        text-align: center;
+    }
+    td {
+        text-align: center;
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<p>
-    @Html.ActionLink("Update All Listings", "GetAllListings")
-</p>
-<table class="table table-striped table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Listing.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Listing.EndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Listing.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Listing.CurrentPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Listing.TotalNetFees)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Listing.Profit)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Listing.QuantitySold)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Listing.ListingStatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InventoryItems)
-            <a href="~/InventoryItems/Create"><i class="glyphicon glyphicon-plus"></i></a>
-        </th>
+</style>
+
+<div class="panel" style="margin-top:10px">
+    <div class="panel-heading text-right">
+        <h3 class="pull-left">All Listings</h3>
+        
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+
+            @Html.ActionLink("Update All Listings", "GetAllListings", null, new { @class = "btn btn-primary" })
+
+        </div>
+    <div class="panel-body col-mid-12">
+
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Listing.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Listing.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Listing.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Listing.CurrentPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Listing.TotalNetFees)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Listing.Profit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Listing.QuantitySold)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Listing.ListingStatus)
+                </th>
+                <th nowrap>
+                    @Html.DisplayNameFor(model => model.InventoryItems) <a href="~/InventoryItems/Create"><i class="glyphicon glyphicon-plus"></i></a>
+                </th>
 
 
-        <th></th>
-    </tr>
+                <th></th>
+            </tr>
 
-@foreach (var item in Model.Listings) {
-    <tr>
-        <td>
-            @{string convertedStartDate = item.StartDate.ToString("MM/dd/yyyy");}
-            @Html.DisplayFor(modelItem => convertedStartDate)
-        </td>
-        <td>
-            @{string convertedEndDate = item.EndDate.ToString("MM/dd/yyyy");}
-            @Html.DisplayFor(modelItem => convertedEndDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CurrentPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalNetFees)
-        </td>
-        <td>
-            <p id="@("profit_"+item.ItemId)">@item.Profit</p>
-            @*<input type="text" class="col-xs-1" />*@
-            @*@Html.DisplayFor(modelItem => item.Profit)*@
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuantitySold)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ListingStatus)
-        </td>
-        <td>
-            @Html.DropDownList("SelectInventoryItem_" + item.ItemId.ToString(), Model.InventoryItems,"Select", new {@onchange ="TestFunc(this.value, this.id)", @class = "form-control"})
-            @Html.Hidden("InventoryItemId_" + item.ItemId.ToString(),item.InventoryItemId)
-        </td>
+            @foreach (var item in Model.Listings)
+            {
+                <tr>
+                    <td>
+                        @{string convertedStartDate = item.StartDate.ToString("MM/dd/yyyy");}
+                        @Html.DisplayFor(modelItem => convertedStartDate)
+                    </td>
+                    <td>
+                        @{string convertedEndDate = item.EndDate.ToString("MM/dd/yyyy");}
+                        @Html.DisplayFor(modelItem => convertedEndDate)
+                    </td>
+                    <td style="text-align:left;">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrentPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalNetFees)
+                    </td>
+                    <td>
+                        <p id="@("profit_" + item.ItemId)">@item.Profit</p>
+                        @*<input type="text" class="col-xs-1" />*@
+                        @*@Html.DisplayFor(modelItem => item.Profit)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantitySold)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ListingStatus)
+                    </td>
+                    <td>
+                        <div class="dropdown" data-toggle="tooltip" title="@(item.InventoryItem == null ? "Select..." : item.InventoryItem.Description )">
+                            <button nowrap class="btn dropdown-toggle btn-block btn-link no-underline" style="color:black" type="button" data-toggle="dropdown">
+                                @{if (@item.InventoryItem != null)
+                                    {
+                                        <p>@(item.InventoryItem.Description.Length > 17? item.InventoryItem.Description.Substring(0, 17) + "..." : item.InventoryItem.Description)<span class="caret"></span></p>
+                                    }
+                                    else
+                                    {
+                                        <p>Select...<span class="caret"></span></p>
+                                    }
+                                }
+                                
+                            </button>
+                            <ul class="dropdown-menu">
+                                @foreach (var invItem in Model.Items)
+                                {
+                                    <li><a href="javascript:TestFunc(@invItem.Id,@item.ItemId)">@invItem.Description</a></li>
+                                }
+                            </ul>
+                        </div>
+                       
+                            @*@Html.DropDownList("SelectInventoryItem_" + item.ItemId.ToString(), Model.InventoryItems, "Select", new { @onchange = "TestFunc(this.value, this.id)", @class = "form-control" })
+                            @Html.Hidden("InventoryItemId_" + item.ItemId.ToString(), item.InventoryItemId)*@
+</td>
 
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.ItemId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ItemId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ItemId }) |*@
-            @*@Html.ActionLink("Update Fees", "UpdateFeesById", new { id = item.ItemId })*@
-        </td>
-    </tr>
-}
+                    <td>
+                        @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Java <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">jmeter</a></li>
+                            <li><a href="#">EJB</a></li>
+                            <li><a href="#">Jasper Report</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>*@
+                        @*@Html.ActionLink("Edit", "Edit", new { id=item.ItemId }) |
+                            @Html.ActionLink("Details", "Details", new { id=item.ItemId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id=item.ItemId }) |*@
+                        @*@Html.ActionLink("Update Fees", "UpdateFeesById", new { id = item.ItemId })*@
+                    </td>
+                </tr>
+                            }
 
-</table>
-
+        </table>
+    </div>
+</div>
 
 
 <script>
 
-    $(document).ready(function(){
-        $('select[id^="SelectInventoryItem"]').each(function() {
-            var listingItemId = $(this).attr('id').split("_");
-           // console.log($('#InventoryItemId_' + listingItemId[1]).val());
-            $(this).val($('#InventoryItemId_'+listingItemId[1]).val());
+    $(document).ready(function () {
 
-        });
+        $('[data-toggle="tooltip"]').tooltip();
+       
     });
-    function TestFunc(inventoryItemId, selectListId)
-    {
-        var listingItemId = selectListId.split("_");
+
+    $(".dropdown-menu li a").click(function () {
+        var invItemDesc = "";
+        if ($(this).text().length > 17)
+        {
+            invItemDesc = $(this).text().substring(0, 17) + '...'
+        }
+        else {
+            invItemDesc = $(this).text();
+        }
+        $(this).parents(".dropdown").find('.btn').html(invItemDesc + ' <span class="caret"></span>');
+        $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+    });
+
+    function TestFunc(inventoryItemId, listingItemId) {
+        //var listingItemId = selectListId.split("_");
+        //console.log(inventoryItemId, listingItemId);
 
         $.ajax({
             type: 'POST',
             url: '/Listings/AssociateInventoryItemToListing',
-            data: { inventoryItemId: inventoryItemId, listingItemId:listingItemId[1] },
+            data: { inventoryItemId: inventoryItemId, listingItemId: listingItemId },
             cache: false,
             success: function (result) {
-                $('#profit_'+listingItemId[1]).text(result.profit.toFixed(2));                
+                $('#profit_' + listingItemId).text(result.profit.toFixed(2));
             }
         });
 
-        function CalculateProfit(listingItemId)
-        {
-           // $('#profit_' + listingItemId).val("5");
-            console.log(listingItemId);
+        function CalculateProfit(listingItemId) {
+            // $('#profit_' + listingItemId).val("5");
+            //console.log(listingItemId);
         }
 
 
     }
 
-   
+
 </script>

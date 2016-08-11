@@ -131,8 +131,8 @@ namespace EbaySalesTracker.Repository
                 netFees += detail.NetAmount;
                 grossFees += detail.GrossAmount;
             }
-            listing.TotalNetFees = netFees;
-            listing.TotalGrossFees = grossFees;
+            listing.TotalNetFees = Math.Round(netFees,2);
+            listing.TotalGrossFees = Math.Round(grossFees,2);
             DataContext.SaveChanges();
     }
 
@@ -248,8 +248,13 @@ namespace EbaySalesTracker.Repository
             {
                 inventoryItem = DataContext.InventoryItems.Where(i => i.Id == listing.InventoryItemId).FirstOrDefault();
             }
-
-            profit = listing.CurrentPrice - listing.TotalNetFees - inventoryItem.Cost;
+            if (listing.QuantitySold > 0)
+            {
+                profit = Math.Round(listing.CurrentPrice - listing.TotalNetFees - inventoryItem.Cost,2);
+            }
+            else {
+                profit = 0;
+            }
 
             return profit;
         }

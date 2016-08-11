@@ -4,7 +4,7 @@
     tiles,
     init = function (args) {
         tiles = args.tiles;
-        var wellDiv = $('<div/>', { 'class': 'well', 'id': 'well' });
+        var wellDiv = $('<div/>', { 'class': 'panel', 'id': 'well' });
             wellDiv.appendTo('#container')
         var carouselDiv = $('<div/>', { 'class': 'carousel slide', 'id': 'myCarousel' });
             carouselDiv.appendTo('#well');
@@ -32,10 +32,10 @@
                 carouselItemDiv.appendTo(carouselInnerDiv);
                 
             }
-            carouselRowDiv = $('<div/>', { 'class': 'row', 'id': 'carouselRow'+loopCount });
+            carouselRowDiv = $('<div/>', { 'class': 'row', 'id': 'carouselRow'+loopCount});
             carouselRowDiv.appendTo('#carouselItem'+loopCount)
             var tileDiv = $('<div/>', { 'class': 'tile col-sm-3', 'text': this.name, 'id': this.tileId });
-            //tileDiv.css('border-top', '5px solid ' + this.scenes[sceneId].borderColor);
+            tileDiv.css({'border-right': 'medium solid ' + this.borderColor, 'background-color':'#fff'});
             tileDiv.data(this);
 
             //moveTile(tileDiv, this.scenes[sceneId]);

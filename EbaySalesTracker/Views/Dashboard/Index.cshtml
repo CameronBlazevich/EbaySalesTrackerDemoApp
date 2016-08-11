@@ -2,32 +2,116 @@
 @{
     ViewBag.Title = "Index";
 }
+<style>
+    #container {
+        margin-top:40px;
+    }
+    .bar-chart {
+        border:2px solid #dcdcdc;
+        margin-bottom:15px;
+    }
 
-<h2>Dashboard</h2>
-<input type="hidden" id="clickedItemId" />
+    .intro-box {
+        height:150px;
+        margin-top:10px;
+    }
+    header {
+        /*margin: -15px -20px;*/
+    }
+    .intro-box-content {
+        margin-top:15px;
+    }
+    .stats-row {
+        margin-bottom:-5px;
+    }
+    .stat-item {
+        display:inline-block;
+        padding-right:15px;
+    }
+    .stat-item .name {
+        margin-bottom:2px;
+    }
+    hr {
+        border-top:2px solid #dcdcdc;
+        margin:0px;
+    }
+    .stat-item-left
+    {
+        border-right:2px solid #dcdcdc;
+    }
+    /*.stat-item-bottom {
+        border-top:solid;
+    }*/
+    .stat-item-right {
+        /*border-left:solid;*/
+        padding-left:15px;
 
-<div class="container">
-    <div class="col-md-12" style="height:450px; margin-bottom:15px;">
-        <div class="row">
-            <div id="myBarChart"  class="col-md-5" style="height:450px;">
+    }
+    /*.stat-item-top {
+        border-bottom:solid;
+    }*/
 
+</style>
+
+
+<div class="row"style="height:150px;">
+    <div class="col-lg-3 col-md-3 panel intro-box">
+        
+            <header><h5>TOP PERFORMERS</h5></header>
+            <div class="intro-box-content">
+                <div class="stats-row">
+                    <div class="stat-item stat-item-left stat-item-top">
+                        <h6 class="name">Best Seller</h6>
+                        <p>Best Selling Item</p>
+                    </div>
+                    <div class="stat-item stat-item-right stat-item-top">
+                        <h6 class="name">Highest Margin</h6>
+                        <p>Highest Margin</p>
+                    </div>
+                </div>
+                <hr />
+                <div class="stats-row">
+                    <div class="stat-item stat-item-left stat-item-bottom">
+                        <h6 class="name">Avg. Profit</h6>
+                        <p>Highest Ave Prof</p>
+                    </div>
+                    <div class="stat-item stat-item-right stat-item-bottom">
+                        <h6 class="name">Total Profit</h6>
+                        <p>Total Item Prof</p>
+                    </div>
+                </div>
             </div>
-            <div id="avgProfitBarChart" class="col-md-5" style="height:450px;">
+       
+    </div>
+    <div class="col-lg-2 col-md-2 col-lg-offset-1 col-md-offset-1 panel intro-box"></div>
+    <div class="col-lg-2 col-md-2 col-lg-offset-1 col-md-offset-1 panel intro-box"></div>
+    <div class="col-lg-2 col-md-2 col-lg-offset-1 col-md-offset-1 panel intro-box"></div>
+</div>
+    <input type="hidden" id="clickedItemId" />
 
+   
+        <div class="row" style="height:450px; margin-bottom:15px;">
+            
+                <div id="myBarChart" class="col-md-6 panel bar-chart" style="height:450px;">
+
+                </div>
+                <div id="avgProfitBarChart" class="col-md-6 panel bar-chart" style="height:450px;">
+
+                
             </div>
         </div>
-    </div>
-</div>
+    
 
 
-<div id="container"></div>
+    <div id="container" class="row"></div>
 
 
 <script type="text/javascript">
     $(document).ready(function () {
                 // $("#dialog").dialog({ autoOpen: false });
 
-                startup.init('Z485739881');
+        //startup.init('Z485739881');
+        sceneLayoutService.get();
 
         $('#myCarousel').carousel(
             {
@@ -74,6 +158,7 @@
                 data.addRows(rows);
                 dataForAvgProfit.addRows(rowsForAvgProfit);
                 var options = {
+                    backgroundColor: '#fff',
                 'title': 'Sample Inventory Chart',
                 titleFontSize:24
                     //backgroundColor: '#adadad',

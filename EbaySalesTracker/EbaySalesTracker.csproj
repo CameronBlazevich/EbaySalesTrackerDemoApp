@@ -195,7 +195,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="css\font-awesome.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\Libs\jquery-2.2.3.intellisense.js" />
+    <Content Include="Content\landing-page.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -229,6 +238,11 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="img\banner-bg.jpg" />
+    <Content Include="img\dog.png" />
+    <Content Include="img\intro-bg.jpg" />
+    <Content Include="img\ipad.png" />
+    <Content Include="img\phones.png" />
     <Content Include="Scripts\Libs\jquery.easing.1.3.js" />
     <Content Include="Scripts\Libs\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\Libs\jquery-ui-1.11.4.min.js" />
