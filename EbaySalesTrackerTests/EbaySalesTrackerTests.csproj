@@ -69,8 +69,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BllUnitTests\InventoryBllTests.cs" />
-    <Compile Include="BllUnitTests\InventoryBllTestsHelpers.cs" />
     <Compile Include="InventoryRepositoryTestHelpers.cs" />
     <Compile Include="InventoryRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
