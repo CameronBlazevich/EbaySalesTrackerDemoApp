@@ -109,7 +109,11 @@ namespace EbaySalesTrackerTests
                 Description = "TestItem 0",
                 Cost = 1.23,
                 QuantitySold = 4,
-                Quantity = 2
+                Quantity = 2,
+                UserId = "2",
+                AverageSalesPrice = null,
+                AverageProfit = null
+
             };
             var item1 = new InventoryItem
             {
@@ -117,7 +121,10 @@ namespace EbaySalesTrackerTests
                 Description = "TestItem 1",
                 Cost = 2.34,
                 QuantitySold = 3,
-                Quantity = 4
+                Quantity = 4,
+                UserId = "1",
+                AverageSalesPrice = null,
+                AverageProfit = null
             };
             var item2 = new InventoryItem
             {
@@ -125,7 +132,10 @@ namespace EbaySalesTrackerTests
                 Description = "TestItem 2",
                 Cost = 3.45,
                 QuantitySold = 2,
-                Quantity = 6
+                Quantity = 6,
+                UserId = "1",
+                AverageSalesPrice = null,
+                AverageProfit = null
             };
             var item3 = new InventoryItem
             {
@@ -133,7 +143,10 @@ namespace EbaySalesTrackerTests
                 Description = "TestItem 3",
                 Cost = 4.56,
                 QuantitySold = 1,
-                Quantity = 0
+                Quantity = 0,
+                UserId = "1",
+                AverageSalesPrice = null,
+                AverageProfit = null
             };
             var item4 = new InventoryItem
             {
@@ -141,7 +154,10 @@ namespace EbaySalesTrackerTests
                 Description = "TestItem 4",
                 Cost = 5.67,
                 QuantitySold = 0,
-                Quantity = 8
+                Quantity = 8,
+                UserId = "1",
+                AverageSalesPrice = null,
+                AverageProfit = null
             };
 
             items.Add(item0);

@@ -8,10 +8,10 @@
 /// <reference path="jquery-ui-1.11.4.min.js" />
 /// <reference path="modernizr-2.6.2.js" />
 /// <reference path="respond.js" />
-/// <reference path="jsrender.js"/>
 /// <reference path="../scene.dataservice.js" />
 /// <reference path="../scene.layoutservice.js" />
 /// <reference path="../scene.startup.js" />
 /// <reference path="../scene.statemanager.js" />
 /// <reference path="../scene.tile.binder.js" />
 /// <reference path="../scene.tile.renderer.js" />
+/// <reference path="../ui.helpers.js" />

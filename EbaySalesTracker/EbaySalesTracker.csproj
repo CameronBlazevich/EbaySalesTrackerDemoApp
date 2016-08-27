@@ -278,6 +278,7 @@
     <Content Include="Scripts\scene.statemanager.js" />
     <Content Include="Scripts\Libs\_references.js" />
     <Content Include="Scripts\scene.tile.binder.js" />
+    <Content Include="Scripts\ui.helpers.js" />
     <Content Include="Templates\InventoryItem.html" />
     <Content Include="Templates\InventoryItemDrillDown.html" />
     <Content Include="Web.config" />

@@ -137,6 +137,10 @@
     <Compile Include="Migrations\201605211409076_TokenExpDate.Designer.cs">
       <DependentUpon>201605211409076_TokenExpDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608190422511_Testing.cs" />
+    <Compile Include="Migrations\201608190422511_Testing.Designer.cs">
+      <DependentUpon>201608190422511_Testing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OperationStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605211409076_TokenExpDate.resx">
       <DependentUpon>201605211409076_TokenExpDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608190422511_Testing.resx">
+      <DependentUpon>201608190422511_Testing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,14 +3,30 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Practices.Unity;
+
 
 namespace EbaySalesTracker.Repository
 {
     public class InventoryRepository:RepositoryBase<EbaySalesTrackerContext>, IInventoryRepository
     {
-        public List<InventoryItem> GetInventoryItemsByUser(string userId)
+        IListingRepository _ListingRepository;
+        public InventoryRepository() 
+        {
+
+        }
+
+        public InventoryRepository(IListingRepository listingRepo)
+        {
+            
+            _ListingRepository = listingRepo ?? ModelContainer.Instance.Resolve<IListingRepository>();
+            //_ListingDetailRepository = listingDetailRepo ?? ModelContainer.Instance.Resolve<IListingDetailRepository>();
+           // _UserRepository = userRepo ?? ModelContainer.Instance.Resolve<IUserRepository>();
+            //_InventoryRepository = inventoryRepo ?? ModelContainer.Instance.Resolve<IInventoryRepository>();
+
+          
+        }
+        public IEnumerable<InventoryItem> GetInventoryItemsByUser(string userId)
         {
             List<InventoryItem> items = new List<InventoryItem>();
             
@@ -19,18 +35,18 @@ namespace EbaySalesTracker.Repository
                 items = DataContext.InventoryItems.Where(u => u.UserId == userId).ToList();
                 foreach(var item in items)
                 {                  
-                    item.QuantitySold = CalculateQuantitySold(item.Id);
-                    SetInventoryItemAverages(item);
+                    item.QuantitySold = CalculateQuantitySold(item.Id,userId);
+                    SetInventoryItemAverages(item,userId);
                 }
             }
                 return items.OrderByDescending(x=>x.QuantitySold).ToList();
         }
-        public InventoryItem GetInventoryItemById(int id)
+        public InventoryItem GetInventoryItemById(int id,string userId)
         {          
             InventoryItem item = new InventoryItem();
-            item = DataContext.InventoryItems.Find(id);            
-            item.QuantitySold = CalculateQuantitySold(item.Id);
-            SetInventoryItemAverages(item);
+            item = DataContext.InventoryItems.Where(x=>x.UserId == userId && x.Id == id).FirstOrDefault();            
+            item.QuantitySold = CalculateQuantitySold(item.Id,userId);
+            SetInventoryItemAverages(item,userId);
             return item;
         }
 
@@ -56,11 +72,11 @@ namespace EbaySalesTracker.Repository
             DataContext.SaveChanges();
         }
 
-        public object CalculateItemProfitByMonth(int id)
+        public object CalculateItemProfitByMonth(int id, string userId)
         {
             //List<Listing> listings = DataContext.Listings.Where(x => x.InventoryItemId == id && x.QuantitySold == 1).ToList();
-            double cost = DataContext.InventoryItems.Where(x => x.Id == id).Select(x => x.Cost).FirstOrDefault();
-
+            double cost = DataContext.InventoryItems.Where(x => x.Id == id && x.UserId == userId).Select(x => x.Cost).FirstOrDefault();
+            
             var result = from listing in DataContext.Listings
                          //join details in DataContext.ListingDetails on listing.ItemId equals details.ItemId
                          //join items in DataContext.InventoryItems on listing.InventoryItemId equals items.Id
@@ -72,22 +88,24 @@ namespace EbaySalesTracker.Repository
             return result;
         }
 
-        public int CalculateQuantitySold(int id)
+        public int CalculateQuantitySold(int id, string userId)
         {
             int qtySold = 0;
-            List<Listing> listings = DataContext.Listings.Where(x => x.InventoryItemId == id &&  x.QuantitySold == 1).ToList();
+            //var listingRepo = new IListingRepository();
+            var listings = _ListingRepository.GetListingsByInventoryItem(userId,id);
+            //List<Listing> listings = DataContext.Listings.Where(x => x.InventoryItemId == id &&  x.QuantitySold == 1).ToList();
             qtySold = listings.Count();         
             return qtySold;
         }
-        private InventoryItem SetInventoryItemAverages(InventoryItem item)
+        private InventoryItem SetInventoryItemAverages(InventoryItem item,string userId)
         {
             double[] averages = new double[2];
-            averages = CalculateAverageSalesPriceAndProfit(item.Id);
+            averages = CalculateAverageSalesPriceAndProfit(item.Id,userId);
             item.AverageProfit = item.QuantitySold == 0 ? 0 : Math.Round(averages[1] - item.Cost, 2);
             item.AverageSalesPrice = Math.Round(averages[0], 2);
             return item;
         }
-        public double[] CalculateAverageSalesPriceAndProfit(int id)
+        public double[] CalculateAverageSalesPriceAndProfit(int id, string userId)
         {
             //{average price, average profit}
             double[] avgsArray = new double[2];
@@ -95,7 +113,9 @@ namespace EbaySalesTracker.Repository
             double avgProfitBeforeCost = 0;
             double totalFees = 0;
             double avgTotalFees = 0;
-            List<Listing> listings = GetListings(id);
+
+            //List<Listing> listings = GetListings(id);
+            var listings = _ListingRepository.GetListingsByInventoryItem(userId, id);
             
             if (listings.Count() == 0)
                 return avgsArray;
@@ -115,11 +135,20 @@ namespace EbaySalesTracker.Repository
             avgsArray[1] = avgProfitBeforeCost;
             return avgsArray;
         }
-
-        public virtual List<Listing> GetListings(int id)
+        public InventoryItem GetBestSellingItem(string userId)
         {
-            List<Listing> listings = DataContext.Listings.Where(x => x.InventoryItemId == id && x.TotalNetFees != 0 && x.QuantitySold > 0).ToList();
-            return listings;
+            //var item = new InventoryItem();
+            var items = GetInventoryItemsByUser(userId);
+            var item = items.Aggregate((curMax, x) => (curMax == null || x.QuantitySold > curMax.QuantitySold ? x : curMax));
+
+            return item;
+        }
+
+        public InventoryItem GetHighestAverageProfitItem(string userId)
+        {
+            var items = GetInventoryItemsByUser(userId);
+            var item = items.Aggregate((curMax, x) => (curMax == null || x.AverageProfit > curMax.AverageProfit ? x : curMax));
+            return item;
         }
     }
 }

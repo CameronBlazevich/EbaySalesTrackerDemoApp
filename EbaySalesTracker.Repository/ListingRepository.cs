@@ -1,13 +1,8 @@
-﻿using System;
+﻿using EbaySalesTracker.Models;
+using EbaySalesTracker.Repository.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EbaySalesTracker.Models;
-using EbaySalesTracker.Repository.Helpers;
-using eBay.Service.Core.Sdk;
-using eBay.Service.Core.Soap;
-using eBay.Service.Call;
 
 namespace EbaySalesTracker.Repository
 {
@@ -165,7 +160,64 @@ namespace EbaySalesTracker.Repository
             return listings;
         }
 
+
         #region FromDb
+        public double GetProfitByMonth(string userId, int year, int month)
+        {
+            double monthlyProfit = 0;
+            var firstDayOfMonth = new DateTime(year, month, 01);
+            var lastDayOfMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+            var listings = DataContext.Listings.Where(x => x.EndDate >= firstDayOfMonth && x.EndDate >= lastDayOfMonth).ToList();
+                
+                //(new DateTime(year, month, 01), new DateTime(year, month, DateTime.DaysInMonth(year, month)), userId);
+            foreach (var listing in listings)
+            {
+                var inventoryItem = new InventoryItem();
+                double profit = 0;
+                if (listing.InventoryItemId != null)
+                {
+                    inventoryItem = DataContext.InventoryItems.Where(i => i.Id == listing.InventoryItemId).FirstOrDefault();
+                }
+                if (listing.QuantitySold > 0)
+                {
+                    profit = listing.CurrentPrice - listing.TotalNetFees - inventoryItem.Cost;
+                }
+                else {
+                    profit = 0;
+                }
+                monthlyProfit += profit;
+               
+            }
+            return Math.Round(monthlyProfit,2);
+        }
+        public double GetSalesByMonth(string userId, int year, int month)
+        {
+            double monthlySales = 0;
+            var firstDayOfMonth = new DateTime(year, month, 01);
+            var lastDayOfMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+            var listings = DataContext.Listings.Where(x => x.EndDate >= firstDayOfMonth && x.EndDate >= lastDayOfMonth).ToList();
+
+            //(new DateTime(year, month, 01), new DateTime(year, month, DateTime.DaysInMonth(year, month)), userId);
+            foreach (var listing in listings)
+            {
+                var inventoryItem = new InventoryItem();
+                double sale = 0;
+                if (listing.InventoryItemId != null)
+                {
+                    inventoryItem = DataContext.InventoryItems.Where(i => i.Id == listing.InventoryItemId).FirstOrDefault();
+                }
+                if (listing.QuantitySold > 0)
+                {
+                    sale = listing.CurrentPrice;
+                }
+                else {
+                    sale = 0;
+                }
+                monthlySales += sale;
+
+            }
+            return Math.Round(monthlySales,2);
+        }
         public List<Listing> GetAllListingsByUser(string userId)
         {
             List <Listing> listings = new List<Listing>();
@@ -203,6 +255,8 @@ namespace EbaySalesTracker.Repository
             var listing = DataContext.Listings.Where(l => l.ItemId == listingId).FirstOrDefault();
             listing.InventoryItemId = inventoryItemId;
             DataContext.SaveChanges();
+
+
         }
 
         public void DissociateInventoryItem(long listingId)
@@ -222,7 +276,7 @@ namespace EbaySalesTracker.Repository
         public List<Listing> GetListingsByInventoryItem(string userId, int inventoryItemId)
         {
             var listings = new List<Listing>();
-            listings = DataContext.Listings.Where(x => x.InventoryItemId == inventoryItemId && x.QuantitySold > 0 && x.UserId == userId).OrderBy(x => x.EndDate).ToList();
+            listings = DataContext.Listings.Where(x => x.InventoryItemId == inventoryItemId && x.TotalNetFees != 0 && x.QuantitySold > 0 && x.UserId == userId).OrderBy(x => x.EndDate).ToList();
             foreach(var listing in listings)
             {
                 listing.Profit = CalculateProfit(listing.ItemId);
@@ -230,6 +284,17 @@ namespace EbaySalesTracker.Repository
 
             return listings;
         }
+        //public List<Listing> GetListingsByInventoryItem(int inventoryItemId)
+        //{
+        //    var listings = new List<Listing>();
+        //    listings = DataContext.Listings.Where (x => x.InventoryItemId == inventoryItemId && x.TotalNetFees != 0 && x.QuantitySold > 0).OrderBy(x => x.EndDate).ToList();
+        //    foreach (var listing in listings)
+        //    {
+        //        listing.Profit = CalculateProfit(listing.ItemId);
+        //    }
+
+        //    return listings;
+        //}
 
         public object GetListingDataByInventoryItem(string userId, int inventoryItemId)
         {
@@ -258,6 +323,8 @@ namespace EbaySalesTracker.Repository
 
             return profit;
         }
+
+       
 
         #endregion
     }

@@ -126,7 +126,8 @@
             })
             dataTable.addRows(rows);
             options = {
-                backgroundColor: '#f5f5f5',
+                backgroundColor: { fill: 'transparent' },
+                legend: { position: 'none' },
                 'title': 'Total Profit Over Time',
                 titleFontSize: 18,
                 vAxis: { title: 'Profit ($)' },
@@ -154,7 +155,9 @@
             })
             dataTable.addRows(rows);
             options = {
-                backgroundColor: '#f5f5f5',
+                backgroundColor: { fill: 'transparent' },
+                legend: { position: 'none' },
+                
                 'title': 'Average Profit Over Time',
                 titleFontSize: 18,
                 vAxis: { title: 'Profit ($)' },

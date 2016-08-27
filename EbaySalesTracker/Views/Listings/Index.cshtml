@@ -156,13 +156,9 @@
 
     $(".dropdown-menu li a").click(function () {
         var invItemDesc = "";
-        if ($(this).text().length > 17)
-        {
-            invItemDesc = $(this).text().substring(0, 17) + '...'
-        }
-        else {
-            invItemDesc = $(this).text();
-        }
+        invItemDesc = helper.elliptify($(this).text(), 20);
+        //need to set tooltip
+        //$(this).attr('data-original-title', $(this).text());
         $(this).parents(".dropdown").find('.btn').html(invItemDesc + ' <span class="caret"></span>');
         $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
     });

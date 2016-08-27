@@ -24,12 +24,12 @@ namespace EbaySalesTracker.Controllers
 
         public DataServiceController(IListingRepository listingRepo, IListingDetailRepository listingDetailRepo, IInventoryRepository inventoryRepo)
         {
-            this.ApplicationDbContext = new ApplicationDbContext();
+            ApplicationDbContext = new ApplicationDbContext();
             _ListingRepository = listingRepo ?? ModelContainer.Instance.Resolve<IListingRepository>();
             _ListingDetailRepository = listingDetailRepo ?? ModelContainer.Instance.Resolve<IListingDetailRepository>();
             _InventoryRepository = inventoryRepo ?? ModelContainer.Instance.Resolve<IInventoryRepository>();
 
-            this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
+            UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ApplicationDbContext));
         }
 
         // GET: DataService
@@ -45,13 +45,14 @@ namespace EbaySalesTracker.Controllers
         }
         public ActionResult GetInventoryItemById(int id)
         {
-            //var user = UserManager.FindById(User.Identity.GetUserId());
-            return Json(_InventoryRepository.GetInventoryItemById(id), JsonRequestBehavior.AllowGet);
+            var user = UserManager.FindById(User.Identity.GetUserId());         
+            return Json(_InventoryRepository.GetInventoryItemById(id,user.Id), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetItemSalesDataByMonth(int id)
         {
-            return Json(_InventoryRepository.CalculateItemProfitByMonth(id), JsonRequestBehavior.AllowGet);
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            return Json(_InventoryRepository.CalculateItemProfitByMonth(id,user.Id), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetDataForAverageProfitOverTime(int id)
@@ -61,6 +62,31 @@ namespace EbaySalesTracker.Controllers
             //test = EbaySalesTracker.Builders.DashboardBuilder.AverageProfitOverTime(user.Id, id);
             return Json(data, JsonRequestBehavior.AllowGet);
 
+        }
+        public JsonResult GetBestSellingItem()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            var bestSellingItem = _InventoryRepository.GetBestSellingItem(user.Id);
+            return Json(bestSellingItem, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetHighestAverageProfitItem()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            var highestAvgProfitItem = _InventoryRepository.GetHighestAverageProfitItem(user.Id);
+            return Json(highestAvgProfitItem, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetProfitByMonth(int year, int month)
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            var monthlyProfit = _ListingRepository.GetProfitByMonth(user.Id,year,month);
+            return Json(monthlyProfit, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetSalesByMonth(int year, int month)
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            var monthlySales = _ListingRepository.GetSalesByMonth(user.Id, year, month);
+            return Json(monthlySales, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -9,13 +9,15 @@ namespace EbaySalesTracker.Repository
 {
     public interface IInventoryRepository
     {
-        List<InventoryItem> GetInventoryItemsByUser(string userId);
-        InventoryItem GetInventoryItemById(int id);
+        IEnumerable<InventoryItem> GetInventoryItemsByUser(string userId);
+        InventoryItem GetInventoryItemById(int id,string userId);
         void CreateInventoryItem(InventoryItem item);
         InventoryItem EditInventoryItem(InventoryItem item);
         void DeleteInventoryItem(int id);
-        double[] CalculateAverageSalesPriceAndProfit(int id);
-        int CalculateQuantitySold(int id);
-        object CalculateItemProfitByMonth(int id);
+        double[] CalculateAverageSalesPriceAndProfit(int id,string userId);
+        int CalculateQuantitySold(int id, string userId);
+        object CalculateItemProfitByMonth(int id,string userId);
+        InventoryItem GetBestSellingItem(string userId);
+        InventoryItem GetHighestAverageProfitItem(string userId);
     }
 }

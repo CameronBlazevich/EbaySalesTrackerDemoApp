@@ -56,11 +56,12 @@ namespace EbaySalesTracker.Controllers
         // GET: InventoryItems/Details/5
         public ActionResult Details(int? id)
         {
+            var user = UserManager.FindById(User.Identity.GetUserId());
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id));
+            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id),user.Id);
             if (inventoryItem == null)
             {
                 return HttpNotFound();
@@ -70,11 +71,12 @@ namespace EbaySalesTracker.Controllers
         // GET: InventoryItems/Details/5
         public ActionResult DetailsPartial(int? id,string viewName)
         {
+            var user = UserManager.FindById(User.Identity.GetUserId());
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id));
+            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id),user.Id);
             if (inventoryItem == null)
             {
                 return HttpNotFound();
@@ -112,11 +114,12 @@ namespace EbaySalesTracker.Controllers
         // GET: InventoryItems/Edit/5
         public ActionResult Edit(int? id)
         {
+            var user = UserManager.FindById(User.Identity.GetUserId());
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id));
+            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id), user.Id);
             if (inventoryItem == null)
             {
                 return HttpNotFound();
@@ -144,11 +147,12 @@ namespace EbaySalesTracker.Controllers
         // GET: InventoryItems/Delete/5
         public ActionResult Delete(int? id)
         {
+            var user = UserManager.FindById(User.Identity.GetUserId());
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id));
+            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id),user.Id);
             if (inventoryItem == null)
             {
                 return HttpNotFound();
