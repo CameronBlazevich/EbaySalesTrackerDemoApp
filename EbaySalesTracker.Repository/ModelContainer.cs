@@ -1,6 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
 
-
 namespace EbaySalesTracker.Repository
 {
     //This is a simplified version of the code shown in the videos
@@ -22,7 +21,8 @@ namespace EbaySalesTracker.Repository
                 _Instance.RegisterType<IListingRepository, ListingRepository>(new HierarchicalLifetimeManager());
                 _Instance.RegisterType<IListingDetailRepository, ListingDetailRepository>(new HierarchicalLifetimeManager());
                 _Instance.RegisterType<IUserRepository, UserRepository>(new HierarchicalLifetimeManager());
-                _Instance.RegisterType<IInventoryRepository, InventoryRepository>(new HierarchicalLifetimeManager());               
+                _Instance.RegisterType<IInventoryRepository, InventoryRepository>(new HierarchicalLifetimeManager());
+                //_Instance.RegisterType<IMarketsAndNewsRepository, MarketsAndNewsRepository>(new HierarchicalLifetimeManager());
                 return _Instance;
             }
         }
