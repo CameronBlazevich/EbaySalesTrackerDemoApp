@@ -344,6 +344,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EbaySalesTracker.Bll\EbaySalesTracker.Bll.csproj">
+      <Project>{1388dbf6-dfde-4ecb-86c7-ba2786c3b5f2}</Project>
+      <Name>EbaySalesTracker.Bll</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EbaySalesTracker.Models\EbaySalesTracker.Models.csproj">
       <Project>{37b00012-d6a3-4188-b60c-3c6d4dc4ecba}</Project>
       <Name>EbaySalesTracker.Models</Name>
