@@ -14,7 +14,7 @@ namespace EbaySalesTracker.Repository
         public virtual DbSet<File> Files { get; set; }
         public virtual DbSet<InventoryItem> InventoryItems { get; set; }
         public virtual DbSet<ListingTransaction> ListingTransactions { get; set; }
-
+        public virtual DbSet<Order> Orders { get; set; }
     }
 }
 

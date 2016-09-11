@@ -35,6 +35,8 @@ namespace EbaySalesTracker.Repository
         public List<Listing> GetAllListingsSinceDateFromEbay(DateTime startDate, string userId)
         {
             IListingDetailRepository detailRepo = new ListingDetailRepository();
+            IListingTransactionRepository transRepo = new ListingTransactionRepository();
+            IOrderRepository orderRepo = new OrderRepository();
             ApplicationUser user = new ApplicationUser();
             var userContext = new ApplicationDbContext();
 
@@ -71,13 +73,29 @@ namespace EbaySalesTracker.Repository
                                 listing.Title = "Error saving listing.";
                             }
                         }
+                        //Dont forget to move this out
                         UpdateFeesById(listing.ItemId, user.UserToken);
+                        var transactions = transRepo.GetListingTransactionsByListingIdFromEbay(listing.ItemId, userId);
+                        if (transactions.Count > 0)
+                        {
+                            foreach (var transaction in transactions)
+                            {
+                                var orderId = listing.ItemId.ToString() + "-" + transaction.Id.ToString();
+                                orderRepo.GetOrderByOrderIdFromEbay(orderId, userId);
+                            }
+                        }
+                        else
+                        {
+                            var orderId = listing.ItemId.ToString() + "-" + "0";
+                            orderRepo.GetOrderByOrderIdFromEbay(orderId, userId);
+                        }
+                       
+
                     }
                 }
             }
 
             return listings;
-
         }
 
         public List<Listing> GetListingsByEndDateFromEbay(DateTime endDateFrom, DateTime endDateTo, string userToken)

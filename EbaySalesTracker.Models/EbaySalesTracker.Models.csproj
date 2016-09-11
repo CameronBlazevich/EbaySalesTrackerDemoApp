@@ -144,6 +144,7 @@
     <Compile Include="ManageViewModels.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OperationStatus.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

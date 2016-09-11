@@ -46,8 +46,12 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.listingProfitField.resources
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.AddQuantitySold.resources
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.Testing.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.AddListingType.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.CreateTransactionsTable.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.AddOrdersTable.resources
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.csproj.GenerateResource.Cache
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.pdb
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.AddListingType.resources
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.CreateTransactionsTable.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.OrdersTablePKNotAutoGen.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.OrderDatesNullable.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.AddRefundInfoToOrders.resources

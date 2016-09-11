@@ -40,7 +40,6 @@ namespace EbaySalesTracker.Repository.Helpers
 
             return listings;
         }
-
         public List<Listing> GetListingsByStartDateFromEbay(DateTime startDateFrom, DateTime startDateTo, string userToken)
         {
             List <Listing> listings = new List<Listing>();

@@ -76,9 +76,11 @@
     <Compile Include="EbaySalesTrackerContext.cs" />
     <Compile Include="Helpers\Engine.cs" />
     <Compile Include="Helpers\EnumExtension.cs" />
+    <Compile Include="Helpers\IOrderEngine.cs" />
     <Compile Include="Helpers\ListingDetailEngine.cs" />
     <Compile Include="Helpers\ListingEngine.cs" />
     <Compile Include="Helpers\ListingTransactionEngine.cs" />
+    <Compile Include="Helpers\OrderEngine.cs" />
     <Compile Include="Helpers\RequestBuilder.cs" />
     <Compile Include="Helpers\XmlBodyBuilders.cs" />
     <Compile Include="IInventoryRepository.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="IListingRepository.cs" />
     <Compile Include="IListingTransactionRepository.cs" />
     <Compile Include="InventoryRepository.cs" />
+    <Compile Include="IOrderRepository.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="ListingDetailRepository.cs" />
     <Compile Include="ListingRepository.cs" />
@@ -142,8 +145,25 @@
     <Compile Include="Migrations\201609110048061_CreateTransactionsTable.Designer.cs">
       <DependentUpon>201609110048061_CreateTransactionsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609110454374_AddOrdersTable.cs" />
+    <Compile Include="Migrations\201609110454374_AddOrdersTable.Designer.cs">
+      <DependentUpon>201609110454374_AddOrdersTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609110459038_OrdersTablePKNotAutoGen.cs" />
+    <Compile Include="Migrations\201609110459038_OrdersTablePKNotAutoGen.Designer.cs">
+      <DependentUpon>201609110459038_OrdersTablePKNotAutoGen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609110548363_OrderDatesNullable.cs" />
+    <Compile Include="Migrations\201609110548363_OrderDatesNullable.Designer.cs">
+      <DependentUpon>201609110548363_OrderDatesNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609110606211_AddRefundInfoToOrders.cs" />
+    <Compile Include="Migrations\201609110606211_AddRefundInfoToOrders.Designer.cs">
+      <DependentUpon>201609110606211_AddRefundInfoToOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContainer.cs" />
+    <Compile Include="OrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="Service References\eBayApiInterfaceService\Reference.cs">
@@ -1027,6 +1047,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609110048061_CreateTransactionsTable.resx">
       <DependentUpon>201609110048061_CreateTransactionsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609110454374_AddOrdersTable.resx">
+      <DependentUpon>201609110454374_AddOrdersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609110459038_OrdersTablePKNotAutoGen.resx">
+      <DependentUpon>201609110459038_OrdersTablePKNotAutoGen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609110548363_OrderDatesNullable.resx">
+      <DependentUpon>201609110548363_OrderDatesNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609110606211_AddRefundInfoToOrders.resx">
+      <DependentUpon>201609110606211_AddRefundInfoToOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

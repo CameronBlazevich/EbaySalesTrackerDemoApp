@@ -13,7 +13,7 @@ namespace EbaySalesTracker.Repository.Helpers
             var context = RequestBuilder.CreateNewApiCall(userToken);
             var getItemTransactionsCall = new GetItemTransactionsCall(context);
             getItemTransactionsCall.ItemID = listingId.ToString();
-            getItemTransactionsCall.OutputSelector = new string[] { "Item.ItemId", "TransactionId" };
+            //getItemTransactionsCall.OutputSelector = new string[] { "Item.ItemId", "TransactionId" };
             getItemTransactionsCall.Execute();
 
             var results = getItemTransactionsCall.ApiResponse.TransactionArray;
