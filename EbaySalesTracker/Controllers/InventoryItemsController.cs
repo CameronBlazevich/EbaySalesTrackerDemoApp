@@ -11,6 +11,7 @@ using EbaySalesTracker.Repository;
 using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using EbaySalesTracker.Bll;
 
 namespace EbaySalesTracker.Controllers
 {
@@ -20,20 +21,22 @@ namespace EbaySalesTracker.Controllers
         IListingRepository _ListingRepository;
         IListingDetailRepository _ListingDetailRepository;
         IInventoryRepository _InventoryRepository;
+        IInventoryBll _InventoryBll;
         ApplicationDbContext ApplicationDbContext;
         UserManager<ApplicationUser> UserManager;
 
-        public InventoryItemsController(): this(null,null,null)
+        public InventoryItemsController(): this(null,null,null,null)
         {
 
         }
 
-        public InventoryItemsController(IListingRepository listingRepo, IListingDetailRepository listingDetailRepo, IInventoryRepository inventoryRepo)
+        public InventoryItemsController(IListingRepository listingRepo, IListingDetailRepository listingDetailRepo, IInventoryRepository inventoryRepo, IInventoryBll inventoryBll)
         {
             this.ApplicationDbContext = new ApplicationDbContext();
             _ListingRepository = listingRepo ?? ModelContainer.Instance.Resolve<IListingRepository>();
             _ListingDetailRepository = listingDetailRepo ?? ModelContainer.Instance.Resolve<IListingDetailRepository>();
             _InventoryRepository = inventoryRepo ?? ModelContainer.Instance.Resolve<IInventoryRepository>();
+            _InventoryBll = inventoryBll ?? new InventoryBll();
 
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
         }
@@ -61,7 +64,7 @@ namespace EbaySalesTracker.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id),user.Id);
+            InventoryItem inventoryItem = _InventoryBll.GetInventoryItemById(Convert.ToInt32(id),user.Id);
             if (inventoryItem == null)
             {
                 return HttpNotFound();
@@ -76,7 +79,7 @@ namespace EbaySalesTracker.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id),user.Id);
+            InventoryItem inventoryItem = _InventoryBll.GetInventoryItemById(Convert.ToInt32(id),user.Id);
             if (inventoryItem == null)
             {
                 return HttpNotFound();
@@ -119,7 +122,7 @@ namespace EbaySalesTracker.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id), user.Id);
+            InventoryItem inventoryItem = _InventoryBll.GetInventoryItemById(Convert.ToInt32(id), user.Id);
             if (inventoryItem == null)
             {
                 return HttpNotFound();
@@ -152,7 +155,7 @@ namespace EbaySalesTracker.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            InventoryItem inventoryItem = _InventoryRepository.GetInventoryItemById(Convert.ToInt32(id),user.Id);
+            InventoryItem inventoryItem = _InventoryBll.GetInventoryItemById(Convert.ToInt32(id),user.Id);
             if (inventoryItem == null)
             {
                 return HttpNotFound();

@@ -21,12 +21,11 @@ namespace EbaySalesTracker.Repository
         void DeleteListing(long id);
         void AssociateInventoryItem(long listingId, int inventoryItemId);
         void DissociateInventoryItem(long listingId);
-        double CalculateProfit(long listingId);
-        void UpdateProfit(long listingId);
-        List<Listing> GetListingsByInventoryItem(string userId, int inventoryItemId);
-       // List<Listing> GetListingsByInventoryItem(int inventoryItemId);
-        object GetListingDataByInventoryItem(string userId, int inventoryItemId);
-        double GetProfitByMonth(string userId, int year, int month);
-        double GetSalesByMonth(string userId, int year, int month);
+        void UpdateListing(Listing listing);
+        IEnumerable<Listing> GetSoldListingsByInventoryItem(int inventoryItemId, string userId);
+        IEnumerable<Listing> GetListingsByEndDate(DateTime startDate, DateTime endDate, string userId);
+
+        // List<Listing> GetListingsByInventoryItem(int inventoryItemId);
+        //object GetListingDataByInventoryItem(string userId, int inventoryItemId);       
     }
 }

@@ -64,6 +64,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -77,15 +78,18 @@
     <Compile Include="Helpers\EnumExtension.cs" />
     <Compile Include="Helpers\ListingDetailEngine.cs" />
     <Compile Include="Helpers\ListingEngine.cs" />
+    <Compile Include="Helpers\ListingTransactionEngine.cs" />
     <Compile Include="Helpers\RequestBuilder.cs" />
     <Compile Include="Helpers\XmlBodyBuilders.cs" />
     <Compile Include="IInventoryRepository.cs" />
     <Compile Include="IListingDetailRepository.cs" />
     <Compile Include="IListingRepository.cs" />
+    <Compile Include="IListingTransactionRepository.cs" />
     <Compile Include="InventoryRepository.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="ListingDetailRepository.cs" />
     <Compile Include="ListingRepository.cs" />
+    <Compile Include="ListingTransactionRepository.cs" />
     <Compile Include="Migrations\201605182341489_init.cs" />
     <Compile Include="Migrations\201605182341489_init.Designer.cs">
       <DependentUpon>201605182341489_init.cs</DependentUpon>
@@ -129,6 +133,14 @@
     <Compile Include="Migrations\201608190423527_Testing.cs" />
     <Compile Include="Migrations\201608190423527_Testing.Designer.cs">
       <DependentUpon>201608190423527_Testing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609102140565_AddListingType.cs" />
+    <Compile Include="Migrations\201609102140565_AddListingType.Designer.cs">
+      <DependentUpon>201609102140565_AddListingType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609110048061_CreateTransactionsTable.cs" />
+    <Compile Include="Migrations\201609110048061_CreateTransactionsTable.Designer.cs">
+      <DependentUpon>201609110048061_CreateTransactionsTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContainer.cs" />
@@ -999,6 +1011,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605240255458_inventoryItemUserIdIsString.resx">
       <DependentUpon>201605240255458_inventoryItemUserIdIsString.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605250249549_listingProfitField.resx">
       <DependentUpon>201605250249549_listingProfitField.cs</DependentUpon>
@@ -1008,6 +1021,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608190423527_Testing.resx">
       <DependentUpon>201608190423527_Testing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609102140565_AddListingType.resx">
+      <DependentUpon>201609102140565_AddListingType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609110048061_CreateTransactionsTable.resx">
+      <DependentUpon>201609110048061_CreateTransactionsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

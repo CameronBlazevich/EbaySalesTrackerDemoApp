@@ -49,14 +49,15 @@ namespace EbaySalesTracker.Repository.Helpers
 
             getSellerEventsCall.StartTimeFrom = startDateFrom;
             getSellerEventsCall.StartTimeTo = startDateTo;
+            getSellerEventsCall.DetailLevelList.Add(DetailLevelCodeType.ReturnAll);
+            getSellerEventsCall.OutputSelector = new string[] { "SellingStatus", "ItemId", "ListingDetails", "Title", "ListingType" };
             getSellerEventsCall.Execute();
 
             var results = getSellerEventsCall.ApiResponse.ItemArray;
 
             foreach (ItemType result in results)
-            {
-                Listing listing = new Listing();
-                listing = MapResultToListing(result);
+            {                
+                var listing = MapResultToListing(result);
 
                 listings.Add(listing);
             }
@@ -71,6 +72,7 @@ namespace EbaySalesTracker.Repository.Helpers
             GetSellerEventsCall getSellerEventsCall = new GetSellerEventsCall(context);
             getSellerEventsCall.EndTimeFrom = endDateFrom;
             getSellerEventsCall.EndTimeTo = endDateTo;
+            getSellerEventsCall.DetailLevelList.Add(DetailLevelCodeType.ReturnAll);
             getSellerEventsCall.Execute();
 
             var results = getSellerEventsCall.ApiResponse.ItemArray;
@@ -84,12 +86,14 @@ namespace EbaySalesTracker.Repository.Helpers
             return listings;
         }
 
+       
+
         #region Helpers   
+       
 
         private Listing MapResultToListing(ItemType res)
         {
-            var listing = new Listing();
-            listing.StartDate = res.ListingDetails.StartTime;
+            var listing = new Listing();            
             listing.CurrentPrice = res.SellingStatus.CurrentPrice.Value;
             listing.ItemId = Convert.ToInt64(res.ItemID);
             listing.StartDate = res.ListingDetails.StartTime;
@@ -97,6 +101,7 @@ namespace EbaySalesTracker.Repository.Helpers
             listing.Title = res.Title;
             listing.QuantitySold = res.SellingStatus.QuantitySold;
             listing.ListingStatus = res.SellingStatus.ListingStatus;
+            listing.Type = res.ListingType;
             return listing;
         }
 

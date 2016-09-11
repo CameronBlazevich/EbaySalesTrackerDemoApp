@@ -7,9 +7,7 @@ using System.Linq;
 namespace EbaySalesTracker.Repository
 {
     public class ListingRepository : RepositoryBase<EbaySalesTrackerContext>, IListingRepository
-    {
-        private readonly IListingRepository _listingRepository;
-
+    {      
         //whats the best place to new up an engine?
         private ListingEngine engine = new ListingEngine();
         public Listing GetListingByItemIdFromEbay(long itemId, string userToken)
@@ -59,6 +57,7 @@ namespace EbaySalesTracker.Repository
                             existingListing.CurrentPrice = listing.CurrentPrice;
                             existingListing.ListingStatus = listing.ListingStatus;
                             existingListing.QuantitySold = listing.QuantitySold;
+                            existingListing.Type = listing.Type;
                             DataContext.SaveChanges();                          
                         }
                         else
@@ -162,77 +161,20 @@ namespace EbaySalesTracker.Repository
 
 
         #region FromDb
-        public double GetProfitByMonth(string userId, int year, int month)
-        {
-            double monthlyProfit = 0;
-            var firstDayOfMonth = new DateTime(year, month, 01);
-            var lastDayOfMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-            var listings = DataContext.Listings.Where(x => x.EndDate >= firstDayOfMonth && x.EndDate >= lastDayOfMonth).ToList();
-                
-                //(new DateTime(year, month, 01), new DateTime(year, month, DateTime.DaysInMonth(year, month)), userId);
-            foreach (var listing in listings)
-            {
-                var inventoryItem = new InventoryItem();
-                double profit = 0;
-                if (listing.InventoryItemId != null)
-                {
-                    inventoryItem = DataContext.InventoryItems.Where(i => i.Id == listing.InventoryItemId).FirstOrDefault();
-                }
-                if (listing.QuantitySold > 0)
-                {
-                    profit = listing.CurrentPrice - listing.TotalNetFees - inventoryItem.Cost;
-                }
-                else {
-                    profit = 0;
-                }
-                monthlyProfit += profit;
-               
-            }
-            return Math.Round(monthlyProfit,2);
-        }
-        public double GetSalesByMonth(string userId, int year, int month)
-        {
-            double monthlySales = 0;
-            var firstDayOfMonth = new DateTime(year, month, 01);
-            var lastDayOfMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-            var listings = DataContext.Listings.Where(x => x.EndDate >= firstDayOfMonth && x.EndDate >= lastDayOfMonth).ToList();
 
-            //(new DateTime(year, month, 01), new DateTime(year, month, DateTime.DaysInMonth(year, month)), userId);
-            foreach (var listing in listings)
-            {
-                var inventoryItem = new InventoryItem();
-                double sale = 0;
-                if (listing.InventoryItemId != null)
-                {
-                    inventoryItem = DataContext.InventoryItems.Where(i => i.Id == listing.InventoryItemId).FirstOrDefault();
-                }
-                if (listing.QuantitySold > 0)
-                {
-                    sale = listing.CurrentPrice;
-                }
-                else {
-                    sale = 0;
-                }
-                monthlySales += sale;
-
-            }
-            return Math.Round(monthlySales,2);
+        public IEnumerable<Listing> GetListingsByEndDate(DateTime startDate, DateTime endDate, string userId)
+        {           
+            return DataContext.Listings.Where(x => x.EndDate >= startDate && x.EndDate >= endDate).ToList();
         }
+       
         public List<Listing> GetAllListingsByUser(string userId)
         {
-            List <Listing> listings = new List<Listing>();
-            listings = DataContext.Listings.Where(x => x.UserId == userId).ToList();
-            return listings;
+            return DataContext.Listings.Where(x => x.UserId == userId).ToList();            
         }
 
         public Listing GetListingById(long id)
         {
-            Listing listing = DataContext.Listings.Find(id);
-            if (listing == null)
-            {
-                //return HttpNotFound();
-            }
-            return listing;;
+            return DataContext.Listings.Find(id);           
         }
 
         public Listing AddListing(Listing listing)
@@ -247,7 +189,6 @@ namespace EbaySalesTracker.Repository
             Listing listing = DataContext.Listings.Find(id);
             DataContext.Listings.Remove(listing);
             DataContext.SaveChanges();
-
         }
 
         public void AssociateInventoryItem(long listingId, int inventoryItemId)
@@ -255,8 +196,6 @@ namespace EbaySalesTracker.Repository
             var listing = DataContext.Listings.Where(l => l.ItemId == listingId).FirstOrDefault();
             listing.InventoryItemId = inventoryItemId;
             DataContext.SaveChanges();
-
-
         }
 
         public void DissociateInventoryItem(long listingId)
@@ -265,67 +204,17 @@ namespace EbaySalesTracker.Repository
             listing.InventoryItemId = null;
             DataContext.SaveChanges();
         }
-        public void UpdateProfit(long listingId)
+        public void UpdateListing(Listing listing)
         {
-            var profit = CalculateProfit(listingId);
-            var listing = DataContext.Listings.Where(l => l.ItemId == listingId).FirstOrDefault();
-            listing.Profit = profit;
+            DataContext.Entry(listing).State = System.Data.Entity.EntityState.Modified;
             DataContext.SaveChanges();
         }
 
-        public List<Listing> GetListingsByInventoryItem(string userId, int inventoryItemId)
+        public IEnumerable<Listing> GetSoldListingsByInventoryItem(int inventoryItemId, string userId)
         {
-            var listings = new List<Listing>();
-            listings = DataContext.Listings.Where(x => x.InventoryItemId == inventoryItemId && x.TotalNetFees != 0 && x.QuantitySold > 0 && x.UserId == userId).OrderBy(x => x.EndDate).ToList();
-            foreach(var listing in listings)
-            {
-                listing.Profit = CalculateProfit(listing.ItemId);
-            }
-
-            return listings;
+            return DataContext.Listings.Where(x => x.InventoryItemId == inventoryItemId && x.TotalNetFees != 0 && x.QuantitySold > 0 && x.UserId == userId).OrderBy(x => x.EndDate).ToList(); 
         }
-        //public List<Listing> GetListingsByInventoryItem(int inventoryItemId)
-        //{
-        //    var listings = new List<Listing>();
-        //    listings = DataContext.Listings.Where (x => x.InventoryItemId == inventoryItemId && x.TotalNetFees != 0 && x.QuantitySold > 0).OrderBy(x => x.EndDate).ToList();
-        //    foreach (var listing in listings)
-        //    {
-        //        listing.Profit = CalculateProfit(listing.ItemId);
-        //    }
-
-        //    return listings;
-        //}
-
-        public object GetListingDataByInventoryItem(string userId, int inventoryItemId)
-        {
-            var listings = GetListingsByInventoryItem(userId, inventoryItemId);
-            var data = listings               
-                .Select(x => new {profit = x.Profit, endDate = x.EndDate});            
-            return data;
-        }
-
-        public double CalculateProfit(long listingId)
-        {
-            double profit = 0;
-            var inventoryItem = new InventoryItem();
-            var listing = DataContext.Listings.Where(l => l.ItemId == listingId).FirstOrDefault();
-            if (listing.InventoryItemId != null)
-            {
-                inventoryItem = DataContext.InventoryItems.Where(i => i.Id == listing.InventoryItemId).FirstOrDefault();
-            }
-            if (listing.QuantitySold > 0)
-            {
-                profit = Math.Round(listing.CurrentPrice - listing.TotalNetFees - inventoryItem.Cost,2);
-            }
-            else {
-                profit = 0;
-            }
-
-            return profit;
-        }
-
-       
-
+             
         #endregion
     }
 }

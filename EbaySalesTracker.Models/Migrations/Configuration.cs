@@ -10,7 +10,6 @@ namespace EbaySalesTracker.Models.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "EbaySalesTracker.Models.ApplicationDbContext";
         }
 
         protected override void Seed(EbaySalesTracker.Models.ApplicationDbContext context)

@@ -37,8 +37,7 @@ namespace EbaySalesTracker.Models
         public InventoryItem InventoryItem { get; set; }
         public int? InventoryItemId { get; set;}
         public double Profit { get; set; }
-
-
+        public ListingTypeCodeType Type { get; set; }
 
     }
 }

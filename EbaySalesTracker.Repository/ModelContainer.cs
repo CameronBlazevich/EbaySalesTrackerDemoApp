@@ -18,6 +18,11 @@ namespace EbaySalesTracker.Repository
         {
             get
             {
+                //_Instance.RegisterTypes(
+                //    AllClasses.FromLoadedAssemblies(),
+                //    WithMappings.FromMatchingInterface,                   
+                //    WithName.Default,
+                //    WithLifetime.Hierarchical);
                 _Instance.RegisterType<IListingRepository, ListingRepository>(new HierarchicalLifetimeManager());
                 _Instance.RegisterType<IListingDetailRepository, ListingDetailRepository>(new HierarchicalLifetimeManager());
                 _Instance.RegisterType<IUserRepository, UserRepository>(new HierarchicalLifetimeManager());

@@ -1,6 +1,7 @@
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\EbaySalesTracker.Repository.dll.config
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\EbaySalesTracker.Repository.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\EbaySalesTracker.Repository.pdb
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\eBay.Service.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\EbaySalesTracker.Models.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\EntityFramework.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\EntityFramework.SqlServer.dll
@@ -18,6 +19,7 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\Owin.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\System.Web.WebPages.Deployment.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\EbaySalesTracker.Models.pdb
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\eBay.Service.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\EntityFramework.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
@@ -34,11 +36,6 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.csprojResolveAssemblyReference.cache
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.init.resources
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.csproj.GenerateResource.Cache
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.dll
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.pdb
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\eBay.Service.dll
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\eBay.Service.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.someChanges.resources
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.changesToSupportEbaySDK.resources
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.inventoryItem.resources
@@ -49,3 +46,8 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.listingProfitField.resources
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.AddQuantitySold.resources
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.Testing.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.csproj.GenerateResource.Cache
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.pdb
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.AddListingType.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.CreateTransactionsTable.resources

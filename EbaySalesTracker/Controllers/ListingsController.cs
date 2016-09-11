@@ -1,15 +1,13 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
+﻿using EbaySalesTracker.Bll;
 using EbaySalesTracker.Models;
 using EbaySalesTracker.Repository;
-using Microsoft.Practices.Unity;
-using System.Collections.Generic;
+using EbaySalesTracker.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using EbaySalesTracker.ViewModels;
+using Microsoft.Practices.Unity;
+using System;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace EbaySalesTracker.Controllers
 {
@@ -20,21 +18,23 @@ namespace EbaySalesTracker.Controllers
         IListingRepository _ListingRepository;
         IListingDetailRepository _ListingDetailRepository;
         IInventoryRepository _InventoryRepository;
+        IInventoryBll _InventoryBll;
         ApplicationDbContext ApplicationDbContext;
         UserManager<ApplicationUser> UserManager;
 
         
 
-        public ListingsController() : this(null,null,null)
+        public ListingsController() : this(null,null,null,null)
         {                
         }
 
-        public ListingsController(IListingRepository listingRepo, IListingDetailRepository listingDetailRepo, IInventoryRepository inventoryRepo)
+        public ListingsController(IListingRepository listingRepo, IListingDetailRepository listingDetailRepo, IInventoryRepository inventoryRepo, IInventoryBll inventoryBll)
         {
             this.ApplicationDbContext = new ApplicationDbContext();
             _ListingRepository = listingRepo ?? ModelContainer.Instance.Resolve<IListingRepository>();
             _ListingDetailRepository = listingDetailRepo ?? ModelContainer.Instance.Resolve<IListingDetailRepository>();
             _InventoryRepository = inventoryRepo ?? ModelContainer.Instance.Resolve<IInventoryRepository>();
+            _InventoryBll = inventoryBll ?? new InventoryBll();
            
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
         }
@@ -54,7 +54,7 @@ namespace EbaySalesTracker.Controllers
             
             foreach (var listing in listingsViewModel.Listings)
             {
-                listing.Profit = _ListingRepository.CalculateProfit(listing.ItemId);
+                listing.Profit = _InventoryBll.CalculateProfitPerListing(listing.ItemId, user.Id);
                 if (listing.InventoryItemId != null)
                 {
                     listing.InventoryItem = items.Where(x => x.Id == listing.InventoryItemId).First();
@@ -175,16 +175,19 @@ namespace EbaySalesTracker.Controllers
         [HttpPost]
         public JsonResult AssociateInventoryItemToListing(string inventoryItemId, string listingItemId)
         {
+            var user = UserManager.FindById(User.Identity.GetUserId());
             var listingId = Convert.ToInt64(listingItemId);
             if (inventoryItemId == "")
             {
                 _ListingRepository.DissociateInventoryItem(listingId);
             }
             else {
-                _ListingRepository.AssociateInventoryItem(listingId, Convert.ToInt32(inventoryItemId));
+                //_ListingRepository.AssociateInventoryItem(listingId, Convert.ToInt32(inventoryItemId));
+                _InventoryBll.AssociateInventoryItemToListing(listingId, Convert.ToInt32(inventoryItemId), user.Id);
             }
 
-            var profit = _ListingRepository.CalculateProfit(listingId);
+            var profit = _InventoryBll.CalculateProfitPerListing(listingId, user.Id);
+            
             return Json(new { profit = profit });
         }
 

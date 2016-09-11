@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EbaySalesTrackerTests
 {
@@ -108,45 +106,45 @@ namespace EbaySalesTrackerTests
                 Id = 0,
                 Description = "TestItem 0",
                 Cost = 1.23,
-                QuantitySold = 4,
+                QuantitySold = 5,
                 Quantity = 2,
                 UserId = "2",
-                AverageSalesPrice = null,
-                AverageProfit = null
+                AverageSalesPrice = 10.02,
+                AverageProfit = 8.10
 
             };
             var item1 = new InventoryItem
             {
                 Id = 1,
                 Description = "TestItem 1",
-                Cost = 2.34,
-                QuantitySold = 3,
+                Cost = 0.50,
+                QuantitySold = 1,
                 Quantity = 4,
                 UserId = "1",
-                AverageSalesPrice = null,
-                AverageProfit = null
+                AverageSalesPrice = 3.00,
+                AverageProfit = 1.50
             };
             var item2 = new InventoryItem
             {
                 Id = 2,
                 Description = "TestItem 2",
-                Cost = 3.45,
-                QuantitySold = 2,
+                Cost = .50,
+                QuantitySold = 0,
                 Quantity = 6,
                 UserId = "1",
-                AverageSalesPrice = null,
-                AverageProfit = null
+                AverageSalesPrice = 0,
+                AverageProfit = 0
             };
             var item3 = new InventoryItem
             {
                 Id = 3,
                 Description = "TestItem 3",
                 Cost = 4.56,
-                QuantitySold = 1,
+                QuantitySold = 0,
                 Quantity = 0,
                 UserId = "1",
-                AverageSalesPrice = null,
-                AverageProfit = null
+                AverageSalesPrice = 0,
+                AverageProfit = 0
             };
             var item4 = new InventoryItem
             {
@@ -156,8 +154,8 @@ namespace EbaySalesTrackerTests
                 QuantitySold = 0,
                 Quantity = 8,
                 UserId = "1",
-                AverageSalesPrice = null,
-                AverageProfit = null
+                AverageSalesPrice = 0,
+                AverageProfit = 0
             };
 
             items.Add(item0);
@@ -166,7 +164,7 @@ namespace EbaySalesTrackerTests
             items.Add(item3);
             items.Add(item4);
 
-            return items;
+            return items.OrderByDescending(x => x.QuantitySold).ToList();
         }
     }
 }
