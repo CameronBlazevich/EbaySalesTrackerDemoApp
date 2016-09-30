@@ -218,7 +218,9 @@
     function populateMonthlyProfitAmount(data) {
         $('#monthly-profit-amount').html('$' + helper.monetaryRound(data));
         monthlyProfit = data;
-        dataService.GetSalesByMonth(2016, 5, populateMonthlySalesAmount);
+        var today = new Date();
+        
+        dataService.GetSalesByMonth(today.getFullYear(), today.getMonth(), populateMonthlySalesAmount);
 
     }
     function populateMonthlySalesAmount(data) {
@@ -232,7 +234,8 @@
     $(document).ready(function () {
         dataService.GetBestSellingItem(populateBestSellingItem);
         dataService.GetHighestAverageProfitItem(populateHighestAverageProfitItem);
-        dataService.GetProfitByMonth(2016, 5, populateMonthlyProfitAmount);
+        var today = new Date();
+        dataService.GetProfitByMonth(today.getFullYear(), today.getMonth(), populateMonthlyProfitAmount);
 
         //startup.init('Z485739881');
         sceneLayoutService.get();

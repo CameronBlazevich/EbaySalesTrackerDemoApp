@@ -14,6 +14,7 @@ namespace EbaySalesTracker.ViewModels
         public List<Listing> Listings { get; set; }
         public List<InventoryItem> Items { get; set;}    
         public int SelectedItem { get; set; }
+        public int TotalListings { get; set; }
         [Display(Name = "Inventory Item")]
         public IEnumerable<SelectListItem> InventoryItems
         {

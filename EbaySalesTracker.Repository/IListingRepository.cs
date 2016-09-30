@@ -15,7 +15,7 @@ namespace EbaySalesTracker.Repository
         void UpdateFeesById(long itemId,string userToken);
 
         //gets from the db
-        List<Listing> GetAllListingsByUser(string userId);
+        IEnumerable<Listing> GetAllListingsByUser(int top, int skip,string userId);
         Listing GetListingById(long id);
         Listing AddListing(Listing listing);
         void DeleteListing(long id);
@@ -24,6 +24,7 @@ namespace EbaySalesTracker.Repository
         void UpdateListing(Listing listing);
         IEnumerable<Listing> GetSoldListingsByInventoryItem(int inventoryItemId, string userId);
         IEnumerable<Listing> GetListingsByEndDate(DateTime startDate, DateTime endDate, string userId);
+        int GetListingsCountByUser(string userId);
 
         // List<Listing> GetListingsByInventoryItem(int inventoryItemId);
         //object GetListingDataByInventoryItem(string userId, int inventoryItemId);       

@@ -14,6 +14,8 @@ namespace EbaySalesTracker.Bll
         double GetSalesByMonth(int year, int month, string userId);
         object GetListingDataByInventoryItem(int inventoryItemId, string userId);
         void AssociateInventoryItemToListing(long listingId, int inventoryItemId, string userId);
+        IEnumerable<Listing> GetListingsByUser(int top, int skip,string userId);
+
         //should probably refactor listings controller so that I don't need this calculate method exposed 
         double CalculateProfitPerListing(long listingId, string userId);
     }

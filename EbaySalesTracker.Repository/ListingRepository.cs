@@ -180,14 +180,19 @@ namespace EbaySalesTracker.Repository
 
         #region FromDb
 
+        public int GetListingsCountByUser(string userId)
+        {
+            return DataContext.Listings.Where(l => l.UserId == userId).Count();
+        }
+
         public IEnumerable<Listing> GetListingsByEndDate(DateTime startDate, DateTime endDate, string userId)
         {           
             return DataContext.Listings.Where(x => x.EndDate >= startDate && x.EndDate >= endDate).ToList();
         }
        
-        public List<Listing> GetAllListingsByUser(string userId)
+        public IEnumerable<Listing> GetAllListingsByUser(int top, int skip, string userId)
         {
-            return DataContext.Listings.Where(x => x.UserId == userId).ToList();            
+            return DataContext.Listings.Where(x => x.UserId == userId).OrderBy(l => l.EndDate).Skip(skip).Take(top).ToList();            
         }
 
         public Listing GetListingById(long id)

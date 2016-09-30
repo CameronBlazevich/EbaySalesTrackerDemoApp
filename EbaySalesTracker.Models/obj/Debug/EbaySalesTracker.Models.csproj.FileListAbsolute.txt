@@ -48,3 +48,6 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\bin\Debug\System.Web.WebPages.Razor.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Debug\EbaySalesTracker.Models.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Debug\EbaySalesTracker.Models.pdb
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Debug\EbaySalesTracker.Models.Migrations.initial.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Debug\EbaySalesTracker.Models.csproj.GenerateResource.Cache
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Debug\EbaySalesTracker.Models.Migrations.AuthTokenExpNullable.resources

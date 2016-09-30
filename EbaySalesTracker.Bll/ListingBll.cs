@@ -33,8 +33,14 @@ namespace EbaySalesTracker.Bll
         {
             return _ListingRepository.GetListingById(listingId);
         }
-       
-
+       public IEnumerable<Listing> GetListingsByUser(int top, int skip, string userId)
+        {
+            return _ListingRepository.GetAllListingsByUser(top, skip, userId);
+        }
+        public int GetListingsCountByUser(string userId)
+        {
+            return _ListingRepository.GetListingsCountByUser(userId);
+        }
         public void UpdateListing(Listing listing)
         {
             _ListingRepository.UpdateListing(listing);

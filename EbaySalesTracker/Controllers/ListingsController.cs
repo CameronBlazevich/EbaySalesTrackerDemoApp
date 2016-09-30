@@ -19,22 +19,24 @@ namespace EbaySalesTracker.Controllers
         IListingDetailRepository _ListingDetailRepository;
         IInventoryRepository _InventoryRepository;
         IInventoryBll _InventoryBll;
+        IListingBll _ListingBll;
         ApplicationDbContext ApplicationDbContext;
         UserManager<ApplicationUser> UserManager;
 
         
 
-        public ListingsController() : this(null,null,null,null)
+        public ListingsController() : this(null,null,null,null,null)
         {                
         }
 
-        public ListingsController(IListingRepository listingRepo, IListingDetailRepository listingDetailRepo, IInventoryRepository inventoryRepo, IInventoryBll inventoryBll)
+        public ListingsController(IListingRepository listingRepo, IListingDetailRepository listingDetailRepo, IInventoryRepository inventoryRepo, IInventoryBll inventoryBll, IListingBll listingBll)
         {
             this.ApplicationDbContext = new ApplicationDbContext();
             _ListingRepository = listingRepo ?? ModelContainer.Instance.Resolve<IListingRepository>();
             _ListingDetailRepository = listingDetailRepo ?? ModelContainer.Instance.Resolve<IListingDetailRepository>();
             _InventoryRepository = inventoryRepo ?? ModelContainer.Instance.Resolve<IInventoryRepository>();
             _InventoryBll = inventoryBll ?? new InventoryBll();
+            _ListingBll = listingBll ?? new ListingBll();
            
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
         }
@@ -42,26 +44,15 @@ namespace EbaySalesTracker.Controllers
         
 
         // GET: Listings
-        public ActionResult Index()
+        public ActionResult Index(int top=10, int skip=0)
         {
+            
             var user = UserManager.FindById(User.Identity.GetUserId());
             string userId = user.Id;
             var listingsViewModel = new ListingsViewModel();
-            listingsViewModel.Listings = _ListingRepository.GetAllListingsByUser(userId);
-           
-            var items = _InventoryRepository.GetInventoryItemsByUser(userId).ToList();
-            listingsViewModel.Items = items;
-            
-            foreach (var listing in listingsViewModel.Listings)
-            {
-                listing.Profit = _InventoryBll.CalculateProfitPerListing(listing.ItemId, user.Id);
-                if (listing.InventoryItemId != null)
-                {
-                    listing.InventoryItem = items.Where(x => x.Id == listing.InventoryItemId).First();
-                    //listingsViewModel.InventoryItems = new SelectList(listingsViewModel.Items, "Id", "Description", listing.InventoryItemId);
-                }
-            }
-           
+            listingsViewModel.Listings = _InventoryBll.GetListingsByUser(top, skip, userId).ToList();
+            listingsViewModel.TotalListings = _ListingBll.GetListingsCountByUser(userId);
+            listingsViewModel.Items = _InventoryBll.GetInventoryItemsByUser(userId).ToList();
 
             return View(listingsViewModel);
         }

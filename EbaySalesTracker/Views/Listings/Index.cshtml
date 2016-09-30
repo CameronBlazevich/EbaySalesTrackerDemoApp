@@ -6,27 +6,28 @@
 
 <style>
     .no-underline {
-        text-decoration:none !important;
+        text-decoration: none !important;
     }
+
     th {
         white-space: nowrap;
         text-align: center;
     }
+
     td {
         text-align: center;
     }
-
 </style>
 
 <div class="panel" style="margin-top:10px">
     <div class="panel-heading text-right">
         <h3 class="pull-left">All Listings</h3>
-        
-            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 
-            @Html.ActionLink("Update All Listings", "GetAllListings", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 
-        </div>
+        @Html.ActionLink("Update All Listings", "GetAllListings", null, new { @class = "btn btn-primary" })
+
+    </div>
     <div class="panel-body col-mid-12">
 
         <table class="table table-striped table-hover">
@@ -99,14 +100,14 @@
                             <button nowrap class="btn dropdown-toggle btn-block btn-link no-underline" style="color:black" type="button" data-toggle="dropdown">
                                 @{if (@item.InventoryItem != null)
                                     {
-                                        <p>@(item.InventoryItem.Description.Length > 17? item.InventoryItem.Description.Substring(0, 17) + "..." : item.InventoryItem.Description)<span class="caret"></span></p>
+                                        <p>@(item.InventoryItem.Description.Length > 17 ? item.InventoryItem.Description.Substring(0, 17) + "..." : item.InventoryItem.Description)<span class="caret"></span></p>
                                     }
                                     else
                                     {
                                         <p>Select...<span class="caret"></span></p>
                                     }
                                 }
-                                
+
                             </button>
                             <ul class="dropdown-menu">
                                 @foreach (var invItem in Model.Items)
@@ -115,33 +116,54 @@
                                 }
                             </ul>
                         </div>
-                       
-                            @*@Html.DropDownList("SelectInventoryItem_" + item.ItemId.ToString(), Model.InventoryItems, "Select", new { @onchange = "TestFunc(this.value, this.id)", @class = "form-control" })
+
+                        @*@Html.DropDownList("SelectInventoryItem_" + item.ItemId.ToString(), Model.InventoryItems, "Select", new { @onchange = "TestFunc(this.value, this.id)", @class = "form-control" })
                             @Html.Hidden("InventoryItemId_" + item.ItemId.ToString(), item.InventoryItemId)*@
-</td>
+                    </td>
 
                     <td>
                         @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Java <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">jmeter</a></li>
-                            <li><a href="#">EJB</a></li>
-                            <li><a href="#">Jasper Report</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>*@
+                                Java <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">jmeter</a></li>
+                                <li><a href="#">EJB</a></li>
+                                <li><a href="#">Jasper Report</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>*@
                         @*@Html.ActionLink("Edit", "Edit", new { id=item.ItemId }) |
                             @Html.ActionLink("Details", "Details", new { id=item.ItemId }) |
                             @Html.ActionLink("Delete", "Delete", new { id=item.ItemId }) |*@
                         @*@Html.ActionLink("Update Fees", "UpdateFeesById", new { id = item.ItemId })*@
                     </td>
                 </tr>
-                            }
+                                    }
 
         </table>
+        @{  var itemsPerPage = 10;
+            var totalPages = Math.Ceiling(((double)Model.TotalListings / (double)itemsPerPage));
+
+        }
+        <ul class="pagination">
+            @{ for (var i = 1; i <= totalPages; i++)
+                {
+                    <li>@Html.ActionLink(i.ToString(), "Index", "Listings", new { top = itemsPerPage, skip = (i - 1) * itemsPerPage }, null)</li>
+                }                
+            }
+            @*<li>@Html.ActionLink("1", "Index", "Listings", new { top = 5, skip = 0 }, null)</li>
+                <li>@Html.ActionLink("2", "Index", "Listings", new { top = 5, skip = 5 }, null)</li>
+                <li>@Html.ActionLink("3", "Index", "Listings", new { top = 5, skip = 10 }, null)</li>
+                <li>@Html.ActionLink("4", "Index", "Listings", new { top = 5, skip = 15 }, null)</li>
+                <li>@Html.ActionLink("5", "Index", "Listings", new { top = 5, skip = 20 }, null)</li>
+                <li>@Html.ActionLink("6", "Index", "Listings", new { top = 5, skip = 25 }, null)</li>*@
+        </ul>
+        <div class="pull-right">
+
+            @Html.DisplayFor(model => model.TotalListings)
+        </div>
     </div>
 </div>
 
@@ -151,7 +173,7 @@
     $(document).ready(function () {
 
         $('[data-toggle="tooltip"]').tooltip();
-       
+
     });
 
     $(".dropdown-menu li a").click(function () {

@@ -418,5 +418,115 @@ namespace EbaySalesTrackerTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void CalculateProfitPerListing_Successful()
+        {
+            var userId = "1";
+            var listingId = 123456789;
+            //Arrange 
+            var listing = new Listing()
+            {
+                ItemId = listingId,
+                CurrentPrice = 54.51,
+                TotalNetFees = 13.24,
+                InventoryItemId = 1,
+                QuantitySold = 1,
+                UserId = userId
+            };
+
+            var invItem = new InventoryItem()
+            {
+                Id = 1,
+                UserId = "1",
+                Cost = 12.01
+            };
+
+            var mockListingBll = new Mock<IListingBll>();
+            mockListingBll.Setup(x => x.GetListingById(listingId)).Returns(listing);
+
+            var mockInvRepo = new Mock<IInventoryRepository>();
+            mockInvRepo.Setup(x => x.GetInventoryItemById((int)listing.InventoryItemId, userId)).Returns(invItem);
+
+            var invBll = new InventoryBll(mockListingBll.Object, mockInvRepo.Object);
+
+            //Act
+            var actual = invBll.CalculateProfitPerListing(listingId, userId);
+            var expected = Math.Round(54.51 - 13.24 - 12.01,2);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void CalculateProfitPerListing_NegativeProfit_Successful()
+        {
+            var userId = "1";
+            var listingId = 123456789;
+            //Arrange 
+            var listing = new Listing()
+            {
+                ItemId = listingId,
+                CurrentPrice = 54.51,
+                TotalNetFees = 13.24,
+                InventoryItemId = 1,
+                QuantitySold = 1,
+                UserId = userId
+            };
+
+            var invItem = new InventoryItem()
+            {
+                Id = 1,
+                UserId = "1",
+                Cost = 112.01
+            };
+
+            var mockListingBll = new Mock<IListingBll>();
+            mockListingBll.Setup(x => x.GetListingById(listingId)).Returns(listing);
+
+            var mockInvRepo = new Mock<IInventoryRepository>();
+            mockInvRepo.Setup(x => x.GetInventoryItemById((int)listing.InventoryItemId, userId)).Returns(invItem);
+
+            var invBll = new InventoryBll(mockListingBll.Object, mockInvRepo.Object);
+
+            //Act
+            var actual = invBll.CalculateProfitPerListing(listingId, userId);
+            var expected = Math.Round(54.51 - 13.24 - 112.01, 2);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void CalculateProfitPerListing_NoAssociatedInvItem_Successful()
+        {
+            var userId = "1";
+            var listingId = 123456789;
+            //Arrange 
+            var listing = new Listing()
+            {
+                ItemId = listingId,
+                CurrentPrice = 54.51,
+                TotalNetFees = 13.24,
+                InventoryItemId = 1,
+                QuantitySold = 1,
+                UserId = userId
+            };
+
+            var invItem = new InventoryItem();
+           
+            var mockListingBll = new Mock<IListingBll>();
+            mockListingBll.Setup(x => x.GetListingById(listingId)).Returns(listing);
+
+            var mockInvRepo = new Mock<IInventoryRepository>();
+            mockInvRepo.Setup(x => x.GetInventoryItemById((int)listing.InventoryItemId, userId)).Returns(invItem);
+
+            var invBll = new InventoryBll(mockListingBll.Object, mockInvRepo.Object);
+
+            //Act
+            var actual = invBll.CalculateProfitPerListing(listingId, userId);
+            var expected = Math.Round(54.51 - 13.24, 2);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
     }    
 }

@@ -123,6 +123,18 @@ namespace EbaySalesTracker.Bll
             }
             return Math.Round(monthlyProfit,2);
         }
+        public IEnumerable<Listing> GetListingsByUser(int top, int skip,string userId)
+        {
+            var listings = _ListingBll.GetListingsByUser(top, skip,userId);
+            foreach (var listing in listings)
+            {
+                SetProfitPerListing(listing, userId);
+                if (listing.InventoryItemId!=null)
+                    listing.InventoryItem = _InventoryRepository.GetInventoryItemById((int)listing.InventoryItemId, userId);
+            }
+            return listings;
+        }
+
         public double GetSalesByMonth(int year, int month, string userId)
         {
             double monthlySales = 0;
@@ -166,6 +178,21 @@ namespace EbaySalesTracker.Bll
                 profit = Math.Round(listing.CurrentPrice - listing.TotalNetFees - inventoryItem.Cost, 2);
             }
             return profit;
+        }
+        public void SetProfitPerListing(Listing listing, string userId)
+        {
+            double profit = 0;
+            var inventoryItem = new InventoryItem();            
+            if (listing.QuantitySold > 0)
+            {
+                if (listing.InventoryItemId != null)
+                {
+                    inventoryItem = _InventoryRepository.GetInventoryItemById((int)listing.InventoryItemId, userId);
+                }
+
+                profit = Math.Round(listing.CurrentPrice - listing.TotalNetFees - inventoryItem.Cost, 2);
+            }
+           // return listing;
         }
 
         public void AssociateInventoryItemToListing(long listingId, int inventoryItemId, string userId)
