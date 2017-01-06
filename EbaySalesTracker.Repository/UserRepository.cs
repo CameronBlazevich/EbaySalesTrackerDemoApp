@@ -16,17 +16,17 @@ namespace EbaySalesTracker.Repository
         {
             using (var userContext = new ApplicationDbContext())
             {
-                sessionId = userContext.Users.Where(x => x.Id == userId).Select(u => u.SessionId).FirstOrDefault();
+                //sessionId = userContext.Users.Where(x => x.Id == userId).Select(u => u.SessionId).FirstOrDefault();
 
-                if (sessionId == "" || sessionId == null)
-                {
+                //if (sessionId == "" || sessionId == null)
+                //{
                     sessionId = engine.GetSessionId();
-                    if (sessionId == null) return null;
+                    //if (sessionId == null) return null;
 
-                    var user = userContext.Users.Where(p => p.Id == userId).FirstOrDefault();
-                    user.SessionId = sessionId;
-                    userContext.SaveChanges();
-                }                
+                    //var user = userContext.Users.Where(p => p.Id == userId).FirstOrDefault();
+                    //user.SessionId = sessionId;
+                    //userContext.SaveChanges();
+                //}                
             }
 
             return sessionId;
@@ -49,6 +49,9 @@ namespace EbaySalesTracker.Repository
 
             return result;
         }
-
+        public bool TestUserToken(string userToken)
+        {
+           return engine.GetEbayOfficialTime(userToken);
+        }
     }
 }

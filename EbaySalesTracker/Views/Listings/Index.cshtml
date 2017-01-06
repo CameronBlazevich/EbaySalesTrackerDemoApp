@@ -5,6 +5,11 @@
 }
 
 <style>
+    li.highlight a {
+        color: white;
+        background-color: #428bca;
+    }
+
     .no-underline {
         text-decoration: none !important;
     }
@@ -19,13 +24,13 @@
     }
 </style>
 
-<div class="panel" style="margin-top:10px">
+<div class="panel">
     <div class="panel-heading text-right">
         <h3 class="pull-left">All Listings</h3>
 
         @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 
-        @Html.ActionLink("Update All Listings", "GetAllListings", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Update All Listings", "UpdateListings", null, new { @class = "btn btn-primary" })
 
     </div>
     <div class="panel-body col-mid-12">
@@ -86,8 +91,6 @@
                     </td>
                     <td>
                         <p id="@("profit_" + item.ItemId)">@item.Profit</p>
-                        @*<input type="text" class="col-xs-1" />*@
-                        @*@Html.DisplayFor(modelItem => item.Profit)*@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.QuantitySold)
@@ -112,58 +115,46 @@
                             <ul class="dropdown-menu">
                                 @foreach (var invItem in Model.Items)
                                 {
-                                    <li><a href="javascript:TestFunc(@invItem.Id,@item.ItemId)">@invItem.Description</a></li>
+                                    <li><a href="javascript:AssoicateItemToListing(@invItem.Id,@item.ItemId)">@invItem.Description</a></li>
                                 }
                             </ul>
                         </div>
-
-                        @*@Html.DropDownList("SelectInventoryItem_" + item.ItemId.ToString(), Model.InventoryItems, "Select", new { @onchange = "TestFunc(this.value, this.id)", @class = "form-control" })
-                            @Html.Hidden("InventoryItemId_" + item.ItemId.ToString(), item.InventoryItemId)*@
                     </td>
-
-                    <td>
-                        @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Java <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">jmeter</a></li>
-                                <li><a href="#">EJB</a></li>
-                                <li><a href="#">Jasper Report</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>*@
-                        @*@Html.ActionLink("Edit", "Edit", new { id=item.ItemId }) |
-                            @Html.ActionLink("Details", "Details", new { id=item.ItemId }) |
-                            @Html.ActionLink("Delete", "Delete", new { id=item.ItemId }) |*@
-                        @*@Html.ActionLink("Update Fees", "UpdateFeesById", new { id = item.ItemId })*@
-                    </td>
+                    <td></td>
                 </tr>
-                                    }
+            }
 
         </table>
         @{  var itemsPerPage = 10;
             var totalPages = Math.Ceiling(((double)Model.TotalListings / (double)itemsPerPage));
+            var currentPage = Convert.ToInt32(Request.Params["skip"]) / 10;
 
         }
-        <ul class="pagination">
+        <ul class="pagination" id="pagination">
+            @{ if (currentPage != 0)
+                {
+                    <li>@Html.ActionLink("First", "Index", "Listings", new { top = itemsPerPage, skip = 0 }, null)</li>
+                    <li>@Html.ActionLink("Prev", "Index", "Listings", new { top = itemsPerPage, skip = ((currentPage - 1) * itemsPerPage) > 0 ? ((currentPage - 1) * itemsPerPage) : 0 }, null)</li>
+                }}
             @{ for (var i = 1; i <= totalPages; i++)
                 {
-                    <li>@Html.ActionLink(i.ToString(), "Index", "Listings", new { top = itemsPerPage, skip = (i - 1) * itemsPerPage }, null)</li>
-                }                
+                    <li class="pagination-item">@Html.ActionLink(i.ToString(), "Index", "Listings", new { top = itemsPerPage, skip = (i - 1) * itemsPerPage }, null)</li>
+                }
             }
-            @*<li>@Html.ActionLink("1", "Index", "Listings", new { top = 5, skip = 0 }, null)</li>
-                <li>@Html.ActionLink("2", "Index", "Listings", new { top = 5, skip = 5 }, null)</li>
-                <li>@Html.ActionLink("3", "Index", "Listings", new { top = 5, skip = 10 }, null)</li>
-                <li>@Html.ActionLink("4", "Index", "Listings", new { top = 5, skip = 15 }, null)</li>
-                <li>@Html.ActionLink("5", "Index", "Listings", new { top = 5, skip = 20 }, null)</li>
-                <li>@Html.ActionLink("6", "Index", "Listings", new { top = 5, skip = 25 }, null)</li>*@
+            @{if (currentPage + 1 < totalPages)
+                {
+                    <li>@Html.ActionLink("Next", "Index", "Listings", new { top = itemsPerPage, skip = (currentPage + 1) >= totalPages ? currentPage * itemsPerPage : (currentPage + 1) * itemsPerPage }, null)</li>
+                    <li>@Html.ActionLink("Last", "Index", "Listings", new { top = itemsPerPage, skip = (totalPages - 1) * itemsPerPage }, null)</li>
+                } }
         </ul>
+
         <div class="pull-right">
 
-            @Html.DisplayFor(model => model.TotalListings)
+            <button id="export" class="btn btn-info">Export To CSV</button>
         </div>
+    </div>
+    <div class="row">
+
     </div>
 </div>
 
@@ -173,7 +164,14 @@
     $(document).ready(function () {
 
         $('[data-toggle="tooltip"]').tooltip();
+        var pageToHighlight;
+        if (@currentPage === 0)
+            pageToHighlight = 1;
 
+        if (@currentPage > 0)
+            pageToHighlight = @currentPage+3
+
+        $('#pagination li:nth-child(' + pageToHighlight + ')').addClass('highlight');
     });
 
     $(".dropdown-menu li a").click(function () {
@@ -184,28 +182,23 @@
         $(this).parents(".dropdown").find('.btn').html(invItemDesc + ' <span class="caret"></span>');
         $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
     });
+    $('#export').click(function () {
+        ExportToCsv();
+    })
 
-    function TestFunc(inventoryItemId, listingItemId) {
-        //var listingItemId = selectListId.split("_");
-        //console.log(inventoryItemId, listingItemId);
+    function ExportToCsv() {
+        window.location = '@Url.Action("GetCsvReport", "Listings")';
+    }
 
+    function AssoicateItemToListing(inventoryItemId, listingItemId) {
         $.ajax({
             type: 'POST',
-            url: '/Listings/AssociateInventoryItemToListing',
+            url: '@Url.Action("AssociateInventoryItemToListing", "Listings")',
             data: { inventoryItemId: inventoryItemId, listingItemId: listingItemId },
             cache: false,
             success: function (result) {
                 $('#profit_' + listingItemId).text(result.profit.toFixed(2));
             }
         });
-
-        function CalculateProfit(listingItemId) {
-            // $('#profit_' + listingItemId).val("5");
-            //console.log(listingItemId);
-        }
-
-
     }
-
-
 </script>

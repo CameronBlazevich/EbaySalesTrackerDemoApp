@@ -25,6 +25,7 @@ namespace EbaySalesTracker.Models
         public string SessionId { get; set; }
         public string UserToken { get; set; }
         public DateTime? TokenExpDate { get; set; }
+        public DateTime? LastListingRefreshDate { get; set; }
     }
 
     

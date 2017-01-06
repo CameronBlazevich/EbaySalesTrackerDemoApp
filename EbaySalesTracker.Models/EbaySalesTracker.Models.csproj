@@ -142,13 +142,9 @@
     <Compile Include="ListingDetail.cs" />
     <Compile Include="ListingTransaction.cs" />
     <Compile Include="ManageViewModels.cs" />
-    <Compile Include="Migrations\201609250005535_initial.cs" />
-    <Compile Include="Migrations\201609250005535_initial.Designer.cs">
-      <DependentUpon>201609250005535_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609250006440_AuthTokenExpNullable.cs" />
-    <Compile Include="Migrations\201609250006440_AuthTokenExpNullable.Designer.cs">
-      <DependentUpon>201609250006440_AuthTokenExpNullable.cs</DependentUpon>
+    <Compile Include="Migrations\201612110425287_LastListingRefreshDateToUserTable.cs" />
+    <Compile Include="Migrations\201612110425287_LastListingRefreshDateToUserTable.Designer.cs">
+      <DependentUpon>201612110425287_LastListingRefreshDateToUserTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OperationStatus.cs" />
@@ -160,11 +156,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609250005535_initial.resx">
-      <DependentUpon>201609250005535_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609250006440_AuthTokenExpNullable.resx">
-      <DependentUpon>201609250006440_AuthTokenExpNullable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612110425287_LastListingRefreshDateToUserTable.resx">
+      <DependentUpon>201612110425287_LastListingRefreshDateToUserTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

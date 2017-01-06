@@ -10,6 +10,7 @@ namespace EbaySalesTracker.Bll
         IEnumerable<Listing> GetListingsByEndDate(DateTime startDate, DateTime endDate, string userId);
         Listing GetListingById(long listingId);
         void UpdateListing(Listing listing);
+        void UpdateListings(string userId);
         int GetListingsCountByUser(string userId);
         IEnumerable<Listing> GetListingsByUser(int top, int skip, string userId);
     }

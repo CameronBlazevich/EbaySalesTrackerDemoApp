@@ -45,5 +45,19 @@ namespace EbaySalesTracker.Bll
         {
             _ListingRepository.UpdateListing(listing);
         }
+
+        public void UpdateListings(string userId)
+        {
+            var lastListingUpdate = _ListingRepository.GetLastListingsUpdate(userId);
+            
+            if (lastListingUpdate == null)
+            {
+                var twoYearsAgo = DateTime.Now.AddYears(-2);
+                lastListingUpdate = twoYearsAgo;
+            }
+            _ListingRepository.UpdateListings((DateTime)lastListingUpdate, userId);
+
+
+        }
     }
 }

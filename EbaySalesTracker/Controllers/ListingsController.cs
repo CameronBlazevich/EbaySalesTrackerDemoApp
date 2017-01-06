@@ -1,4 +1,5 @@
 ﻿using EbaySalesTracker.Bll;
+using EbaySalesTracker.Helpers;
 using EbaySalesTracker.Models;
 using EbaySalesTracker.Repository;
 using EbaySalesTracker.ViewModels;
@@ -6,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
 using System;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -89,6 +91,34 @@ namespace EbaySalesTracker.Controllers
 
             return View(listing);
         }
+        [HttpGet]
+        public FileResult GetCsvReport()
+        {
+
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            string userId = user.Id;
+            var listings = _InventoryBll.GetListingsByUser(-1, -1, userId).ToList();
+            
+            var myExport = new CsvExport();
+            foreach (var listing in listings)
+            {
+                myExport.AddRow();
+                myExport["Listing Id"] = listing.ItemId;
+                myExport["Title"] = listing.Title;
+                myExport["Start Date"] = listing.StartDate;
+                myExport["End Date"] = listing.EndDate;
+                myExport["Sale Price"] = Math.Round(listing.CurrentPrice,2);
+                myExport["Total Net Fees"] = Math.Round(listing.TotalNetFees,2);
+                myExport["Profit"] = Math.Round(listing.Profit,2);
+                myExport["Status"] = listing.ListingStatus;
+                myExport["Associated Item"] = listing.InventoryItem?.Description;
+                myExport["Item Cost"] = listing.InventoryItem?.Cost;
+            }
+            var listingsCsv =  File(myExport.ExportToBytes(), "text/csv", "Listings_" + DateTime.Now + ".csv");
+
+            return listingsCsv;
+
+        }
 
         //// GET: Listings/Edit/5
         //public ActionResult Edit(long? id)
@@ -153,12 +183,11 @@ namespace EbaySalesTracker.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult GetAllListings()
+        public ActionResult UpdateListings()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
             string userId = user.Id;
-            _ListingRepository.GetAllListingsSinceDateFromEbay(new DateTime(2015,01,01), userId);
-            //_ListingDetailRepository.GetAllListingDetailsFromEbay(db.Listings.Select(i => i.ItemId).ToList());
+            _ListingBll.UpdateListings(userId);
 
             return RedirectToAction("Index");
         }

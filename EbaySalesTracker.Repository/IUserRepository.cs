@@ -10,6 +10,6 @@ namespace EbaySalesTracker.Repository
     {
         string GetSessionId(string userId);
         List<string> GetUserToken(string userId, string sessionId);
-
+        bool TestUserToken(string userToken);
     }
 }

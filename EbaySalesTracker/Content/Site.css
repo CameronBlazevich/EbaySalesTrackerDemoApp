@@ -2,6 +2,7 @@
     padding-top: 50px;
     padding-bottom: 20px;
     background-color: #dcdcdc;
+    /*background-color: black;*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -31,4 +32,22 @@ textarea {
 
 .topnav {
     font-size: 14px; 
+}
+.registration-pitch {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url('../img/Logomakr_0KNSYp.png') no-repeat center center;
+    background-size: contain;
+}
+.panel {
+    margin-top:10px;
+}
+.navbar {
+    background-color:#ffffff;
+    color:black;
+}
+.greyed-out{
+    color:lightgray;                 
 }

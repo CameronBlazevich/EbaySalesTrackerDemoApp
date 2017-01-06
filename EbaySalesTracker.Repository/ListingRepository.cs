@@ -34,66 +34,12 @@ namespace EbaySalesTracker.Repository
 
         public List<Listing> GetAllListingsSinceDateFromEbay(DateTime startDate, string userId)
         {
-            IListingDetailRepository detailRepo = new ListingDetailRepository();
-            IListingTransactionRepository transRepo = new ListingTransactionRepository();
-            IOrderRepository orderRepo = new OrderRepository();
             ApplicationUser user = new ApplicationUser();
             var userContext = new ApplicationDbContext();
-
-            user = userContext.Users.Where(p => p.Id == userId).FirstOrDefault();
-                 
             
+            user = userContext.Users.Where(p => p.Id == userId).FirstOrDefault();
+
             List<Listing> listings = engine.GetAllListingsSinceDateFromEbay(startDate, user.UserToken);
-
-
-            if (listings != null && listings.Count > 0)
-            {
-                using (DataContext)
-                {
-                    foreach (var listing in listings)
-                    {
-                        //check if the listing already exists in db
-                        var existingListing = DataContext.Listings.SingleOrDefault(l => l.ItemId == listing.ItemId);
-                        if (existingListing != null)
-                        {
-                            existingListing.CurrentPrice = listing.CurrentPrice;
-                            existingListing.ListingStatus = listing.ListingStatus;
-                            existingListing.QuantitySold = listing.QuantitySold;
-                            existingListing.Type = listing.Type;
-                            DataContext.SaveChanges();                          
-                        }
-                        else
-                        {
-                            //should figure out how to better implement opStatus/BaseRepo
-                            listing.UserId = userId;
-                            DataContext.Listings.Add(listing);
-                            var opStatus = Save(listing);
-                            if (!opStatus.Status)
-                            {
-                                listing.Title = "Error saving listing.";
-                            }
-                        }
-                        //Dont forget to move this out
-                        UpdateFeesById(listing.ItemId, user.UserToken);
-                        var transactions = transRepo.GetListingTransactionsByListingIdFromEbay(listing.ItemId, userId);
-                        if (transactions.Count > 0)
-                        {
-                            foreach (var transaction in transactions)
-                            {
-                                var orderId = listing.ItemId.ToString() + "-" + transaction.Id.ToString();
-                                orderRepo.GetOrderByOrderIdFromEbay(orderId, userId);
-                            }
-                        }
-                        else
-                        {
-                            var orderId = listing.ItemId.ToString() + "-" + "0";
-                            orderRepo.GetOrderByOrderIdFromEbay(orderId, userId);
-                        }
-                       
-
-                    }
-                }
-            }
 
             return listings;
         }
@@ -158,7 +104,6 @@ namespace EbaySalesTracker.Repository
                 {
                     foreach (var listing in listings)
                     {
-                        //check if the listing already exists in db
                         var exists = DataContext.Listings.Where(l => l.ItemId == listing.ItemId).Any();
                         if (!exists)
                         {
@@ -178,6 +123,75 @@ namespace EbaySalesTracker.Repository
         }
 
 
+        public void UpdateListings(DateTime sinceDate, string userId)
+        {
+            IListingDetailRepository detailRepo = new ListingDetailRepository();          
+            ApplicationUser user = new ApplicationUser();
+            var userContext = new ApplicationDbContext();
+
+            user = userContext.Users.Where(p => p.Id == userId).FirstOrDefault();
+
+            List<Listing> listings = engine.GetAllListingsSinceDateFromEbay(sinceDate, user.UserToken);
+
+
+            if (listings != null && listings.Count > 0)
+            {
+                using (DataContext)
+                {
+                    foreach (var listing in listings)
+                    {
+                        var existingListing = DataContext.Listings.SingleOrDefault(l => l.ItemId == listing.ItemId);
+                        if (existingListing != null)
+                        {
+                            existingListing.CurrentPrice = listing.CurrentPrice;
+                            existingListing.ListingStatus = listing.ListingStatus;
+                            existingListing.QuantitySold = listing.QuantitySold;
+                            existingListing.Type = listing.Type;
+                            DataContext.SaveChanges();
+                        }
+                        else
+                        {
+                            //should figure out how to better implement opStatus/BaseRepo
+                            listing.UserId = userId;
+                            DataContext.Listings.Add(listing);
+                            var opStatus = Save(listing);
+                            if (!opStatus.Status)
+                            {
+                                listing.Title = "Error saving listing.";
+                            }
+                        }
+                        UpdateFeesById(listing.ItemId, user.UserToken);
+                        UpdateTransactions(listing, userId);                        
+                    }
+                }
+                SetLastUpdateDate(userId);
+            }
+
+        }
+
+        
+
+        private void UpdateTransactions(Listing listing, string userId)
+        {
+            IListingTransactionRepository transRepo = new ListingTransactionRepository();
+            IOrderRepository orderRepo = new OrderRepository();
+
+            var transactions = transRepo.GetListingTransactionsByListingIdFromEbay(listing.ItemId, userId);
+            if (transactions.Count > 0)
+            {
+                foreach (var transaction in transactions)
+                {
+                    var orderId = listing.ItemId.ToString() + "-" + transaction.Id.ToString();
+                    orderRepo.GetOrderByOrderIdFromEbay(orderId, userId);
+                }
+            }
+            else
+            {
+                var orderId = listing.ItemId.ToString() + "-" + "0";
+                orderRepo.GetOrderByOrderIdFromEbay(orderId, userId);
+            }
+        }
+
         #region FromDb
 
         public int GetListingsCountByUser(string userId)
@@ -192,6 +206,9 @@ namespace EbaySalesTracker.Repository
        
         public IEnumerable<Listing> GetAllListingsByUser(int top, int skip, string userId)
         {
+            if (top == -1 && skip == -1)
+                return DataContext.Listings.Where(x => x.UserId == userId).OrderBy(l => l.EndDate).ToList();
+
             return DataContext.Listings.Where(x => x.UserId == userId).OrderBy(l => l.EndDate).Skip(skip).Take(top).ToList();            
         }
 
@@ -237,7 +254,25 @@ namespace EbaySalesTracker.Repository
         {
             return DataContext.Listings.Where(x => x.InventoryItemId == inventoryItemId && x.TotalNetFees != 0 && x.QuantitySold > 0 && x.UserId == userId).OrderBy(x => x.EndDate).ToList(); 
         }
-             
+
+        public DateTime? GetLastListingsUpdate(string userId)
+        {
+            using (var userContext = new ApplicationDbContext())
+            {
+                return userContext.Users.Where(u => u.Id == userId).Select(u => u.LastListingRefreshDate).FirstOrDefault();
+            }
+        }
+
+        private void SetLastUpdateDate(string userId)
+        {
+            using (var userContext = new ApplicationDbContext())
+            {
+                var user = userContext.Users.Where(u => u.Id == userId).FirstOrDefault();
+                user.LastListingRefreshDate = DateTime.Now;
+                userContext.SaveChanges();
+            }
+        }
+
         #endregion
     }
 }

@@ -93,73 +93,13 @@
     <Compile Include="ListingDetailRepository.cs" />
     <Compile Include="ListingRepository.cs" />
     <Compile Include="ListingTransactionRepository.cs" />
-    <Compile Include="Migrations\201605182341489_init.cs" />
-    <Compile Include="Migrations\201605182341489_init.Designer.cs">
-      <DependentUpon>201605182341489_init.cs</DependentUpon>
+    <Compile Include="Migrations\201611160416232_InitialMigForLocalhost.cs" />
+    <Compile Include="Migrations\201611160416232_InitialMigForLocalhost.Designer.cs">
+      <DependentUpon>201611160416232_InitialMigForLocalhost.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605232327184_someChanges.cs" />
-    <Compile Include="Migrations\201605232327184_someChanges.Designer.cs">
-      <DependentUpon>201605232327184_someChanges.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605240025272_changesToSupportEbaySDK.cs" />
-    <Compile Include="Migrations\201605240025272_changesToSupportEbaySDK.Designer.cs">
-      <DependentUpon>201605240025272_changesToSupportEbaySDK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605240205375_inventoryItem.cs" />
-    <Compile Include="Migrations\201605240205375_inventoryItem.Designer.cs">
-      <DependentUpon>201605240205375_inventoryItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605240209497_inventoryItemIdNullable.cs" />
-    <Compile Include="Migrations\201605240209497_inventoryItemIdNullable.Designer.cs">
-      <DependentUpon>201605240209497_inventoryItemIdNullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605240218563_inventoryItemPricesNullable.cs" />
-    <Compile Include="Migrations\201605240218563_inventoryItemPricesNullable.Designer.cs">
-      <DependentUpon>201605240218563_inventoryItemPricesNullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605240250441_inventoryItemUserId.cs" />
-    <Compile Include="Migrations\201605240250441_inventoryItemUserId.Designer.cs">
-      <DependentUpon>201605240250441_inventoryItemUserId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605240255458_inventoryItemUserIdIsString.cs" />
-    <Compile Include="Migrations\201605240255458_inventoryItemUserIdIsString.Designer.cs">
-      <DependentUpon>201605240255458_inventoryItemUserIdIsString.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605250249549_listingProfitField.cs" />
-    <Compile Include="Migrations\201605250249549_listingProfitField.Designer.cs">
-      <DependentUpon>201605250249549_listingProfitField.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606040010449_AddQuantitySold.cs" />
-    <Compile Include="Migrations\201606040010449_AddQuantitySold.Designer.cs">
-      <DependentUpon>201606040010449_AddQuantitySold.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608190423527_Testing.cs" />
-    <Compile Include="Migrations\201608190423527_Testing.Designer.cs">
-      <DependentUpon>201608190423527_Testing.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609102140565_AddListingType.cs" />
-    <Compile Include="Migrations\201609102140565_AddListingType.Designer.cs">
-      <DependentUpon>201609102140565_AddListingType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609110048061_CreateTransactionsTable.cs" />
-    <Compile Include="Migrations\201609110048061_CreateTransactionsTable.Designer.cs">
-      <DependentUpon>201609110048061_CreateTransactionsTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609110454374_AddOrdersTable.cs" />
-    <Compile Include="Migrations\201609110454374_AddOrdersTable.Designer.cs">
-      <DependentUpon>201609110454374_AddOrdersTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609110459038_OrdersTablePKNotAutoGen.cs" />
-    <Compile Include="Migrations\201609110459038_OrdersTablePKNotAutoGen.Designer.cs">
-      <DependentUpon>201609110459038_OrdersTablePKNotAutoGen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609110548363_OrderDatesNullable.cs" />
-    <Compile Include="Migrations\201609110548363_OrderDatesNullable.Designer.cs">
-      <DependentUpon>201609110548363_OrderDatesNullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609110606211_AddRefundInfoToOrders.cs" />
-    <Compile Include="Migrations\201609110606211_AddRefundInfoToOrders.Designer.cs">
-      <DependentUpon>201609110606211_AddRefundInfoToOrders.cs</DependentUpon>
+    <Compile Include="Migrations\201611160425390_ChangeTypeOnInvItems.cs" />
+    <Compile Include="Migrations\201611160425390_ChangeTypeOnInvItems.Designer.cs">
+      <DependentUpon>201611160425390_ChangeTypeOnInvItems.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContainer.cs" />
@@ -1008,60 +948,6 @@
     <None Include="Service References\eBayApiInterfaceService\ebaySvc.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605182341489_init.resx">
-      <DependentUpon>201605182341489_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605232327184_someChanges.resx">
-      <DependentUpon>201605232327184_someChanges.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605240025272_changesToSupportEbaySDK.resx">
-      <DependentUpon>201605240025272_changesToSupportEbaySDK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605240205375_inventoryItem.resx">
-      <DependentUpon>201605240205375_inventoryItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605240209497_inventoryItemIdNullable.resx">
-      <DependentUpon>201605240209497_inventoryItemIdNullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605240218563_inventoryItemPricesNullable.resx">
-      <DependentUpon>201605240218563_inventoryItemPricesNullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605240250441_inventoryItemUserId.resx">
-      <DependentUpon>201605240250441_inventoryItemUserId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605240255458_inventoryItemUserIdIsString.resx">
-      <DependentUpon>201605240255458_inventoryItemUserIdIsString.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605250249549_listingProfitField.resx">
-      <DependentUpon>201605250249549_listingProfitField.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606040010449_AddQuantitySold.resx">
-      <DependentUpon>201606040010449_AddQuantitySold.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608190423527_Testing.resx">
-      <DependentUpon>201608190423527_Testing.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609102140565_AddListingType.resx">
-      <DependentUpon>201609102140565_AddListingType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609110048061_CreateTransactionsTable.resx">
-      <DependentUpon>201609110048061_CreateTransactionsTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609110454374_AddOrdersTable.resx">
-      <DependentUpon>201609110454374_AddOrdersTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609110459038_OrdersTablePKNotAutoGen.resx">
-      <DependentUpon>201609110459038_OrdersTablePKNotAutoGen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609110548363_OrderDatesNullable.resx">
-      <DependentUpon>201609110548363_OrderDatesNullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609110606211_AddRefundInfoToOrders.resx">
-      <DependentUpon>201609110606211_AddRefundInfoToOrders.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
@@ -1078,6 +964,14 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611160416232_InitialMigForLocalhost.resx">
+      <DependentUpon>201611160416232_InitialMigForLocalhost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611160425390_ChangeTypeOnInvItems.resx">
+      <DependentUpon>201611160425390_ChangeTypeOnInvItems.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -20,6 +20,7 @@ namespace EbaySalesTracker.Models
         //public int ProductId { get; set; }
         //public Product Product { get; set; }
         [Display(Name = "Current Price")]
+        [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public double CurrentPrice { get; set; }
         [Display(Name = "Quantity Sold")]
         public int QuantitySold { get; set; }
@@ -27,6 +28,7 @@ namespace EbaySalesTracker.Models
         public ListingStatusCodeType ListingStatus {get; set;}
         //public ListingStatus ListingStatus { get; set; }
         [Display(Name = "Total Net Fees")]
+        [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public double TotalNetFees { get; set; }
         public double TotalGrossFees { get; set; }
         public List<ListingDetail> ListingDetails { get; set; }
@@ -36,6 +38,7 @@ namespace EbaySalesTracker.Models
         public string UserId { get; set; }
         public InventoryItem InventoryItem { get; set; }
         public int? InventoryItemId { get; set;}
+        [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public double Profit { get; set; }
         public ListingTypeCodeType Type { get; set; }
 

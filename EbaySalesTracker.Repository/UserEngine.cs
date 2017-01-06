@@ -43,6 +43,19 @@ namespace EbaySalesTracker.Repository
           
         }
 
+        public bool GetEbayOfficialTime(string userToken)
+        {
+
+            var context = RequestBuilder.CreateNewApiCall(userToken);
+            GeteBayOfficialTimeCall ebayOfficialTimeCall = new GeteBayOfficialTimeCall(context);
+            ebayOfficialTimeCall.Execute();
+
+            var success = ebayOfficialTimeCall.ApiResponse.Ack.ToString();
+
+            return (success == "Success");
+        }
+        
+
 
     }
 }

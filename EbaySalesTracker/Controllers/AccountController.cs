@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EbaySalesTracker.Models;
+using System.Configuration;
+using EbaySalesTracker.Repository;
+using Microsoft.Practices.Unity;
 
 namespace EbaySalesTracker.Controllers
 {
@@ -17,11 +20,17 @@ namespace EbaySalesTracker.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        IUserRepository _UserRepository;
 
-        public AccountController()
+        public AccountController() : this(null)
         {
+            
         }
 
+        public AccountController(IUserRepository userRepo)
+        {
+            _UserRepository = userRepo ?? ModelContainer.Instance.Resolve<IUserRepository>();
+        }
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
@@ -58,6 +67,7 @@ namespace EbaySalesTracker.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+
             return View();
         }
 
@@ -479,6 +489,58 @@ namespace EbaySalesTracker.Controllers
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult EbayAuthenticationAccepted()
+        {
+            var identity = User.Identity as ClaimsIdentity;
+            var userId = identity.Claims.Where(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Select(c => c.Value).FirstOrDefault();
+
+            var sessionId = UserManager.GetClaims(userId).Where(c => c.Type == "SessionId").Select(c => c.Value).FirstOrDefault();
+            var tokenInfo = _UserRepository.GetUserToken(userId, sessionId);
+
+            bool result = _UserRepository.TestUserToken(tokenInfo[0]);
+            return RedirectToAction("Index", "Listings");
+        }
+
+        public ActionResult AuthenticateUserWithEbay()
+        {
+            var clientId = ConfigurationManager.AppSettings["clientId"];
+            var ruName = ConfigurationManager.AppSettings["runame"];
+            var responseType = ConfigurationManager.AppSettings["response_type"];
+            var clientSecret = ConfigurationManager.AppSettings["client_secret"];
+            var useOAuth = ConfigurationManager.AppSettings["UseOAuth"];
+
+            var identity = User.Identity as ClaimsIdentity;
+            var userId = identity.Claims.Where(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Select(c => c.Value).FirstOrDefault();
+
+
+            if (useOAuth == "true")
+            {
+                var url = "https://signin.ebay.com/ws/eBayISAPI.dll?SignIn&runame=Cameron_Blazevi-CameronB-EbayFe-urvcak&oauthparams=%26state%3Dnull%26client_id%3DCameronB-EbayFeeT-PRD-e8a129233-5ff958d9%26redirect_uri%3DCameron_Blazevi-CameronB-EbayFe-urvcak%26response_type%3Dcode%26device_id%3Dnull%26display%3Dnull%26scope%3Dhttps%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope+https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.marketing.readonly+https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.marketing+https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.inventory.readonly+https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.inventory+https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.account.readonly+https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.account+https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.fulfillment.readonly+https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.fulfillment+https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.analytics.readonly%26tt%3D1";
+                return Redirect(url);
+            }
+            else
+            {
+                string encodedSessionId = HttpUtility.UrlEncode(_UserRepository.GetSessionId(userId));
+             
+                //this function call doesn't seem to be working. skipping for now
+                SetUserClaimForSessionId(userId,encodedSessionId);
+
+                var url = "https://signin.ebay.com/ws/eBayISAPI.dll?SignIn&runame=Cameron_Blazevi-CameronB-EbayFe-urvcak&SessID=" + encodedSessionId;
+                return Redirect(url);
+            }
+        }
+        private void SetUserClaimForSessionId(string userId, string sessionId)
+        {
+            var claimType = "SessionId";
+            var existingClaim = UserManager.GetClaims(userId).Where(c => c.Type == claimType).FirstOrDefault();
+            if (existingClaim != null)
+            {
+                UserManager.RemoveClaim(userId, existingClaim);
+            }
+            UserManager.AddClaim(userId, new Claim(claimType, sessionId));
         }
         #endregion
     }
