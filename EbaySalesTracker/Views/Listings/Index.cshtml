@@ -1,4 +1,5 @@
-﻿@model EbaySalesTracker.ViewModels.ListingsViewModel
+﻿
+@model EbaySalesTracker.ViewModels.ListingsViewModel
 
 @{
     ViewBag.Title = "Listings";
@@ -30,7 +31,7 @@
 
         @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 
-        @Html.ActionLink("Update All Listings", "UpdateListings", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Update Listings", "UpdateListings", null, new { @class = "btn btn-primary" })
 
     </div>
     <div class="panel-body col-mid-12">
@@ -62,7 +63,7 @@
                     @Html.DisplayNameFor(model => model.Listing.ListingStatus)
                 </th>
                 <th nowrap>
-                    @Html.DisplayNameFor(model => model.InventoryItems) <a href="~/InventoryItems/Create"><i class="glyphicon glyphicon-plus"></i></a>
+                    @Html.DisplayNameFor(model => model.InventoryItems) <a href="#" data-toggle="modal" data-target="#create-inventory-item" class=""><i class="glyphicon glyphicon-plus"></i></a>
                 </th>
 
 
@@ -99,7 +100,7 @@
                         @Html.DisplayFor(modelItem => item.ListingStatus)
                     </td>
                     <td>
-                        <div class="dropdown" data-toggle="tooltip" title="@(item.InventoryItem == null ? "Select..." : item.InventoryItem.Description )">
+                        @*<div class="dropdown" data-toggle="tooltip" title="@(item.InventoryItem == null ? "Select..." : item.InventoryItem.Description )">
                             <button nowrap class="btn dropdown-toggle btn-block btn-link no-underline" style="color:black" type="button" data-toggle="dropdown">
                                 @{if (@item.InventoryItem != null)
                                     {
@@ -112,17 +113,32 @@
                                 }
 
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu">  
                                 @foreach (var invItem in Model.Items)
                                 {
                                     <li><a href="javascript:AssoicateItemToListing(@invItem.Id,@item.ItemId)">@invItem.Description</a></li>
                                 }
                             </ul>
-                        </div>
+                        </div>*@
+
+
+                        @{if (@item.InventoryItem != null)
+                            {
+                                <div>
+                                    <a href="#" id="@("listingid_" + item.ItemId)" data-type="select" data-name="inventory-item-id" data-pk="1" data-value="@item.InventoryItem.Id" data-original-title="Select Product">@item.InventoryItem.Description</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    <a href="#" id="@("listingid_" + item.ItemId)" data-type="select" data-name="inventory-item-id" data-pk="1" data-value="-1" data-original-title="Select Product">None</a>
+                                </div>
+                            }
+                        }
                     </td>
                     <td></td>
                 </tr>
-            }
+                            }
 
         </table>
         @{  var itemsPerPage = 10;
@@ -157,11 +173,32 @@
 
     </div>
 </div>
+    <!-- Create Modal -->
+<div class="modal fade" id="create-inventory-item" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header row">
+                <div class="col-md-10">
+                    <h2 class="modal-title" id="exampleModalLabel">Create New Item</h2>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("../InventoryItems/_CreateInventoryItem", new EbaySalesTracker.Models.InventoryItem(), new ViewDataDictionary())
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script>
-
+    var inventoryItems = {};
     $(document).ready(function () {
+        
 
         $('[data-toggle="tooltip"]').tooltip();
         var pageToHighlight;
@@ -172,6 +209,31 @@
             pageToHighlight = @currentPage+3
 
         $('#pagination li:nth-child(' + pageToHighlight + ')').addClass('highlight');
+
+        dataService.GetInventoryItems(setupInventoryItemArrayForDdl);
+    });
+    function setupInventoryItemArrayForDdl(data) {
+        inventoryItems['-1'] = "None";
+        data.forEach(function(inventoryItem, index){
+            inventoryItems[inventoryItem.Id] = inventoryItem.Description;
+        });
+
+        console.log(inventoryItems);
+        $('[id^="listingid_"]').attr({"data-source" : JSON.stringify(inventoryItems)});
+        $('[id^="listingid_"]').editable();
+    }
+    //$('[id^="listingid_"]').click(function() {
+    //    var clickedElementsId = $(this).attr('id');
+    //    var listingId = clickedElementsId.split("_")[1];
+    //    console.log(listingId);
+    //})
+
+    $('[id^="listingid_"]').on('save',function(e, editable) {
+        var selectListId = $(this).attr('id');
+        var listingId = selectListId.split("_")[1];
+        var selectedInventoryItemId = editable.newValue;
+        AssociateItemToListing(selectedInventoryItemId,listingId);
+
     });
 
     $(".dropdown-menu li a").click(function () {
@@ -190,7 +252,7 @@
         window.location = '@Url.Action("GetCsvReport", "Listings")';
     }
 
-    function AssoicateItemToListing(inventoryItemId, listingItemId) {
+    function AssociateItemToListing(inventoryItemId, listingItemId) {
         $.ajax({
             type: 'POST',
             url: '@Url.Action("AssociateInventoryItemToListing", "Listings")',

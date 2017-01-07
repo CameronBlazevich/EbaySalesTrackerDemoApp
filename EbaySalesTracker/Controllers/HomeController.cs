@@ -211,21 +211,21 @@ namespace EbaySalesTracker.Controllers
 
         public ActionResult Contact()
         {
+            //commented out code for testing user claims
 
-
-            var identity = User.Identity as ClaimsIdentity;
+            //var identity = User.Identity as ClaimsIdentity;
             
 
-            var userId = identity.Claims.Where(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Select(c => c.Value).FirstOrDefault();
+            //var userId = identity.Claims.Where(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Select(c => c.Value).FirstOrDefault();
 
-            var claims = UserManager.GetClaims(userId);
+            //var claims = UserManager.GetClaims(userId);
 
-            //UserManager.AddClaimAsync(userId, new Claim("TestClaim", "Test"));
+            ////UserManager.AddClaimAsync(userId, new Claim("TestClaim", "Test"));
 
 
-            var claimToRemove = claims.Where(c => c.Type == "TestClaim").FirstOrDefault();
+            //var claimToRemove = claims.Where(c => c.Type == "TestClaim").FirstOrDefault();
 
-            //UserManager.RemoveClaimAsync(userId, claimToRemove);
+            ////UserManager.RemoveClaimAsync(userId, claimToRemove);
 
             ViewBag.Message = "Your contact page.";
 

@@ -12,6 +12,7 @@
     <NameOfLastUsedPublishProfile>Test</NameOfLastUsedPublishProfile>
     <ProjectView>ProjectFiles</ProjectView>
     <WebStackScaffolding_ViewDialogWidth>1920</WebStackScaffolding_ViewDialogWidth>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

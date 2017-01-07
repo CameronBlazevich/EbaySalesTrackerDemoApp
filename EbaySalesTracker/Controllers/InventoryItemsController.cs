@@ -45,14 +45,8 @@ namespace EbaySalesTracker.Controllers
         public ActionResult Index()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            var inventoryItems = _InventoryRepository.GetInventoryItemsByUser(user.Id);
-
-            //foreach(var item in inventoryItems)
-            //{
-            //    item.AverageSalesPrice = _InventoryRepository.CalculateAverageSalesPrice(item.Id);
-            //}
-
-
+            var inventoryItems = _InventoryBll.GetInventoryItemsByUser(user.Id);
+           
             return View(inventoryItems);
         }
 
@@ -100,7 +94,7 @@ namespace EbaySalesTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Description,Cost,Quantity,AverageSalesPrice,AverageProfit")] InventoryItem inventoryItem)
+        public ActionResult Create([Bind(Include = "Id,Description,Cost")] InventoryItem inventoryItem)
         {
             if (ModelState.IsValid)
             {

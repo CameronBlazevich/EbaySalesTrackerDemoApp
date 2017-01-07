@@ -55,7 +55,8 @@ namespace EbaySalesTracker.Bll
                 var twoYearsAgo = DateTime.Now.AddYears(-2);
                 lastListingUpdate = twoYearsAgo;
             }
-            _ListingRepository.UpdateListings((DateTime)lastListingUpdate, userId);
+            
+            _ListingRepository.UpdateListings(((DateTime)lastListingUpdate).AddDays(-10), userId);
 
 
         }
