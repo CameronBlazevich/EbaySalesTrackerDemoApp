@@ -44,14 +44,23 @@ namespace EbaySalesTracker.Repository
             return item;
         }
 
-        public void DeleteInventoryItem(int id)
+        public void DeleteInventoryItem(int id, string userId)
         {
-            InventoryItem item = DataContext.InventoryItems.Find(id);
+            
+            InventoryItem item = DataContext.InventoryItems.Where(i => i.Id == id && i.UserId == userId).FirstOrDefault();
             if (item == null)
                 return;
+            if (!InventoryItemIsAssociatedToListing(id))
+            {
+                DataContext.InventoryItems.Remove(item);
+                DataContext.SaveChanges();
+            }
+            
+        }
 
-            DataContext.InventoryItems.Remove(item);
-            DataContext.SaveChanges();
+        private bool InventoryItemIsAssociatedToListing(int id)
+        {
+            return DataContext.Listings.Where(x => x.InventoryItemId == id).Any();
         }
 
         public object CalculateItemProfitByMonth(int id, string userId)

@@ -29,8 +29,6 @@
     <div class="panel-heading text-right">
         <h3 class="pull-left">All Listings</h3>
 
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
-
         @Html.ActionLink("Update Listings", "UpdateListings", null, new { @class = "btn btn-primary" })
 
     </div>
@@ -117,7 +115,7 @@
                                 @foreach (var invItem in Model.Items)
                                 {
                                     <li><a href="javascript:AssoicateItemToListing(@invItem.Id,@item.ItemId)">@invItem.Description</a></li>
-                                }
+                                }l
                             </ul>
                         </div>*@
 
@@ -170,16 +168,16 @@
         </div>
     </div>
     <div class="row">
-
+        
     </div>
 </div>
-    <!-- Create Modal -->
+   <!-- Create Modal -->
 <div class="modal fade" id="create-inventory-item" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content create-inventory-modal">
             <div class="modal-header row">
                 <div class="col-md-10">
-                    <h2 class="modal-title" id="exampleModalLabel">Create New Item</h2>
+                    <h3 class="modal-title" id="exampleModalLabel">New Product</h3>
                 </div>
                 <div class="col-md-2">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -188,13 +186,21 @@
                 </div>
             </div>
             <div class="modal-body">
-                @Html.Partial("../InventoryItems/_CreateInventoryItem", new EbaySalesTracker.Models.InventoryItem(), new ViewDataDictionary())
+                @Html.Partial("../InventoryItems/_CreateInventoryItem", new EbaySalesTracker.Models.InventoryItem())
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Cancel</button>
+                        <button type="submit" id="create-inventory-submit" form="CreateInventoryItemForm" class="btn btn-default btn-primary">Create</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
+<script src="~/Scripts/ebaysalestracker_validation.js"></script>
 <script>
     var inventoryItems = {};
     $(document).ready(function () {
@@ -218,15 +224,9 @@
             inventoryItems[inventoryItem.Id] = inventoryItem.Description;
         });
 
-        console.log(inventoryItems);
         $('[id^="listingid_"]').attr({"data-source" : JSON.stringify(inventoryItems)});
         $('[id^="listingid_"]').editable();
     }
-    //$('[id^="listingid_"]').click(function() {
-    //    var clickedElementsId = $(this).attr('id');
-    //    var listingId = clickedElementsId.split("_")[1];
-    //    console.log(listingId);
-    //})
 
     $('[id^="listingid_"]').on('save',function(e, editable) {
         var selectListId = $(this).attr('id');

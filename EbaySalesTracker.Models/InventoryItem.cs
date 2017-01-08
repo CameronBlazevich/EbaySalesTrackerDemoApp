@@ -5,6 +5,7 @@ namespace EbaySalesTracker.Models
     public class InventoryItem
     {
         public int Id { get; set; }
+        [Required]
         public string Description { get; set; }
         public double Cost { get; set; }
         public double Quantity { get; set; }

@@ -197,7 +197,7 @@ namespace EbaySalesTracker.Controllers
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
             var listingId = Convert.ToInt64(listingItemId);
-            if (inventoryItemId == "")
+            if (inventoryItemId == "-1")
             {
                 _ListingRepository.DissociateInventoryItem(listingId);
             }

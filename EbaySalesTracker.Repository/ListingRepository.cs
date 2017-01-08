@@ -207,9 +207,9 @@ namespace EbaySalesTracker.Repository
         public IEnumerable<Listing> GetAllListingsByUser(int top, int skip, string userId)
         {
             if (top == -1 && skip == -1)
-                return DataContext.Listings.Where(x => x.UserId == userId).OrderBy(l => l.EndDate).ToList();
+                return DataContext.Listings.Where(x => x.UserId == userId).OrderByDescending(l => l.EndDate).ToList();
 
-            return DataContext.Listings.Where(x => x.UserId == userId).OrderBy(l => l.EndDate).Skip(skip).Take(top).ToList();            
+            return DataContext.Listings.Where(x => x.UserId == userId).OrderByDescending(l => l.EndDate).Skip(skip).Take(top).ToList();            
         }
 
         public Listing GetListingById(long id)

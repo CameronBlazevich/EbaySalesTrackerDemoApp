@@ -94,14 +94,19 @@ namespace EbaySalesTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Description,Cost")] InventoryItem inventoryItem)
+        public ActionResult Create([Bind(Include = "Id,Description,Cost")] InventoryItem inventoryItem, string ParentPage)
         {
+            var parent = ParentPage;
             if (ModelState.IsValid)
             {
                 var user = UserManager.FindById(User.Identity.GetUserId());
                 inventoryItem.UserId = user.Id;
                 _InventoryRepository.CreateInventoryItem(inventoryItem);
                
+                if (ParentPage == "Listings")
+                {
+                    return RedirectToAction("Index", "Listings");
+                }
                 return RedirectToAction("Index");
             }
 
@@ -128,17 +133,23 @@ namespace EbaySalesTracker.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Description,Cost,Quantity,AverageSalesPrice,AverageProfit")] InventoryItem inventoryItem)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Description,Cost")] InventoryItem inventoryItem, bool costChange)
         {
+            var success = false;
             if (ModelState.IsValid)
             {
                 var user = UserManager.FindById(User.Identity.GetUserId());
                 inventoryItem.UserId = user.Id;
-                inventoryItem = _InventoryRepository.EditInventoryItem(inventoryItem);              
-                return RedirectToAction("Index");
+                inventoryItem = _InventoryRepository.EditInventoryItem(inventoryItem);
+                if(costChange) //get updated item to recalculate avg profit
+                {
+                    inventoryItem = _InventoryBll.GetInventoryItemById(Convert.ToInt32(inventoryItem.Id), user.Id);
+                }
+                success = true;
+
             }
-            return View(inventoryItem);
+            return Json(new { success,inventoryItem.Id,inventoryItem.Description, inventoryItem.Cost, inventoryItem.AverageProfit});
         }
 
         // GET: InventoryItems/Delete/5
@@ -159,12 +170,21 @@ namespace EbaySalesTracker.Controllers
 
         // POST: InventoryItems/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _InventoryRepository.DeleteInventoryItem(id);
+            var success = false;
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            _InventoryRepository.DeleteInventoryItem(id,user.Id);
+
+            InventoryItem inventoryItem = _InventoryBll.GetInventoryItemById(Convert.ToInt32(id), user.Id);
+            if (inventoryItem == null)
+            {
+                success = true;
+                return Json(success, id.ToString());
+            }
            
-            return RedirectToAction("Index");
+            return Json(success);
         }              
     }
 }

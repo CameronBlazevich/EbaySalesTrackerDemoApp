@@ -9,7 +9,7 @@ namespace EbaySalesTracker.Repository
         InventoryItem GetInventoryItemById(int id,string userId);
         void CreateInventoryItem(InventoryItem item);
         InventoryItem EditInventoryItem(InventoryItem item);
-        void DeleteInventoryItem(int id);
+        void DeleteInventoryItem(int id, string userId);
         object CalculateItemProfitByMonth(int id,string userId);
 
     }

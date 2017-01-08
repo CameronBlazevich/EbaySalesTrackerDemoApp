@@ -35,8 +35,8 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\System.Web.WebPages.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.csprojResolveAssemblyReference.cache
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.InitialMigForLocalhost.resources
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.ChangeTypeOnInvItems.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.Initial.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.Migrations.RequireInventoryItemDesc.resources
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.csproj.GenerateResource.Cache
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Debug\EbaySalesTracker.Repository.pdb

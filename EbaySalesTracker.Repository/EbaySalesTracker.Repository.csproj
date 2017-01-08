@@ -93,13 +93,13 @@
     <Compile Include="ListingDetailRepository.cs" />
     <Compile Include="ListingRepository.cs" />
     <Compile Include="ListingTransactionRepository.cs" />
-    <Compile Include="Migrations\201611160416232_InitialMigForLocalhost.cs" />
-    <Compile Include="Migrations\201611160416232_InitialMigForLocalhost.Designer.cs">
-      <DependentUpon>201611160416232_InitialMigForLocalhost.cs</DependentUpon>
+    <Compile Include="Migrations\201701072337247_Initial.cs" />
+    <Compile Include="Migrations\201701072337247_Initial.Designer.cs">
+      <DependentUpon>201701072337247_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611160425390_ChangeTypeOnInvItems.cs" />
-    <Compile Include="Migrations\201611160425390_ChangeTypeOnInvItems.Designer.cs">
-      <DependentUpon>201611160425390_ChangeTypeOnInvItems.cs</DependentUpon>
+    <Compile Include="Migrations\201701072356378_RequireInventoryItemDesc.cs" />
+    <Compile Include="Migrations\201701072356378_RequireInventoryItemDesc.Designer.cs">
+      <DependentUpon>201701072356378_RequireInventoryItemDesc.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContainer.cs" />
@@ -966,11 +966,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611160416232_InitialMigForLocalhost.resx">
-      <DependentUpon>201611160416232_InitialMigForLocalhost.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701072337247_Initial.resx">
+      <DependentUpon>201701072337247_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611160425390_ChangeTypeOnInvItems.resx">
-      <DependentUpon>201611160425390_ChangeTypeOnInvItems.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701072356378_RequireInventoryItemDesc.resx">
+      <DependentUpon>201701072356378_RequireInventoryItemDesc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

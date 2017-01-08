@@ -50,6 +50,12 @@ var dataService = new function () {
             $.getJSON(serviceBase + 'GetBestSellingItem', {}, function (data) {
                 callback(data);
             })
+        },
+        updateInventoryItem = function (id,description,cost,costChange,callback) {
+            $.post('../InventoryItems/Edit', { Id: id, Description: description, Cost: cost, costChange: costChange }, callback);
+        },
+        deleteInventoryItem = function (id, callback) {
+            $.post('../InventoryItems/Delete/' + id, { id: id }, callback);
         };
 
     return {
@@ -61,7 +67,9 @@ var dataService = new function () {
         GetBestSellingItem: getBestSellingItem,
         GetHighestAverageProfitItem: getHighestAverageProfitItem,
         GetProfitByMonth: getProfitByMonth,
-        GetSalesByMonth: getSalesByMonth
+        GetSalesByMonth: getSalesByMonth,
+        UpdateInventoryItem: updateInventoryItem,
+        DeleteInventoryItem: deleteInventoryItem
     //    getMarketIndexes: getMarketIndexes,
     //    getQuote: getQuote,
     //    getTickerQuotes: getTickerQuotes
