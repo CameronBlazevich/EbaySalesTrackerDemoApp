@@ -52,11 +52,10 @@ namespace EbaySalesTracker.Controllers
 
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
         }
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-
-            ViewData["User"] = user;
+            var user = UserManager.FindById(User.Identity.GetUserId());           
             return View();
         }
 

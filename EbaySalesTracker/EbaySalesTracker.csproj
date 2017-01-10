@@ -34,6 +34,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -261,6 +265,16 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <None Include="Properties\PublishProfiles\eBayProfitTracker - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\eBayProfitTracker - Web Deploy %282%29.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\eBayProfitTracker - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\EbayProfitTrackerAzure.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\Libs\jquery-2.2.3.intellisense.js" />
     <Content Include="Content\landing-page.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -331,6 +345,11 @@
     <Content Include="Scripts\Libs\jquery-2.2.3.js" />
     <Content Include="Scripts\Libs\jquery-2.2.3.min.js" />
     <Content Include="Scripts\scene.layoutservice.js" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ListingsViewModel.cs" />
   </ItemGroup>

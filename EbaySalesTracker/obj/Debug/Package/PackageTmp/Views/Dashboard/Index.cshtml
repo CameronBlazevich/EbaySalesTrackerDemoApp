@@ -1,0 +1,343 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    #container {
+        margin-top: 40px;
+    }
+
+    .bar-chart {
+        border: 2px solid #dcdcdc;
+        margin-bottom: 15px;
+    }
+
+    .intro-box {
+        height: 150px;
+        margin-top: 10px;
+    }
+
+    header {
+        /*margin: -15px -20px;*/
+    }
+
+    .intro-box-content {
+        margin-top: 15px;
+    }
+
+    .stats-row {
+        margin-bottom: -5px;
+    }
+
+    .stat-item {
+        display: inline-block;
+        padding-right: 15px;
+        /*width:48%;*/
+    }
+
+        .stat-item .name {
+            margin-bottom: 2px;
+        }
+
+        .stat-item p {
+            font-weight: 700;
+            /*width:48%;*/
+        }
+
+    hr {
+        border-top: 2px solid #dcdcdc;
+        margin: 0px;
+    }
+
+    .stat-item-left {
+        border-right: 2px solid #dcdcdc;
+        width: 65%;
+    }
+    /*.stat-item-bottom {
+        border-top:solid;
+    }*/
+    .stat-item-right {
+        /*border-left:solid;*/
+        padding-left: 15px;
+        width: 32%;
+    }
+    /*.stat-item-top {
+        border-bottom:solid;
+    }*/
+</style>
+
+
+<div class="row" style="height:150px;">
+    <div class="col-lg-3 col-md-3 panel intro-box">
+
+        <header><h5>TOP PERFORMERS</h5></header>
+        <div class="intro-box-content">
+            <div class="stats-row">
+                <div class="stat-item stat-item-left stat-item-top">
+                    <h6 class="name">Best Seller</h6>
+                    <p id="best-seller"></p>
+                </div>
+                <div class="stat-item stat-item-right stat-item-top">
+                    <h6 class="name">Sold</h6>
+                    <p id="best-seller-quantity"></p>
+                </div>
+            </div>
+            <hr />
+            <div class="stats-row">
+                <div class="stat-item stat-item-left stat-item-bottom">
+                    <h6 class="name">Highest Avg. Profit</h6>
+                    <p id="highest-average-profit-desc"></p>
+                </div>
+                <div class="stat-item stat-item-right stat-item-bottom">
+                    <h6 class="name">Avg.</h6>
+                    <p id="highest-average-profit"></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-2 col-md-2 col-lg-offset-1 col-md-offset-1 panel intro-box">
+        <header><h5>THIS MONTH</h5></header>
+        <div class="row" style="min-height:60%;">
+            <div class="stat-item stat-item-top col-md-6" style="min-height:45%">
+                <h6 class="name">Profit</h6>
+                <p id="monthly-profit-amount"></p>
+            </div>
+
+            <div class="col-md-6  pull-right" style="margin-top:15px; text-align:center;">
+                <h6 class="name">Margin</h6>
+                <h1 id="monthly-margin-amount" style="margin-top:10px"></h1>
+            </div>
+
+            <div class="stat-item stat-item-top col-md-6" style="min-height:45%">
+                <h6 class="name">Sales</h6>
+                <p id="monthly-sales-amount"></p>
+            </div>
+        </div>      
+    </div>
+
+    <div class="col-lg-2 col-md-2 col-lg-offset-1 col-md-offset-1 panel intro-box">
+        <header><h5>MONTHLY PROFIT</h5></header>
+        <div class="intro-box-content">
+
+        </div>
+    </div>
+
+    <div class="col-lg-2 col-md-2 col-lg-offset-1 col-md-offset-1 panel intro-box">
+        <div class="intro-box-content">
+
+        </div>
+    </div>
+</div>
+<input type="hidden" id="clickedItemId" />
+
+
+<div class="row" style="height:450px; margin-bottom:15px;">
+
+    <div id="myBarChart" class="col-md-6 panel bar-chart" style="height:450px;">
+
+    </div>
+    <div id="piechart" class="col-md-6 panel bar-chart" style="height:450px;">
+        THIS PIE CHART NEEDS TO DISPLAY DIFFERENT INFO
+
+    </div>
+</div>
+<div class="row" style="height:450px; margin-bottom:15px;">
+
+    <div class="col-md-6 panel bar-chart" style="height:450px;">
+
+    </div>
+    <div id="avgProfitBarChart" class="col-md-6 panel bar-chart" style="height:450px;">
+
+
+    </div>
+</div>
+
+
+
+<div id="container" class="row"></div>
+
+
+<script type="text/javascript">
+
+    function populateBestSellingItem(data) {
+        $('#best-seller').html(helper.elliptify(data.Description, 22));
+
+        $('#best-seller').attr({
+            'title': data.Description,
+            'data-toggle': "tooltip"
+        });
+
+        $('#best-seller-quantity').html(data.QuantitySold);
+    }
+
+    function populateHighestAverageProfitItem(data) {
+        $('#highest-average-profit-desc').html(helper.elliptify(data.Description, 22));
+
+        $('#highest-average-profit-desc').attr({
+            'title': data.Description,
+            'data-toggle': "tooltip"
+        });
+
+        $('#highest-average-profit').html(data.AverageProfit);
+
+        enableTooltips();
+    }
+
+    function populatePieChart(data) {
+        var pieChartDataArray = new Array();
+        pieChartDataArray.push(['Product', 'Total Profit'])
+        $(data).each(function (index) {
+
+            pieChartDataArray.push(
+                [$(this).attr('Description'), Math.abs($(this).attr('AverageProfit'))
+                    //, $(this).attr('Id')
+                ]
+                );
+        });
+
+        var pieChartDataTable = new google.visualization.arrayToDataTable(pieChartDataArray);
+        var options = {
+            title: 'Total Profit by Item',
+            legend: { position: 'none' },
+            backgroundColor: { fill: 'transparent' },
+            'chartArea': { 'width': '70%', 'height': '70%' },
+            pieSliceText: 'label'
+            //pieHole:0.4
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(pieChartDataTable, options);
+    }
+
+    function enableTooltips() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    var monthlyProfit;
+    var monthlySales;
+    function populateMonthlyProfitAmount(data) {
+        $('#monthly-profit-amount').html('$' + helper.monetaryRound(data));
+        monthlyProfit = data;
+        var today = new Date();
+        
+        dataService.GetSalesByMonth(today.getFullYear(), today.getMonth(), populateMonthlySalesAmount);
+
+    }
+    function populateMonthlySalesAmount(data) {
+        $('#monthly-sales-amount').html('$' + helper.monetaryRound(data));
+        monthlySales = data;
+        console.log('prof: ' + monthlyProfit);
+        console.log('sale: ' + monthlySales);
+       
+        $('#monthly-margin-amount').html(Math.round(monthlyProfit / monthlySales * 100) + '%');
+    }
+    $(document).ready(function () {
+        dataService.GetBestSellingItem(populateBestSellingItem);
+        dataService.GetHighestAverageProfitItem(populateHighestAverageProfitItem);
+        var today = new Date();
+        dataService.GetProfitByMonth(today.getFullYear(), today.getMonth(), populateMonthlyProfitAmount);
+
+        //startup.init('Z485739881');
+        sceneLayoutService.get();
+
+        $('#myCarousel').carousel(
+            {
+                interval: 1000000
+            }
+        );
+
+    });
+    //function test(data) {
+    //    console.log(data);
+    //};
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawInitialChart);
+
+
+    function drawInitialChart() {
+        dataService.GetInventoryItems(populatePieChart);
+
+        var data = new google.visualization.DataTable();
+        var rows = new Array();
+
+        var dataForAvgProfit = new google.visualization.DataTable();
+        var rowsForAvgProfit = new Array();
+
+        dataForAvgProfit.addColumn('string', 'Item');
+        dataForAvgProfit.addColumn('number', 'Avg. Profit');
+
+        data.addColumn('string', 'Item');
+        data.addColumn('number', 'Qty Sold');
+        data.addColumn('number', 'Id');
+        dataService.GetInventoryItems(function (result) {
+            $(result).each(function (index) {
+
+                rows.push(
+
+                    [$(this).attr('Description'), $(this).attr('QuantitySold'), $(this).attr('Id')]
+            );
+                rowsForAvgProfit.push(
+
+                    [$(this).attr('Description'), $(this).attr('AverageProfit')])
+            });
+            data.addRows(rows);
+            dataForAvgProfit.addRows(rowsForAvgProfit);
+            var optionsForQtySoldBarChart = {
+                backgroundColor: '#fff',
+                'title': 'Total Quantity Sold by Item',
+                titleFontSize: 14
+                //backgroundColor: '#adadad',
+                //chartArea: {
+                //backgroundColor: {
+                //stroke: '#4322c0',
+                //strokeWidth: 3
+                //}
+                //}
+            };
+            var optionsForAvgProfitBarChart = {
+                backgroundColor: '#fff',
+                'title': 'Average Profit by Item',
+                titleFontSize: 14
+                //backgroundColor: '#adadad',
+                //chartArea: {
+                //backgroundColor: {
+                //stroke: '#4322c0',
+                //strokeWidth: 3
+                //}
+                //}
+            };
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.BarChart(document.getElementById('myBarChart'));
+            var view = new google.visualization.DataView(data);
+            view.setColumns([0, 1]);
+
+            google.visualization.events.addListener(chart, 'select', selectHandler);
+            chart.draw(view, optionsForQtySoldBarChart);
+
+            var chartForAvgProfit = new google.visualization.ColumnChart(document.getElementById('avgProfitBarChart'));
+            chartForAvgProfit.draw(dataForAvgProfit, optionsForAvgProfitBarChart);
+
+            function selectHandler() {
+                var selectedItem = chart.getSelection()[0];
+                if (selectedItem) {
+                    $('#clickedItemId').val(data.getValue(selectedItem.row, 2));
+                    dataService.GetInventoryItemById(data.getValue(selectedItem.row, 2), renderDrillDownTemplate);                    
+                };
+            };
+        });
+
+    }
+    function closeDrillDown() {
+        drawInitialChart();
+    }
+
+    function renderDrillDownTemplate(data) {
+
+        $.get('/Templates/InventoryItemDrillDown.html', function (template) {
+            $('body').append(template);
+            var html = $('#InventoryItemDrillDown').render(data);
+            $('#avgProfitBarChart').html(html);
+        });
+    }
+</script>
+

@@ -140,7 +140,7 @@ namespace EbaySalesTracker.Repository
                 {
                     foreach (var listing in listings)
                     {
-                        var existingListing = DataContext.Listings.SingleOrDefault(l => l.ItemId == listing.ItemId);
+                        var existingListing = DataContext.Listings.SingleOrDefault(l => l.ItemId == listing.ItemId && l.UserId == userId);
                         if (existingListing != null)
                         {
                             existingListing.CurrentPrice = listing.CurrentPrice;

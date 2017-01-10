@@ -1,0 +1,43 @@
+﻿@model EbaySalesTracker.Models.InventoryItem
+<style>
+    .panel-body {
+        height: 90%;
+        background-color: darkgray;
+        color: white;
+        margin: 10px;
+    }
+
+        .panel-body h2 {
+            margin-top: 5px;
+        }
+</style>
+    <div class="row" style="height:22%">
+        <div class="col-md-3 panel-body">
+            <h2>5</h2>
+            <div class="small">Total Sold</div>
+        </div>
+        <div class="col-md-3 panel-body">
+            <h2>6</h2>
+            <div class="small">Avg. Profit</div>
+        </div>
+        <div class="col-md-offset-9">
+            <a id="closeDrillDown"class="close" onclick="closeDrillDown()">×</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row" style="height:22%">
+        <div class="col-md-3 panel-body">
+            <h2>5</h2>
+            <div class="small">Total Fees</div>
+        </div>
+        <div class="col-md-3 panel-body">
+            <h2>6</h2>
+            <div class="small">Total Profit</div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row" style="height:45%;">
+        <div class="col-md-12 panel-body">
+            <h2>Line Graph of Profit Over Time</h2>
+        </div>
+    </div>

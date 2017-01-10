@@ -142,7 +142,7 @@ namespace EbaySalesTracker.Controllers
                 var user = UserManager.FindById(User.Identity.GetUserId());
                 inventoryItem.UserId = user.Id;
                 inventoryItem = _InventoryRepository.EditInventoryItem(inventoryItem);
-                if(costChange) //get updated item to recalculate avg profit
+                //if(costChange) //get updated item to recalculate avg profit
                 {
                     inventoryItem = _InventoryBll.GetInventoryItemById(Convert.ToInt32(inventoryItem.Id), user.Id);
                 }
@@ -180,11 +180,9 @@ namespace EbaySalesTracker.Controllers
             InventoryItem inventoryItem = _InventoryBll.GetInventoryItemById(Convert.ToInt32(id), user.Id);
             if (inventoryItem == null)
             {
-                success = true;
-                return Json(success, id.ToString());
+                success = true;               
             }
-           
-            return Json(success);
+            return Json(new { success, id });
         }              
     }
 }
