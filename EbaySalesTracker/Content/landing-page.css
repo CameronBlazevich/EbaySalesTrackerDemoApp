@@ -168,3 +168,11 @@ footer {
 p.copyright {
     margin: 15px 0 0;
 }
+
+.modal-header {
+  border:none;
+}
+
+.modal-body {
+  border-top: 1px solid #e5e5e5;
+}

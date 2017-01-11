@@ -56,6 +56,21 @@ var dataService = new function () {
         },
         deleteInventoryItem = function (id, callback) {
             $.post('../InventoryItems/Delete/' + id, { id: id }, callback);
+        },
+        getSalesSummaries = function ( callback) {
+            $.get(serviceBase + 'GetSalesSummaries', {}, function (data) {
+                callback(data);
+            })
+        },
+        getProfitSummaries = function (callback) {
+            $.get(serviceBase + 'GetProfitSummaries', {}, function (data) {
+                callback(data);
+            })
+        },
+        getFeesSummaries = function (callback) {
+            $.get(serviceBase + 'GetFeesSummaries', {}, function (data) {
+                callback(data);
+            })
         };
 
     return {
@@ -69,7 +84,10 @@ var dataService = new function () {
         GetProfitByMonth: getProfitByMonth,
         GetSalesByMonth: getSalesByMonth,
         UpdateInventoryItem: updateInventoryItem,
-        DeleteInventoryItem: deleteInventoryItem
+        DeleteInventoryItem: deleteInventoryItem,
+        GetSalesSummaries: getSalesSummaries,
+        GetProfitSummaries: getProfitSummaries,
+        GetFeesSummarites: getFeesSummaries
     //    getMarketIndexes: getMarketIndexes,
     //    getQuote: getQuote,
     //    getTickerQuotes: getTickerQuotes

@@ -70,13 +70,9 @@ textarea {
     width:60px !important;
 }
 
-.modal-title {
-  margin: 0;
-  line-height: 1.428571429;
+.modal-header{
+    border: none;
 }
-
 .modal-body {
   border-top: 1px solid #e5e5e5;
-  position: relative;
-  padding: 20px;
 }

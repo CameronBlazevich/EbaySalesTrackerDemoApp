@@ -430,9 +430,10 @@
     <Content Include="Scripts\scene.tile.renderer.js" />
     <Content Include="Views\InventoryItems\_InventoryItemDrillDown.cshtml" />
     <Content Include="Views\Account\EbayAuthenticationAccepted.cshtml" />
-    <Content Include="Views\Home\_LoginPartial_UsernamePassword.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial_UsernamePassword.cshtml" />
     <Content Include="Views\InventoryItems\_CreateInventoryItem.cshtml" />
     <Content Include="Views\InventoryItems\_EditInventoryItem.cshtml" />
+    <Content Include="Views\Shared\_SalesSummaries.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

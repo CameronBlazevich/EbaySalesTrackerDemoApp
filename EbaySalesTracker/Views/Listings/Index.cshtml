@@ -23,155 +23,152 @@
     td {
         text-align: center;
     }
+
+    #sidebar-wrapper {
+        margin-right: 0px;
+        padding-right: 0px;
+    }
+
+    .sidebar-table {
+        margin: 10px;
+
+    }
+
+        .sidebar-table td {
+                    text-align:left;
+        }
 </style>
-
-<div class="panel">
-    <div class="panel-heading text-right">
-        <h3 class="pull-left">All Listings</h3>
-
-        @Html.ActionLink("Update Listings", "UpdateListings", null, new { @class = "btn btn-primary" })
-
+<div class="row">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper" class="col-md-2">        
+       @Html.Partial("_SalesSummaries")
     </div>
-    <div class="panel-body col-md-12">
+    <!-- /#sidebar-wrapper -->
 
-        <table class="table table-striped table-hover">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Listing.StartDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Listing.EndDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Listing.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Listing.CurrentPrice)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Listing.TotalNetFees)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Listing.Profit)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Listing.QuantitySold)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Listing.ListingStatus)
-                </th>
-                <th nowrap>
-                    @Html.DisplayNameFor(model => model.InventoryItems) <a href="#" data-toggle="modal" data-target="#create-inventory-item" class=""><i class="glyphicon glyphicon-plus"></i></a>
-                </th>
+    <div class="col-md-10">
+        <div class="panel">
+            <div class="panel-heading text-right">
+                <h3 class="pull-left">All Listings</h3>
+
+                @Html.ActionLink("Update Listings", "UpdateListings", null, new { @class = "btn btn-primary" })
+
+            </div>
+            <div class="panel-body col-md-12">
+
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Listing.StartDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Listing.EndDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Listing.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Listing.CurrentPrice)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Listing.TotalNetFees)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Listing.Profit)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Listing.QuantitySold)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Listing.ListingStatus)
+                        </th>
+                        <th nowrap>
+                            @Html.DisplayNameFor(model => model.InventoryItems) <a href="#" data-toggle="modal" data-target="#create-inventory-item" class=""><i class="glyphicon glyphicon-plus"></i></a>
+                        </th>
 
 
-                <th></th>
-            </tr>
+                        <th></th>
+                    </tr>
 
-            @foreach (var item in Model.Listings)
+                    @foreach (var item in Model.Listings)
             {
-                <tr>
-                    <td>
-                        @{string convertedStartDate = item.StartDate.ToString("MM/dd/yyyy");}
-                        @Html.DisplayFor(modelItem => convertedStartDate)
-                    </td>
-                    <td>
-                        @{string convertedEndDate = item.EndDate.ToString("MM/dd/yyyy");}
-                        @Html.DisplayFor(modelItem => convertedEndDate)
-                    </td>
-                    <td style="text-align:left;">
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CurrentPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TotalNetFees)
-                    </td>
-                    <td>
-                        <p id="@("profit_" + item.ItemId)">@item.Profit</p>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.QuantitySold)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ListingStatus)
-                    </td>
-                    <td>
-                        @*<div class="dropdown" data-toggle="tooltip" title="@(item.InventoryItem == null ? "Select..." : item.InventoryItem.Description )">
-                            <button nowrap class="btn dropdown-toggle btn-block btn-link no-underline" style="color:black" type="button" data-toggle="dropdown">
+                        <tr>
+                            <td>
+                                @{string convertedStartDate = item.StartDate.ToString("MM/dd/yyyy");}
+                                @Html.DisplayFor(modelItem => convertedStartDate)
+                            </td>
+                            <td>
+                                @{string convertedEndDate = item.EndDate.ToString("MM/dd/yyyy");}
+                                @Html.DisplayFor(modelItem => convertedEndDate)
+                            </td>
+                            <td style="text-align:left;">
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CurrentPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalNetFees)
+                            </td>
+                            <td>
+                                <p id="@("profit_" + item.ItemId)">@item.Profit</p>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.QuantitySold)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ListingStatus)
+                            </td>
+                            <td>
                                 @{if (@item.InventoryItem != null)
                                     {
-                                        <p>@(item.InventoryItem.Description.Length > 17 ? item.InventoryItem.Description.Substring(0, 17) + "..." : item.InventoryItem.Description)<span class="caret"></span></p>
+                                        <div>
+                                            <a href="#" id="@("listingid_" + item.ItemId)" data-type="select" data-name="inventory-item-id" data-pk="1" data-value="@item.InventoryItem.Id" data-original-title="Select Product">@item.InventoryItem.Description</a>
+                                        </div>
                                     }
                                     else
                                     {
-                                        <p>Select...<span class="caret"></span></p>
+                                        <div>
+                                            <a href="#" id="@("listingid_" + item.ItemId)" data-type="select" data-name="inventory-item-id" data-pk="1" data-value="-1" data-original-title="Select Product">None</a>
+                                        </div>
                                     }
                                 }
+                            </td>
+                            <td></td>
+                        </tr>
+                                    }
 
-                            </button>
-                            <ul class="dropdown-menu">  
-                                @foreach (var invItem in Model.Items)
-                                {
-                                    <li><a href="javascript:AssoicateItemToListing(@invItem.Id,@item.ItemId)">@invItem.Description</a></li>
-                                }l
-                            </ul>
-                        </div>*@
-
-
-                        @{if (@item.InventoryItem != null)
-                            {
-                                <div>
-                                    <a href="#" id="@("listingid_" + item.ItemId)" data-type="select" data-name="inventory-item-id" data-pk="1" data-value="@item.InventoryItem.Id" data-original-title="Select Product">@item.InventoryItem.Description</a>
-                                </div>
-                            }
-                            else
-                            {
-                                <div>
-                                    <a href="#" id="@("listingid_" + item.ItemId)" data-type="select" data-name="inventory-item-id" data-pk="1" data-value="-1" data-original-title="Select Product">None</a>
-                                </div>
-                            }
-                        }
-                    </td>
-                    <td></td>
-                </tr>
-                            }
-
-        </table>
-        @{  var itemsPerPage = 10;
+                </table>
+                @{  var itemsPerPage = 10;
             var totalPages = Math.Ceiling(((double)Model.TotalListings / (double)itemsPerPage));
             var currentPage = Convert.ToInt32(Request.Params["skip"]) / 10;
 
-        }
-        <ul class="pagination" id="pagination">
-            @{ if (currentPage != 0)
-                {
-                    <li>@Html.ActionLink("First", "Index", "Listings", new { top = itemsPerPage, skip = 0 }, null)</li>
-                    <li>@Html.ActionLink("Prev", "Index", "Listings", new { top = itemsPerPage, skip = ((currentPage - 1) * itemsPerPage) > 0 ? ((currentPage - 1) * itemsPerPage) : 0 }, null)</li>
-                }}
-            @{ for (var i = 1; i <= totalPages; i++)
-                {
-                    <li class="pagination-item">@Html.ActionLink(i.ToString(), "Index", "Listings", new { top = itemsPerPage, skip = (i - 1) * itemsPerPage }, null)</li>
                 }
-            }
-            @{if (currentPage + 1 < totalPages)
-                {
-                    <li>@Html.ActionLink("Next", "Index", "Listings", new { top = itemsPerPage, skip = (currentPage + 1) >= totalPages ? currentPage * itemsPerPage : (currentPage + 1) * itemsPerPage }, null)</li>
-                    <li>@Html.ActionLink("Last", "Index", "Listings", new { top = itemsPerPage, skip = (totalPages - 1) * itemsPerPage }, null)</li>
-                } }
-        </ul>
+                <ul class="pagination" id="pagination">
+                    @{ if (currentPage != 0)
+                        {
+                            <li>@Html.ActionLink("First", "Index", "Listings", new { top = itemsPerPage, skip = 0 }, null)</li>
+                            <li>@Html.ActionLink("Prev", "Index", "Listings", new { top = itemsPerPage, skip = ((currentPage - 1) * itemsPerPage) > 0 ? ((currentPage - 1) * itemsPerPage) : 0 }, null)</li>
+                        }}
+                    @{ for (var i = 1; i <= totalPages; i++)
+                        {
+                            <li class="pagination-item">@Html.ActionLink(i.ToString(), "Index", "Listings", new { top = itemsPerPage, skip = (i - 1) * itemsPerPage }, null)</li>
+                        }
+                    }
+                    @{if (currentPage + 1 < totalPages)
+                        {
+                            <li>@Html.ActionLink("Next", "Index", "Listings", new { top = itemsPerPage, skip = (currentPage + 1) >= totalPages ? currentPage * itemsPerPage : (currentPage + 1) * itemsPerPage }, null)</li>
+                            <li>@Html.ActionLink("Last", "Index", "Listings", new { top = itemsPerPage, skip = (totalPages - 1) * itemsPerPage }, null)</li>
+                        } }
+                </ul>
 
-        <div class="pull-right">
-
-            <button id="export" class="btn btn-info">Export To CSV</button>
+                <div class="pull-right">
+                    <button id="export" class="btn btn-info">Export To CSV</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        
-    </div>
 </div>
-   <!-- Create Modal -->
+<!-- Create Modal -->
 <div class="modal fade" id="create-inventory-item" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content create-inventory-modal">
@@ -200,13 +197,10 @@
     </div>
 </div>
 
-<script src="~/Scripts/ebaysalestracker_validation.js"></script>
+
 <script>
     var inventoryItems = {};
     $(document).ready(function () {
-        
-
-        $('[data-toggle="tooltip"]').tooltip();
         var pageToHighlight;
         if (@currentPage === 0)
             pageToHighlight = 1;
@@ -217,7 +211,15 @@
         $('#pagination li:nth-child(' + pageToHighlight + ')').addClass('highlight');
 
         dataService.GetInventoryItems(setupInventoryItemArrayForDdl);
+       
     });
+
+    
+
+    
+
+
+
     function setupInventoryItemArrayForDdl(data) {
         inventoryItems['-1'] = "None";
         data.forEach(function(inventoryItem, index){

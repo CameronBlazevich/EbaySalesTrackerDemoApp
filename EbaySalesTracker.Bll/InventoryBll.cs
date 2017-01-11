@@ -102,30 +102,7 @@ namespace EbaySalesTracker.Bll
             return item;
         }
 
-        public double GetProfitByMonth(int year, int month, string userId)
-        {
-            double monthlyProfit = 0;
-            var firstDayOfMonth = new DateTime(year, month, 01);
-            var lastDayOfMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-
-            var listings = _ListingBll.GetListingsByEndDate(firstDayOfMonth, lastDayOfMonth, userId);
-                        
-            foreach (var listing in listings)
-            {
-                var inventoryItem = new InventoryItem();
-                double profit = 0;
-                if (listing.InventoryItemId != null)
-                {
-                    inventoryItem = _InventoryRepository.GetInventoryItemById((int)listing.InventoryItemId, userId);
-                }
-                if (listing.QuantitySold > 0)
-                {
-                    profit = listing.CurrentPrice - listing.TotalNetFees - inventoryItem.Cost;
-                }               
-                monthlyProfit += profit;
-            }
-            return Math.Round(monthlyProfit,2);
-        }
+       
 
         public IEnumerable<Listing> GetListingsByUser(int top, int skip, string userId)
         {
@@ -137,26 +114,7 @@ namespace EbaySalesTracker.Bll
             return listings;
         }
 
-        public double GetSalesByMonth(int year, int month, string userId)
-        {
-            double monthlySales = 0;
-            var firstDayOfMonth = new DateTime(year, month, 01);
-            var lastDayOfMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-
-            var listings = _ListingBll.GetListingsByEndDate(firstDayOfMonth, lastDayOfMonth, userId);
-
-            foreach (var listing in listings)
-            {
-                var inventoryItem = new InventoryItem();
-                double sale = 0;
-                if (listing.QuantitySold > 0)
-                {
-                    sale = listing.CurrentPrice;
-                }               
-                monthlySales += sale;
-            }
-            return Math.Round(monthlySales, 2);
-        }
+        
 
         public object GetListingDataByInventoryItem(int inventoryItemId, string userId)
         {
@@ -203,6 +161,147 @@ namespace EbaySalesTracker.Bll
             listing.Profit = CalculateProfitPerListing(listingId, userId);
             _ListingBll.UpdateListing(listing);
 
+        }
+        public double GetSalesByMonth(int year, int month, string userId)
+        {
+            var firstDayOfMonth = new DateTime(year, month, 01);
+            var lastDayOfMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+
+            var listings = _ListingBll.GetListingsByEndDate(firstDayOfMonth, lastDayOfMonth, userId);
+
+            return CalculateSales(listings);
+        }
+
+        public double GetSalesByYear(int year, string userId)
+        {
+            var firstDayOfYear = new DateTime(year, 1, 1);
+            var lastDayOfYear = new DateTime(year, 12, 31);
+
+            var listings = _ListingBll.GetListingsByEndDate(firstDayOfYear, lastDayOfYear, userId);
+
+            return CalculateSales(listings);
+        }
+
+        public double GetSalesLastSevenDays(string userId)
+        {
+            var now = DateTime.Now;
+            var today = new DateTime(now.Year, now.Month, now.Day);
+            var sevenDaysAgo = today.AddDays(-7);
+
+            var listings = _ListingBll.GetListingsByEndDate(today, sevenDaysAgo, userId);
+
+            return CalculateSales(listings);
+        }
+
+        private double CalculateSales(IEnumerable<Listing> listings)
+        {
+            double totalSales = 0;
+
+            foreach (var listing in listings)
+            {
+                double sellingPrice = 0;
+                if (listing.QuantitySold > 0)
+                {
+                    sellingPrice = listing.CurrentPrice;
+                }
+                totalSales += sellingPrice;
+            }
+            return Math.Round(totalSales, 2);
+        }
+        public double GetProfitLastSevenDays(string userId)
+        {
+            var now = DateTime.Now;
+            var today = new DateTime(now.Year, now.Month, now.Day);
+            var sevenDaysAgo = today.AddDays(-7);
+
+            var listings = _ListingBll.GetListingsByEndDate(today, sevenDaysAgo, userId);
+            return CalculateProfit(listings, userId);
+        }
+        public double GetProfitByMonth(int year, int month, string userId)
+        {
+            var firstDayOfMonth = new DateTime(year, month, 01);
+            var lastDayOfMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+
+            var listings = _ListingBll.GetListingsByEndDate(firstDayOfMonth, lastDayOfMonth, userId);
+
+            return CalculateProfit(listings, userId);
+        }
+        public double GetProfitByYear(int year, string userId)
+        {
+            var firstDayOfYear = new DateTime(year, 1, 1);
+            var lastDayOfYear = new DateTime(year, 12, 31);
+
+            var listings = _ListingBll.GetListingsByEndDate(firstDayOfYear, lastDayOfYear, userId);
+
+            return CalculateProfit(listings, userId);
+        }
+        private double CalculateProfit(IEnumerable<Listing> listings, string userId)
+        {
+            double totalProfit = 0;
+            foreach (var listing in listings)
+            {
+                var inventoryItem = new InventoryItem();
+                double profit = 0;
+                if (listing.InventoryItemId != null)
+                {
+                    inventoryItem = _InventoryRepository.GetInventoryItemById((int)listing.InventoryItemId, userId);
+                }
+                if (listing.QuantitySold > 0)
+                {
+                    profit = listing.CurrentPrice - listing.TotalNetFees - inventoryItem.Cost;
+                }
+                totalProfit += profit;
+            }
+            return Math.Round(totalProfit, 2);
+        }
+
+        public double GetFeesLastSevenDays(string userId)
+        {
+            var now = DateTime.Now;
+            var today = new DateTime(now.Year, now.Month, now.Day);
+            var sevenDaysAgo = today.AddDays(-7);
+
+            var listings = _ListingBll.GetListingsByEndDate(today, sevenDaysAgo, userId);
+
+            return CalculateFees(listings);
+        }
+
+       
+        public double GetFeesByMonth(int year, int month, string userId)
+        {
+            var firstDayOfMonth = new DateTime(year, month, 01);
+            var lastDayOfMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+
+            var listings = _ListingBll.GetListingsByEndDate(firstDayOfMonth, lastDayOfMonth, userId);
+
+            return CalculateFees(listings);
+        }
+
+        public double GetFeesByYear(int year, string userId)
+        {
+            var firstDayOfYear = new DateTime(year, 1, 1);
+            var lastDayOfYear = new DateTime(year, 12, 31);
+
+            var listings = _ListingBll.GetListingsByEndDate(firstDayOfYear, lastDayOfYear, userId);
+
+            return CalculateFees(listings);
+        }
+
+        private double CalculateFees(IEnumerable<Listing> listings)
+        {
+            //not sure if I should care about quantity sold > 0
+            double totalFees = 0;
+
+            foreach (var listing in listings)
+            {
+                double fees = 0;
+                if (listing.QuantitySold > 0)
+                {
+                    fees = listing.TotalNetFees;
+                }
+                totalFees += fees;
+            }
+            return Math.Round(totalFees, 2);
         }
     }
 }

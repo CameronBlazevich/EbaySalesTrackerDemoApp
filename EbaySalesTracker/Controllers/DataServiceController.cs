@@ -4,6 +4,7 @@ using EbaySalesTracker.Repository;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
+using System;
 using System.Web.Mvc;
 
 namespace EbaySalesTracker.Controllers
@@ -57,7 +58,6 @@ namespace EbaySalesTracker.Controllers
             var user = UserManager.FindById(User.Identity.GetUserId());
             return Json(_InventoryRepository.CalculateItemProfitByMonth(id,user.Id), JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult GetDataForAverageProfitOverTime(int id)
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
@@ -85,11 +85,52 @@ namespace EbaySalesTracker.Controllers
             var monthlyProfit = _InventoryBll.GetProfitByMonth(year, month, user.Id);
             return Json(monthlyProfit, JsonRequestBehavior.AllowGet);
         }
+       
         public JsonResult GetSalesByMonth(int year, int month)
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
             var monthlySales = _InventoryBll.GetSalesByMonth(year, month, user.Id);
             return Json(monthlySales, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetSalesByYear(int year)
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            var yearlySales = _InventoryBll.GetSalesByYear(year, user.Id);
+            return Json(yearlySales, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetSalesSummaries()
+        {
+            var today = DateTime.Now;
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            var salesLastSevenDays = _InventoryBll.GetSalesLastSevenDays(user.Id);
+            var salesThisMonth = _InventoryBll.GetSalesByMonth(today.Year, today.Month, user.Id);
+            var salesThisYear = _InventoryBll.GetSalesByYear(today.Year, user.Id);
+           
+            return Json(new { salesLastSevenDays, salesThisMonth, salesThisYear }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetProfitSummaries()
+        {
+            var today = DateTime.Now;
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            var profitLastSevenDays = _InventoryBll.GetProfitLastSevenDays(user.Id);
+            var profitThisMonth = _InventoryBll.GetProfitByMonth(today.Year, today.Month, user.Id);
+            var profitThisYear = _InventoryBll.GetProfitByYear(today.Year, user.Id);
+
+            return Json(new { profitLastSevenDays, profitThisMonth, profitThisYear }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetFeesSummaries()
+        {
+            var today = DateTime.Now;
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            var feesLastSevenDays = _InventoryBll.GetFeesLastSevenDays(user.Id);
+            var feesThisMonth = _InventoryBll.GetFeesByMonth(today.Year, today.Month, user.Id);
+            var feesThisYear = _InventoryBll.GetFeesByYear(today.Year, user.Id);
+
+            return Json(new { feesLastSevenDays, feesThisMonth, feesThisYear }, JsonRequestBehavior.AllowGet);
         }
     }
 }
