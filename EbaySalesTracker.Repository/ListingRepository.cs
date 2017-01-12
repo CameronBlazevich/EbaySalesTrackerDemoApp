@@ -10,15 +10,15 @@ namespace EbaySalesTracker.Repository
     {      
         //whats the best place to new up an engine?
         private ListingEngine engine = new ListingEngine();
-        public Listing GetListingByItemIdFromEbay(long itemId, string userToken)
+        public Listing GetListingByItemIdFromEbay(long itemId, string userId)
         {
+            var userToken = GetUserToken(userId);
             using (DataContext)
             {
                 var listing = DataContext.Listings.Where(s => s.ItemId == itemId).SingleOrDefault();
                 if (listing == null)
                 {
                     listing = engine.GetListingByItemIdFromEbay(itemId, userToken);
-                    //listing.TotalNetFees = DataContext.ListingDetails.Sum(x => x.NetAmount);
                     DataContext.Listings.Add(listing);
 
                     var opStatus = Save(listing);
@@ -34,18 +34,16 @@ namespace EbaySalesTracker.Repository
 
         public List<Listing> GetAllListingsSinceDateFromEbay(DateTime startDate, string userId)
         {
-            ApplicationUser user = new ApplicationUser();
-            var userContext = new ApplicationDbContext();
-            
-            user = userContext.Users.Where(p => p.Id == userId).FirstOrDefault();
+            var userToken = GetUserToken(userId);
 
-            List<Listing> listings = engine.GetAllListingsSinceDateFromEbay(startDate, user.UserToken);
+            List<Listing> listings = engine.GetAllListingsSinceDateFromEbay(startDate, userToken);
 
             return listings;
         }
 
-        public List<Listing> GetListingsByEndDateFromEbay(DateTime endDateFrom, DateTime endDateTo, string userToken)
+        public List<Listing> GetListingsByEndDateFromEbay(DateTime endDateFrom, DateTime endDateTo, string userId)
         {
+            var userToken = GetUserToken(userId);
             List<Listing> listings = engine.GetListingsByEndDateFromEbay(endDateFrom, endDateTo, userToken);
 
             if (listings != null && listings.Count > 0)
@@ -74,8 +72,9 @@ namespace EbaySalesTracker.Repository
 
         }
 
-        public void UpdateFeesById(long itemId, string userToken)
+        public void UpdateFeesById(long itemId, string userId)
         {
+            var userToken = GetUserToken(userId);
             IListingDetailRepository detailRepo = new ListingDetailRepository();
             Listing listing = DataContext.Listings.Where(x => x.ItemId == itemId).FirstOrDefault();
             double netFees = 0;
@@ -94,9 +93,10 @@ namespace EbaySalesTracker.Repository
             DataContext.SaveChanges();
     }
 
-        public List<Listing> GetListingsByStartDateFromEbay(DateTime startDateFrom, DateTime startDateTo, string userId, string userToken)
+        public List<Listing> GetListingsByStartDateFromEbay(DateTime startDateFrom, DateTime startDateTo, string userId)
         {
-            List<Listing> listings = engine.GetListingsByStartDateFromEbay(startDateFrom, startDateTo,userToken);
+            var userToken = GetUserToken(userId);
+            List<Listing> listings = engine.GetListingsByStartDateFromEbay(startDateFrom, startDateTo, userToken);
 
             if (listings != null && listings.Count > 0)
             {
@@ -125,13 +125,11 @@ namespace EbaySalesTracker.Repository
 
         public void UpdateListings(DateTime sinceDate, string userId)
         {
-            IListingDetailRepository detailRepo = new ListingDetailRepository();          
-            ApplicationUser user = new ApplicationUser();
-            var userContext = new ApplicationDbContext();
+            IListingDetailRepository detailRepo = new ListingDetailRepository();
 
-            user = userContext.Users.Where(p => p.Id == userId).FirstOrDefault();
+            var userToken = GetUserToken(userId);
 
-            List<Listing> listings = engine.GetAllListingsSinceDateFromEbay(sinceDate, user.UserToken);
+            List<Listing> listings = engine.GetAllListingsSinceDateFromEbay(sinceDate, userToken);
 
 
             if (listings != null && listings.Count > 0)
@@ -160,7 +158,7 @@ namespace EbaySalesTracker.Repository
                                 listing.Title = "Error saving listing.";
                             }
                         }
-                        UpdateFeesById(listing.ItemId, user.UserToken);
+                        UpdateFeesById(listing.ItemId, userId);
                         UpdateTransactions(listing, userId);                        
                     }
                 }
@@ -201,7 +199,7 @@ namespace EbaySalesTracker.Repository
 
         public IEnumerable<Listing> GetListingsByEndDate(DateTime startDate, DateTime endDate, string userId)
         {           
-            return DataContext.Listings.Where(x => x.EndDate >= startDate && x.EndDate >= endDate).ToList();
+            return DataContext.Listings.Where(x => x.EndDate >= startDate && x.EndDate <= endDate).ToList();
         }
        
         public IEnumerable<Listing> GetAllListingsByUser(int top, int skip, string userId)
@@ -271,6 +269,16 @@ namespace EbaySalesTracker.Repository
                 user.LastListingRefreshDate = DateTime.Now;
                 userContext.SaveChanges();
             }
+        }
+
+        private  string GetUserToken(string userId)
+        {
+            ApplicationUser user = new ApplicationUser();
+            var userContext = new ApplicationDbContext();
+
+            user = userContext.Users.Where(p => p.Id == userId).FirstOrDefault();
+
+            return user.UserToken;
         }
 
         #endregion

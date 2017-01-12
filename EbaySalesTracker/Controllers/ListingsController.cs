@@ -120,52 +120,6 @@ namespace EbaySalesTracker.Controllers
 
         }
 
-        //// GET: Listings/Edit/5
-        //public ActionResult Edit(long? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Listing listing = db.Listings.Find(id);
-        //    if (listing == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(listing);
-        //}
-
-        // POST: Listings/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "ItemId,StartDate,EndDate,Title,CurrentPrice,QuantitySold,ListingStatus")] Listing listing)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(listing).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(listing);
-        //}
-
-        // GET: Listings/Delete/5
-        //public ActionResult Delete(long? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Listing listing = db.Listings.Find(id);
-        //    if (listing == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(listing);
-        //}
-
         // POST: Listings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -177,9 +131,8 @@ namespace EbaySalesTracker.Controllers
 
         public ActionResult UpdateFeesById(long id)
         {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            string userToken = user.UserToken;
-            _ListingRepository.UpdateFeesById(id, userToken);
+            var user = UserManager.FindById(User.Identity.GetUserId());            
+            _ListingRepository.UpdateFeesById(id, user.Id);
             return RedirectToAction("Index");
         }
 
@@ -187,6 +140,9 @@ namespace EbaySalesTracker.Controllers
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
             string userId = user.Id;
+            //var _UserRepository = new UserRepository();
+            //bool result = _UserRepository.TestUserToken(user.UserToken);
+
             _ListingBll.UpdateListings(userId);
 
             return RedirectToAction("Index");
@@ -202,7 +158,6 @@ namespace EbaySalesTracker.Controllers
                 _ListingRepository.DissociateInventoryItem(listingId);
             }
             else {
-                //_ListingRepository.AssociateInventoryItem(listingId, Convert.ToInt32(inventoryItemId));
                 _InventoryBll.AssociateInventoryItemToListing(listingId, Convert.ToInt32(inventoryItemId), user.Id);
             }
 

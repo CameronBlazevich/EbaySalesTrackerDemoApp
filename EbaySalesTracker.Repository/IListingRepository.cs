@@ -8,11 +8,11 @@ namespace EbaySalesTracker.Repository
     {
         //gets from ebay
         //Listing GetListingByItemIdFromEbay(long itemId);
-        Listing GetListingByItemIdFromEbay(long itemId, string userToken);
-        List<Listing> GetListingsByEndDateFromEbay(DateTime EndDateFrom, DateTime EndDateTo, string userToken);
+        Listing GetListingByItemIdFromEbay(long itemId, string userId);
+        List<Listing> GetListingsByEndDateFromEbay(DateTime EndDateFrom, DateTime EndDateTo, string userId);
         List<Listing> GetAllListingsSinceDateFromEbay(DateTime startDate,string userId);
-        List<Listing> GetListingsByStartDateFromEbay(DateTime startDateFrom, DateTime startDateTo, string userId, string userToken);
-        void UpdateFeesById(long itemId,string userToken);
+        List<Listing> GetListingsByStartDateFromEbay(DateTime startDateFrom, DateTime startDateTo, string userId);
+        void UpdateFeesById(long itemId,string userId);
         void UpdateListings(DateTime sinceDate, string userId);
 
         //gets from the db
@@ -26,9 +26,6 @@ namespace EbaySalesTracker.Repository
         IEnumerable<Listing> GetSoldListingsByInventoryItem(int inventoryItemId, string userId);
         IEnumerable<Listing> GetListingsByEndDate(DateTime startDate, DateTime endDate, string userId);
         int GetListingsCountByUser(string userId);
-        DateTime? GetLastListingsUpdate(string userId);
-
-        // List<Listing> GetListingsByInventoryItem(int inventoryItemId);
-        //object GetListingDataByInventoryItem(string userId, int inventoryItemId);       
+        DateTime? GetLastListingsUpdate(string userId);      
     }
 }
