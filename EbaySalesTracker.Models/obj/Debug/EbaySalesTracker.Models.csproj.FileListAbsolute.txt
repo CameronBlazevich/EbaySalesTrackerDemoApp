@@ -18,6 +18,7 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\bin\Debug\Microsoft.Web.Infrastructure.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\bin\Debug\Newtonsoft.Json.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\bin\Debug\Owin.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\bin\Debug\Stripe.net.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\bin\Debug\System.Web.Helpers.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\bin\Debug\System.Web.Mvc.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\bin\Debug\System.Web.Razor.dll

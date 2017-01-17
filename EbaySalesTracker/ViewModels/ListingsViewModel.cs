@@ -20,6 +20,7 @@ namespace EbaySalesTracker.ViewModels
         {
             get { return new SelectList(Items, "Id", "Description"); }
         }
+        public bool IsAuthenticatedWithEbay { get; set; }
         //public double Profit { get; set;}
         //public SelectList InventoryItemSelectList { get; set; }
 

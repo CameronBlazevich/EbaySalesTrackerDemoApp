@@ -87,9 +87,14 @@ namespace EbaySalesTracker.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+
             switch (result)
             {
                 case SignInStatus.Success:
+                    if (returnUrl == "CompleteRegistration")
+                    {
+                        return RedirectToAction("Register", "Account");
+                    }
                     return RedirectToAction("Index", "Listings");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -101,6 +106,7 @@ namespace EbaySalesTracker.Controllers
                     return View(model);
             }
         }
+
 
         //
         // GET: /Account/VerifyCode
@@ -167,13 +173,23 @@ namespace EbaySalesTracker.Controllers
                 if (result.Succeeded)
                 {
                     //comment this out for forcing email verification: https://www.asp.net/mvc/overview/security/create-an-aspnet-mvc-5-web-app-with-email-confirmation-and-password-reset
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    var messageBody = "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>";
+                        messageBody += "<br /><br /><br />If that link doesn't work please visit: " + callbackUrl;
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", messageBody);
+
+                    // Uncomment to debug locally 
+                    // TempData["ViewBagLink"] = callbackUrl;
+
+                    ViewBag.Message = user.Email.ToString();
+
+                    return View("Info");
+
 
                     return RedirectToAction("Register", "Account");
                 }
@@ -545,5 +561,7 @@ namespace EbaySalesTracker.Controllers
             UserManager.AddClaim(userId, new Claim(claimType, sessionId));
         }
         #endregion
+
+        
     }
 }

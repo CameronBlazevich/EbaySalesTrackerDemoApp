@@ -1,0 +1,1400 @@
+[1/14/2017 11:04:27 AM, Informational]
+https://api.sandbox.ebay.com/ws/api.dll?callname=GeteBayOfficialTime&siteid=0&client=netsoap
+
+[1/14/2017 11:04:27 AM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GeteBayOfficialTimeRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <MessageID>980633fb-40b4-436d-9901-1415853c84bf</MessageID>
+      <Version>949</Version>
+    </GeteBayOfficialTimeRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GeteBayOfficialTimeResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+  <Timestamp>2017-01-14 17:04:37</Timestamp>
+  <Ack>Failure</Ack>
+  <Errors>
+    <ShortMessage>Unsupported API call.</ShortMessage>
+    <LongMessage>The API call "GeteBayOfficialTime" is invalid or not supported in this release.</LongMessage>
+    <ErrorCode>2</ErrorCode>
+    <SeverityCode>Error</SeverityCode>
+    <ErrorClassification>RequestError</ErrorClassification>
+  </Errors>
+  <Build>18131074</Build>
+</GeteBayOfficialTimeResponse>
+
+[1/14/2017 11:04:27 AM, Error]
+Object reference not set to an instance of an object.
+
+[1/14/2017 1:51:58 PM, Informational]
+https://api.sandbox.ebay.com/ws/api.dll?callname=GeteBayOfficialTime&siteid=0&client=netsoap
+
+[1/14/2017 1:51:58 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GeteBayOfficialTimeRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <MessageID>5d95d3b2-1d80-4a6f-ac87-6a4adc380121</MessageID>
+      <Version>949</Version>
+    </GeteBayOfficialTimeRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GeteBayOfficialTimeResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+  <Timestamp>2017-01-14 19:52:08</Timestamp>
+  <Ack>Failure</Ack>
+  <Errors>
+    <ShortMessage>Unsupported API call.</ShortMessage>
+    <LongMessage>The API call "GeteBayOfficialTime" is invalid or not supported in this release.</LongMessage>
+    <ErrorCode>2</ErrorCode>
+    <SeverityCode>Error</SeverityCode>
+    <ErrorClassification>RequestError</ErrorClassification>
+  </Errors>
+  <Build>18131074</Build>
+</GeteBayOfficialTimeResponse>
+
+[1/14/2017 1:51:58 PM, Error]
+Object reference not set to an instance of an object.
+
+[1/14/2017 1:53:53 PM, Informational]
+https://api.sandbox.ebay.com/ws/api.dll?callname=GeteBayOfficialTime&siteid=0&client=netsoap
+
+[1/14/2017 1:53:54 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GeteBayOfficialTimeRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <MessageID>bc65dd22-e731-4163-b218-2ed20fee30eb</MessageID>
+      <Version>967</Version>
+    </GeteBayOfficialTimeRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GeteBayOfficialTimeResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+  <Timestamp>2017-01-14 19:54:04</Timestamp>
+  <Ack>Failure</Ack>
+  <Errors>
+    <ShortMessage>Unsupported API call.</ShortMessage>
+    <LongMessage>The API call "GeteBayOfficialTime" is invalid or not supported in this release.</LongMessage>
+    <ErrorCode>2</ErrorCode>
+    <SeverityCode>Error</SeverityCode>
+    <ErrorClassification>RequestError</ErrorClassification>
+  </Errors>
+  <Build>18131074</Build>
+</GeteBayOfficialTimeResponse>
+
+[1/14/2017 1:53:54 PM, Error]
+Object reference not set to an instance of an object.
+
+[1/14/2017 2:16:19 PM, Informational]
+https://api.sandbox.ebay.com/ws/api.dll?callname=GeteBayOfficialTime&siteid=0&client=netsoap
+
+[1/14/2017 2:16:19 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GeteBayOfficialTimeRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <MessageID>cd1870de-bf16-47ae-898e-d07e2afbc345</MessageID>
+      <Version>967</Version>
+    </GeteBayOfficialTimeRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GeteBayOfficialTimeResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+  <Timestamp>2017-01-14 20:16:30</Timestamp>
+  <Ack>Failure</Ack>
+  <Errors>
+    <ShortMessage>Unsupported API call.</ShortMessage>
+    <LongMessage>The API call "GeteBayOfficialTime" is invalid or not supported in this release.</LongMessage>
+    <ErrorCode>2</ErrorCode>
+    <SeverityCode>Error</SeverityCode>
+    <ErrorClassification>RequestError</ErrorClassification>
+  </Errors>
+  <Build>18131074</Build>
+</GeteBayOfficialTimeResponse>
+
+[1/14/2017 2:16:20 PM, Error]
+Object reference not set to an instance of an object.
+
+[1/14/2017 2:17:58 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GeteBayOfficialTime&siteid=0&client=netsoap
+
+[1/14/2017 2:17:59 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GeteBayOfficialTimeRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <MessageID>7ba67630-0357-41bb-bd0b-ca621985c7fa</MessageID>
+      <Version>967</Version>
+    </GeteBayOfficialTimeRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GeteBayOfficialTimeResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:18:10.139Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>7ba67630-0357-41bb-bd0b-ca621985c7fa</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+    </GeteBayOfficialTimeResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:17:59 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:00 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>a7ea5ca6-475d-4a24-98a3-ac28550c8abb</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-01-04T14:17:59.6404237-06:00</StartTimeFrom>
+      <StartTimeTo>2015-04-29T14:17:59.6404237-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:18:10.088Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>a7ea5ca6-475d-4a24-98a3-ac28550c8abb</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:00 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:00 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>334ca6c2-bc03-4b92-b5b8-a993fb8a3d15</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-04-29T14:17:59.6404237-05:00</StartTimeFrom>
+      <StartTimeTo>2015-08-22T14:17:59.6404237-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:18:10.401Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>334ca6c2-bc03-4b92-b5b8-a993fb8a3d15</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:00 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:00 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>33c65b16-8ce6-4caa-978e-92cb1f9e9fe6</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-08-22T14:17:59.6404237-05:00</StartTimeFrom>
+      <StartTimeTo>2015-12-15T14:17:59.6404237-06:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:18:11.367Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>33c65b16-8ce6-4caa-978e-92cb1f9e9fe6</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:00 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:01 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>1c16ca44-2a6a-48d4-a313-92f8c840d384</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-12-15T14:17:59.6404237-06:00</StartTimeFrom>
+      <StartTimeTo>2016-04-08T14:17:59.6404237-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:18:11.671Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>1c16ca44-2a6a-48d4-a313-92f8c840d384</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:01 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:01 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>b8a49cd4-76eb-4fef-91f5-0caa6cfa73b0</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2016-04-08T14:17:59.6404237-05:00</StartTimeFrom>
+      <StartTimeTo>2016-08-01T14:17:59.6404237-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:18:11.952Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>b8a49cd4-76eb-4fef-91f5-0caa6cfa73b0</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:01 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:01 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>669e0428-d7f2-465d-8932-361c03d94cbd</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2016-08-01T14:17:59.6404237-05:00</StartTimeFrom>
+      <StartTimeTo>2016-11-24T14:17:59.6404237-06:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:18:12.233Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>669e0428-d7f2-465d-8932-361c03d94cbd</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:01 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:01 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>0cb9f750-6ee2-4009-aef6-06b67b3562c3</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2016-11-24T14:17:59.6404237-06:00</StartTimeFrom>
+      <StartTimeTo>2017-03-19T14:17:59.6404237-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:18:12.571Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>0cb9f750-6ee2-4009-aef6-06b67b3562c3</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:47 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GeteBayOfficialTime&siteid=0&client=netsoap
+
+[1/14/2017 2:18:48 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GeteBayOfficialTimeRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <MessageID>bc0e4591-b893-4f2f-ad65-ebfade4c69f7</MessageID>
+      <Version>967</Version>
+    </GeteBayOfficialTimeRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GeteBayOfficialTimeResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:18:59.062Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>bc0e4591-b893-4f2f-ad65-ebfade4c69f7</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+    </GeteBayOfficialTimeResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:48 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:48 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>e1c315f5-6634-4801-9692-5dd1a753d6e6</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-01-04T14:18:48.6688452-06:00</StartTimeFrom>
+      <StartTimeTo>2015-04-29T14:18:48.6688452-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:18:58.993Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>e1c315f5-6634-4801-9692-5dd1a753d6e6</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:48 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:49 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>d44fe935-0deb-473f-b665-2ed22f67d53f</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-04-29T14:18:48.6688452-05:00</StartTimeFrom>
+      <StartTimeTo>2015-08-22T14:18:48.6688452-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:18:59.306Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>d44fe935-0deb-473f-b665-2ed22f67d53f</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:49 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:49 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>db8af9fc-6e6d-4aa4-8189-6628b217e8a9</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-08-22T14:18:48.6688452-05:00</StartTimeFrom>
+      <StartTimeTo>2015-12-15T14:18:48.6688452-06:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:18:59.618Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>db8af9fc-6e6d-4aa4-8189-6628b217e8a9</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:49 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:49 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>a50ac3a2-e111-48b1-acf4-68ed5f51102a</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-12-15T14:18:48.6688452-06:00</StartTimeFrom>
+      <StartTimeTo>2016-04-08T14:18:48.6688452-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:19:00.529Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>a50ac3a2-e111-48b1-acf4-68ed5f51102a</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:49 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:50 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>0cd16485-f2b7-481a-86ef-a0eccec96f06</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2016-04-08T14:18:48.6688452-05:00</StartTimeFrom>
+      <StartTimeTo>2016-08-01T14:18:48.6688452-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:19:00.841Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>0cd16485-f2b7-481a-86ef-a0eccec96f06</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:50 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:50 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>ea296d35-830d-4dbc-b5fd-6e41b1117a41</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2016-08-01T14:18:48.6688452-05:00</StartTimeFrom>
+      <StartTimeTo>2016-11-24T14:18:48.6688452-06:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:19:01.154Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>ea296d35-830d-4dbc-b5fd-6e41b1117a41</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:18:50 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:18:50 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>864eef03-0c16-4c67-beaa-f42b3d446b10</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2016-11-24T14:18:48.6688452-06:00</StartTimeFrom>
+      <StartTimeTo>2017-03-19T14:18:48.6688452-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:19:01.437Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>864eef03-0c16-4c67-beaa-f42b3d446b10</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:19:35 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GeteBayOfficialTime&siteid=0&client=netsoap
+
+[1/14/2017 2:19:36 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GeteBayOfficialTimeRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <MessageID>9f618d5a-5611-4d00-bcb4-51d42524b8a9</MessageID>
+      <Version>967</Version>
+    </GeteBayOfficialTimeRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GeteBayOfficialTimeResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:19:46.429Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>9f618d5a-5611-4d00-bcb4-51d42524b8a9</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+    </GeteBayOfficialTimeResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:19:50 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:19:50 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>7227a186-0e25-4e47-a658-4fe2bd020b8d</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-01-04T14:19:44.6350773-06:00</StartTimeFrom>
+      <StartTimeTo>2015-04-29T14:19:44.6350773-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:20:01.578Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>7227a186-0e25-4e47-a658-4fe2bd020b8d</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:19:53 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:19:54 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>15c008ec-b156-4da8-a2c8-048ffde67fe3</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-04-29T14:19:44.6350773-05:00</StartTimeFrom>
+      <StartTimeTo>2015-08-22T14:19:44.6350773-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:20:04.796Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>15c008ec-b156-4da8-a2c8-048ffde67fe3</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:19:54 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:19:54 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>0adc172b-31bd-478d-ad19-2ef57556abba</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-08-22T14:19:44.6350773-05:00</StartTimeFrom>
+      <StartTimeTo>2015-12-15T14:19:44.6350773-06:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:20:05.093Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>0adc172b-31bd-478d-ad19-2ef57556abba</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:19:54 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:19:54 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>95fc775d-d138-4811-b1cc-588d08ac7456</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-12-15T14:19:44.6350773-06:00</StartTimeFrom>
+      <StartTimeTo>2016-04-08T14:19:44.6350773-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:20:04.804Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>95fc775d-d138-4811-b1cc-588d08ac7456</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:19:54 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:19:55 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>c8e89dcd-9639-402c-b918-8458acce6932</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2016-04-08T14:19:44.6350773-05:00</StartTimeFrom>
+      <StartTimeTo>2016-08-01T14:19:44.6350773-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:20:05.132Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>c8e89dcd-9639-402c-b918-8458acce6932</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:19:55 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:19:55 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>c116f70c-fd5c-48f3-8c13-b66184d30da4</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2016-08-01T14:19:44.6350773-05:00</StartTimeFrom>
+      <StartTimeTo>2016-11-24T14:19:44.6350773-06:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:20:06.032Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>c116f70c-fd5c-48f3-8c13-b66184d30da4</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/14/2017 2:19:55 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/14/2017 2:19:55 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>73fedcde-5aea-43fb-8984-4b2efc3351a3</MessageID>
+      <Version>967</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2016-11-24T14:19:44.6350773-06:00</StartTimeFrom>
+      <StartTimeTo>2017-03-19T14:19:44.6350773-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-14T20:20:05.679Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>73fedcde-5aea-43fb-8984-4b2efc3351a3</CorrelationID>
+      <Version>989</Version>
+      <Build>E989_CORE_API_18131074_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/15/2017 5:03:19 PM, Informational]
+https://api.sandbox.ebay.com/wsapi?callname=GeteBayOfficialTime&siteid=0&client=netsoap
+
+[1/15/2017 5:03:20 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents" />
+  </soap:Header>
+  <soap:Body>
+    <GeteBayOfficialTimeRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <MessageID>39c96b89-b31c-4e16-a427-9c32b9b2cf2c</MessageID>
+      <Version>967</Version>
+    </GeteBayOfficialTimeRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <soapenv:Fault>
+      <faultcode xmlns:ns1="http://xml.apache.org/axis/">ns1:Client</faultcode>
+      <faultstring>Application name invalid.</faultstring>
+      <faultactor>http://www.ebay.com/ws/websvc/eBayAPI</faultactor>
+      <detail>
+        <FaultDetail>
+          <ErrorCode>127</ErrorCode>
+          <Severity>Error</Severity>
+          <DetailedMessage>API application "{0}" invalid.</DetailedMessage>
+        </FaultDetail>
+      </detail>
+    </soapenv:Fault>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/15/2017 5:03:20 PM, Error]
+API application "{0}" invalid.
+
+[1/15/2017 5:05:42 PM, Informational]
+https://api.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/15/2017 5:05:43 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents" />
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>46b01ce0-8751-4fc5-a242-a068fbf81ecc</MessageID>
+      <Version>949</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-01-05T17:05:39.1175091-06:00</StartTimeFrom>
+      <StartTimeTo>2015-04-30T17:05:39.1175091-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <soapenv:Fault>
+      <faultcode xmlns:ns1="http://xml.apache.org/axis/">ns1:Client</faultcode>
+      <faultstring>Application name invalid.</faultstring>
+      <faultactor>http://www.ebay.com/ws/websvc/eBayAPI</faultactor>
+      <detail>
+        <FaultDetail>
+          <ErrorCode>127</ErrorCode>
+          <Severity>Error</Severity>
+          <DetailedMessage>API application "{0}" invalid.</DetailedMessage>
+        </FaultDetail>
+      </detail>
+    </soapenv:Fault>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/15/2017 5:05:43 PM, Error]
+API application "{0}" invalid.
+
+[1/15/2017 5:16:10 PM, Informational]
+https://api.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/15/2017 5:16:10 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents" />
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>263a385d-adb2-409f-a152-3f603878de1b</MessageID>
+      <Version>949</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-01-05T17:16:06.5578279-06:00</StartTimeFrom>
+      <StartTimeTo>2015-04-30T17:16:06.5578279-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <soapenv:Fault>
+      <faultcode xmlns:ns1="http://xml.apache.org/axis/">ns1:Client</faultcode>
+      <faultstring>Application name invalid.</faultstring>
+      <faultactor>http://www.ebay.com/ws/websvc/eBayAPI</faultactor>
+      <detail>
+        <FaultDetail>
+          <ErrorCode>127</ErrorCode>
+          <Severity>Error</Severity>
+          <DetailedMessage>API application "{0}" invalid.</DetailedMessage>
+        </FaultDetail>
+      </detail>
+    </soapenv:Fault>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/15/2017 5:16:10 PM, Error]
+API application "{0}" invalid.
+
+[1/15/2017 8:50:40 PM, Informational]
+https://api.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/15/2017 8:50:40 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents" />
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>e41b2d15-fb35-4601-b507-57771c360bc9</MessageID>
+      <Version>949</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2015-01-05T20:50:40.5005357-06:00</StartTimeFrom>
+      <StartTimeTo>2015-04-30T20:50:40.5005357-05:00</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <soapenv:Fault>
+      <faultcode xmlns:ns1="http://xml.apache.org/axis/">ns1:Client</faultcode>
+      <faultstring>Application name invalid.</faultstring>
+      <faultactor>http://www.ebay.com/ws/websvc/eBayAPI</faultactor>
+      <detail>
+        <FaultDetail>
+          <ErrorCode>127</ErrorCode>
+          <Severity>Error</Severity>
+          <DetailedMessage>API application "{0}" invalid.</DetailedMessage>
+        </FaultDetail>
+      </detail>
+    </soapenv:Fault>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/15/2017 8:50:40 PM, Error]
+API application "{0}" invalid.
+
+[1/15/2017 9:11:02 PM, Informational]
+https://api.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/15/2017 9:11:03 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>cbdc9a21-60dc-44d8-8552-49779d817b05</MessageID>
+      <Version>949</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2016-12-29T14:46:16.72</StartTimeFrom>
+      <StartTimeTo>2017-04-23T14:46:16.72</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-16T03:11:15.753Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>cbdc9a21-60dc-44d8-8552-49779d817b05</CorrelationID>
+      <Version>967</Version>
+      <Build>E967_CORE_APISELLING_17965876_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/15/2017 9:11:16 PM, Informational]
+https://api.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/15/2017 9:11:18 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>f1da7a96-b6c0-41ef-9d22-36495941d786</MessageID>
+      <Version>949</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2016-12-29T14:46:16.72</StartTimeFrom>
+      <StartTimeTo>2017-04-23T14:46:16.72</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-16T03:11:30.351Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>f1da7a96-b6c0-41ef-9d22-36495941d786</CorrelationID>
+      <Version>967</Version>
+      <Build>E967_CORE_APISELLING_17965876_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+
+[1/15/2017 9:11:25 PM, Informational]
+https://api.ebay.com/wsapi?callname=GetSellerEvents&siteid=0&client=netsoap
+
+[1/15/2017 9:11:26 PM, Informational]
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+    <RequesterCredentials xmlns="urn:ebay:apis:eBLBaseComponents">
+      <eBayAuthToken>******</eBayAuthToken>
+    </RequesterCredentials>
+  </soap:Header>
+  <soap:Body>
+    <GetSellerEventsRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+      <DetailLevel>ReturnAll</DetailLevel>
+      <MessageID>430695d5-2a12-472f-b4b0-900de8612086</MessageID>
+      <Version>949</Version>
+      <OutputSelector>SellingStatus</OutputSelector>
+      <OutputSelector>ItemId</OutputSelector>
+      <OutputSelector>ListingDetails</OutputSelector>
+      <OutputSelector>Title</OutputSelector>
+      <OutputSelector>ListingType</OutputSelector>
+      <StartTimeFrom>2016-12-29T14:46:16.72</StartTimeFrom>
+      <StartTimeTo>2017-04-23T14:46:16.72</StartTimeTo>
+    </GetSellerEventsRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <GetSellerEventsResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+      <Timestamp>2017-01-16T03:11:38.514Z</Timestamp>
+      <Ack>Success</Ack>
+      <CorrelationID>430695d5-2a12-472f-b4b0-900de8612086</CorrelationID>
+      <Version>967</Version>
+      <Build>E967_CORE_APISELLING_17965876_R1</Build>
+      <ItemArray />
+    </GetSellerEventsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
+

@@ -52,9 +52,14 @@ namespace EbaySalesTracker.Controllers
             var user = UserManager.FindById(User.Identity.GetUserId());
             string userId = user.Id;
             var listingsViewModel = new ListingsViewModel();
+            listingsViewModel.IsAuthenticatedWithEbay = false;
             listingsViewModel.Listings = _InventoryBll.GetListingsByUser(top, skip, userId).ToList();
             listingsViewModel.TotalListings = _ListingBll.GetListingsCountByUser(userId);
             listingsViewModel.Items = _InventoryBll.GetInventoryItemsByUser(userId).ToList();
+            if (!string.IsNullOrEmpty(user.UserToken))
+            {
+                listingsViewModel.IsAuthenticatedWithEbay = true;
+            }
 
             return View(listingsViewModel);
         }

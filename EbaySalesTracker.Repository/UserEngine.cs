@@ -48,7 +48,7 @@ namespace EbaySalesTracker.Repository
 
             var context = RequestBuilder.CreateNewApiCall(userToken);
             GeteBayOfficialTimeCall ebayOfficialTimeCall = new GeteBayOfficialTimeCall(context);
-            ebayOfficialTimeCall.Execute();
+            DateTime officialTime = ebayOfficialTimeCall.GeteBayOfficialTime();
 
             var success = ebayOfficialTimeCall.ApiResponse.Ack.ToString();
 

@@ -27,7 +27,7 @@ namespace EbaySalesTracker
             var myMessage = new SendGridMessage();
             myMessage.AddTo(message.Destination);
             myMessage.From = new System.Net.Mail.MailAddress(
-                                "ebayprofittracker@gmail.com", "Support");
+                                "ebayprofittracker@eprofittracker.com", "Support");
             myMessage.Subject = "Welcome to eBay Profit Tracker";
             myMessage.Text = message.Body;
             myMessage.Html = message.Body;

@@ -31,17 +31,17 @@
 
     .sidebar-table {
         margin: 10px;
-
     }
 
         .sidebar-table td {
-                    text-align:left;
+            text-align: left;
         }
 </style>
 <div class="row">
     <!-- Sidebar -->
-    <div id="sidebar-wrapper" class="col-md-2">        
-       @Html.Partial("_SalesSummaries")
+    <div id="sidebar-wrapper" class="col-md-2">
+        @*@Html.Partial("_ListingsFilter")*@
+        @Html.Partial("_SalesSummaries")
     </div>
     <!-- /#sidebar-wrapper -->
 
@@ -49,9 +49,14 @@
         <div class="panel">
             <div class="panel-heading text-right">
                 <h3 class="pull-left">All Listings</h3>
-
-                @Html.ActionLink("Update Listings", "UpdateListings", null, new { @class = "btn btn-primary" })
-
+                @if (Model.IsAuthenticatedWithEbay)
+                {
+                    @Html.ActionLink("Update Listings", "UpdateListings", null, new { @class = "btn btn-primary" })
+                }
+                else
+                {
+                    <a href="@Url.Action("AuthenticateUserWithEbay","Account", new { target = "_new" })" class="btn btn-primary" title="Authenticate your account with eBay so that we can automatically import your listing information.">Authenticate with Ebay</a>
+                }
             </div>
             <div class="panel-body col-md-12">
 
@@ -211,12 +216,12 @@
         $('#pagination li:nth-child(' + pageToHighlight + ')').addClass('highlight');
 
         dataService.GetInventoryItems(setupInventoryItemArrayForDdl);
-       
+
     });
 
-    
 
-    
+
+
 
 
 

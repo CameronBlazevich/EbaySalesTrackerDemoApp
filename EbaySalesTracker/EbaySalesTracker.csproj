@@ -48,7 +48,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="eBay.Service, Version=3.939.0.0, Culture=neutral, PublicKeyToken=1d9d786a5932eaf0" />
+    <Reference Include="eBay.Service, Version=3.981.0.0, Culture=neutral, PublicKeyToken=1d9d786a5932eaf0, processorArchitecture=MSIL">
+      <HintPath>..\packages\eBay.3.981.0\lib\net40\eBay.Service.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -217,6 +220,7 @@
     <Compile Include="Controllers\InventoryItemsController.cs" />
     <Compile Include="Controllers\ListingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StripeWebhookController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -434,6 +438,8 @@
     <Content Include="Views\InventoryItems\_CreateInventoryItem.cshtml" />
     <Content Include="Views\InventoryItems\_EditInventoryItem.cshtml" />
     <Content Include="Views\Shared\_SalesSummaries.cshtml" />
+    <Content Include="Views\Shared\_ListingsFilter.cshtml" />
+    <Content Include="Views\Shared\Info.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -441,6 +447,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\DataService\" />
+    <Folder Include="Views\StripeWebhook\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

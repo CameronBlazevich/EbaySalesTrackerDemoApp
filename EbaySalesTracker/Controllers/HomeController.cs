@@ -1,22 +1,16 @@
-﻿using EbaySalesTracker.Models;
+﻿using EbaySalesTracker.Bll;
+using EbaySalesTracker.Models;
 using EbaySalesTracker.Repository;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
+using Microsoft.Practices.Unity;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Security.Claims;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.Practices.Unity;
-using EbaySalesTracker.Bll;
-using System.Configuration;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net;
-using System.Text;
-using System.IO;
-using System.Security.Claims;
-using System.Linq;
-using System.Threading;
-using System.Web.Script.Serialization;
 
 namespace EbaySalesTracker.Controllers
 {
@@ -31,7 +25,7 @@ namespace EbaySalesTracker.Controllers
         IListingBll _ListingBll;
         IInventoryBll _InventoryBll;
         UserManager<ApplicationUser> UserManager;
-       string userId = "";
+        string userId = "";
 
 
         public HomeController() : this(null,null,null,null,null)
@@ -54,8 +48,7 @@ namespace EbaySalesTracker.Controllers
         }
         [AllowAnonymous]
         public ActionResult Index()
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId());           
+        {   
             return View();
         }
 

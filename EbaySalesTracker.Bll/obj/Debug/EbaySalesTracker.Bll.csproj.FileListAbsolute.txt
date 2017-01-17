@@ -1,3 +1,4 @@
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Bll\bin\Debug\EbaySalesTracker.Bll.dll.config
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Bll\bin\Debug\EbaySalesTracker.Bll.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Bll\bin\Debug\EbaySalesTracker.Bll.pdb
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Bll\bin\Debug\EbaySalesTracker.Models.dll
