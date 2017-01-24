@@ -1,0 +1,62 @@
+﻿@model EbaySalesTracker.ViewModels.Subscription.BillingViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-7">
+                    @Html.Partial("_BillingPartial")
+                </div>
+                <div class="col-md-5">
+                    <div class="greyed-out">
+                        <div>
+                            <h3>3: Authenticate with eBay!</h3>
+                        </div>
+                        <div class="clearfix"></div>
+                        <p>The following button will take you to eBay where you will log in and be asked to give our app permission to import your data from eBay.</p>
+                        <a href="#" class="btn btn-primary disabled">Authenticate</a>
+                        <div class="clearfix"></div>
+                        <br /><br />
+                        <p>Once authenticated, you can automatically import all of your listing information.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+    @*@foreach (var plan in Model.Plans)
+        {
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+
+                <!-- PRICE ITEM -->
+                <div class="panel price">
+                    <div class="panel-heading  text-center">
+                        <h3>@plan.Name</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <p class="lead" style="font-size:40px"><strong>$@plan.AmountInDollars / @plan.Interval</strong></p>
+                    </div>
+                    <ul class="list-group list-group-flush text-center">
+                        <li>feature 1</li>
+                        <li>feature 2</li>
+                        @foreach (var feature in plan.Features)
+                        {
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i>@feature.Description</li>
+                        }
+                    </ul>
+                    <div class="panel-footer">
+                        <a class="btn btn-lg btn-block " href="/Account/Subscribe/@plan.Id">BUY NOW!</a>
+                    </div>
+                </div>
+                <!-- /PRICE ITEM -->
+            </div>
+        }*@
+
+</div>
+
+

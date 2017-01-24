@@ -62,16 +62,19 @@ namespace EbaySalesTracker.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.SubscriptionCancelled ? "Subscription cancelled. Your subscription will remain active until the date of your next charge."
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = UserManager.Users.Where(u => u.Id == userId).FirstOrDefault();
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                StripeActiveUntil = user.StripeActiveUntil
             };
             return View(model);
         }
@@ -380,7 +383,8 @@ namespace EbaySalesTracker.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
-            Error
+            Error, 
+            SubscriptionCancelled
         }
 
 #endregion

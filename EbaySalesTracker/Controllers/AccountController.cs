@@ -22,20 +22,22 @@ namespace EbaySalesTracker.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         IUserRepository _UserRepository;
+        private IPlanService _planService;
 
         public AccountController() : this(null)
         {
-            
+
         }
 
         public AccountController(IUserRepository userRepo)
         {
             _UserRepository = userRepo ?? ModelContainer.Instance.Resolve<IUserRepository>();
         }
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IPlanService planService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            PlanService = planService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -44,9 +46,9 @@ namespace EbaySalesTracker.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -61,7 +63,22 @@ namespace EbaySalesTracker.Controllers
                 _userManager = value;
             }
         }
+        public IPlanService PlanService
+        {
+            get
+            {
+                return _planService ?? new PlanService();
+            }
+            private set
+            {
+                _planService = value;
+            }
+        }
 
+        public ActionResult EbayAuthentication()
+        {
+            return View("EbayAuthentication");
+        }
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -91,10 +108,6 @@ namespace EbaySalesTracker.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    if (returnUrl == "CompleteRegistration")
-                    {
-                        return RedirectToAction("Register", "Account");
-                    }
                     return RedirectToAction("Index", "Listings");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -137,7 +150,7 @@ namespace EbaySalesTracker.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -154,9 +167,42 @@ namespace EbaySalesTracker.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(int id = 2)
         {
-            return View();
+            var plan = PlanService.Find(id);
+            var model = new RegisterViewModel { Plan = plan };
+            
+            model.HasActiveSubscription = false;
+            if (Request.IsAuthenticated)
+            {
+                var user = UserManager.FindById(User.Identity.GetUserId());
+                model.HasActiveSubscription = user.StripeActiveUntil > DateTime.Now;
+            }
+                       
+            return View(model);
+        }
+
+        //
+        // GET: /Account/RegisterEmailAndPassword
+        [AllowAnonymous]
+        public ActionResult RegisterEmailAndPassword(int stripePlanId = 2)
+        {
+            var plan = PlanService.Find(stripePlanId);
+            var model = new RegisterViewModel { Plan = plan };
+
+            model.HasActiveSubscription = false;
+            if (Request.IsAuthenticated)
+            {
+                var user = UserManager.FindById(User.Identity.GetUserId());
+                model.HasConfirmedEmail = false;
+                if (user.EmailConfirmed)
+                {
+                    model.HasConfirmedEmail = true;
+                }
+                model.HasActiveSubscription = user.StripeActiveUntil > DateTime.Now;
+            }
+
+            return View(model);
         }
 
         //
@@ -168,30 +214,35 @@ namespace EbaySalesTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, StripeActiveUntil = DateTime.Now.AddDays(-1) };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     //comment this out for forcing email verification: https://www.asp.net/mvc/overview/security/create-an-aspnet-mvc-5-web-app-with-email-confirmation-and-password-reset
-                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     var messageBody = "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>";
-                        messageBody += "<br /><br /><br />If that link doesn't work please visit: " + callbackUrl;
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", messageBody);
+                    messageBody += "<br /><br /><br />If that link doesn't work please visit: " + callbackUrl;
+                    var messageSubject = "Welcome to eProfitTracker! Please confirm you email.";
+                    await UserManager.SendEmailAsync(user.Id, messageSubject, messageBody);
 
                     // Uncomment to debug locally 
                     // TempData["ViewBagLink"] = callbackUrl;
 
                     ViewBag.Message = user.Email.ToString();
 
-                    return View("Info");
+
+                    //return View("Info");
 
 
-                    return RedirectToAction("Register", "Account");
+                    //return RedirectToAction("Register", "Account");
+                    //return RedirectToAction("RegisterStripeSubscription", "Account");
+                    //return RedirectToAction("RegisterEmailAndPassword", "Account");
+                    return RedirectToAction("Index", "Subscription");
                 }
                 AddErrors(result);
             }
@@ -199,6 +250,7 @@ namespace EbaySalesTracker.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
 
         //
         // GET: /Account/ConfirmEmail
@@ -210,6 +262,7 @@ namespace EbaySalesTracker.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
+            
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
@@ -239,10 +292,10 @@ namespace EbaySalesTracker.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                 await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -431,6 +484,16 @@ namespace EbaySalesTracker.Controllers
             return View();
         }
 
+        public ActionResult Subscribe(int id)
+        {
+            if (Request.IsAuthenticated)
+            {
+                var plan = PlanService.Find(id);
+                return RedirectToAction("Billing", "Subscribtion", new { PlanId = plan.Id });
+            }
+            return RedirectToAction("Account", "Register");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -542,9 +605,9 @@ namespace EbaySalesTracker.Controllers
             else
             {
                 string encodedSessionId = HttpUtility.UrlEncode(_UserRepository.GetSessionId(userId));
-             
+
                 //this function call doesn't seem to be working. skipping for now
-                SetUserClaimForSessionId(userId,encodedSessionId);
+                SetUserClaimForSessionId(userId, encodedSessionId);
 
                 var url = "https://signin.ebay.com/ws/eBayISAPI.dll?SignIn&runame=Cameron_Blazevi-CameronB-EbayFe-urvcak&SessID=" + encodedSessionId;
                 return Redirect(url);
@@ -562,6 +625,6 @@ namespace EbaySalesTracker.Controllers
         }
         #endregion
 
-        
+
     }
 }

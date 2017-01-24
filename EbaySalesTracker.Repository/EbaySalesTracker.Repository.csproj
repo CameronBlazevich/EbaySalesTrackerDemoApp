@@ -43,6 +43,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
@@ -61,6 +65,10 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stripe.net, Version=7.0.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -101,6 +109,7 @@
     <Compile Include="InventoryRepository.cs" />
     <Compile Include="IOrderRepository.cs" />
     <Compile Include="IUserRepository.cs" />
+    <Compile Include="IWebHookRepository.cs" />
     <Compile Include="ListingDetailRepository.cs" />
     <Compile Include="ListingRepository.cs" />
     <Compile Include="ListingTransactionRepository.cs" />
@@ -112,7 +121,33 @@
     <Compile Include="Migrations\201701072356378_RequireInventoryItemDesc.Designer.cs">
       <DependentUpon>201701072356378_RequireInventoryItemDesc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701170329088_StripeSubFeaturesandPlanTables.cs" />
+    <Compile Include="Migrations\201701170329088_StripeSubFeaturesandPlanTables.Designer.cs">
+      <DependentUpon>201701170329088_StripeSubFeaturesandPlanTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701170334121_FixSubscriptionPlanTableNamesArentDateTimes.cs" />
+    <Compile Include="Migrations\201701170334121_FixSubscriptionPlanTableNamesArentDateTimes.Designer.cs">
+      <DependentUpon>201701170334121_FixSubscriptionPlanTableNamesArentDateTimes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701212104570_createWebHookLogsTable.cs" />
+    <Compile Include="Migrations\201701212104570_createWebHookLogsTable.Designer.cs">
+      <DependentUpon>201701212104570_createWebHookLogsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701212107044_createWebHookLogsTable_correction.cs" />
+    <Compile Include="Migrations\201701212107044_createWebHookLogsTable_correction.Designer.cs">
+      <DependentUpon>201701212107044_createWebHookLogsTable_correction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701212122168_createWebHookLogsTable_correction_2.cs" />
+    <Compile Include="Migrations\201701212122168_createWebHookLogsTable_correction_2.Designer.cs">
+      <DependentUpon>201701212122168_createWebHookLogsTable_correction_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701230611439_changeIdForWebhooks.cs" />
+    <Compile Include="Migrations\201701230611439_changeIdForWebhooks.Designer.cs">
+      <DependentUpon>201701230611439_changeIdForWebhooks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="StripePlanService\IPlanService.cs" />
+    <Compile Include="StripePlanService\PlanService.cs" />
     <Compile Include="ModelContainer.cs" />
     <Compile Include="OrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,6 +159,7 @@
     </Compile>
     <Compile Include="UserEngine.cs" />
     <Compile Include="UserRepository.cs" />
+    <Compile Include="WebHookRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EbaySalesTracker.Models\EbaySalesTracker.Models.csproj">
@@ -982,6 +1018,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701072356378_RequireInventoryItemDesc.resx">
       <DependentUpon>201701072356378_RequireInventoryItemDesc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701170329088_StripeSubFeaturesandPlanTables.resx">
+      <DependentUpon>201701170329088_StripeSubFeaturesandPlanTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701170334121_FixSubscriptionPlanTableNamesArentDateTimes.resx">
+      <DependentUpon>201701170334121_FixSubscriptionPlanTableNamesArentDateTimes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701212104570_createWebHookLogsTable.resx">
+      <DependentUpon>201701212104570_createWebHookLogsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701212107044_createWebHookLogsTable_correction.resx">
+      <DependentUpon>201701212107044_createWebHookLogsTable_correction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701212122168_createWebHookLogsTable_correction_2.resx">
+      <DependentUpon>201701212122168_createWebHookLogsTable_correction_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701230611439_changeIdForWebhooks.resx">
+      <DependentUpon>201701230611439_changeIdForWebhooks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

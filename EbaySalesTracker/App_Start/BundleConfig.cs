@@ -16,7 +16,10 @@ namespace EbaySalesTracker
                         "~/Scripts/Libs/jquery-ui-{version}.js",
                         "~/Scripts/Libs/jquery.easing.1.3.js",
                         "~/Scripts/ui.helpers.js",
-                        "~/Scripts/bootstrap3-editable/js/bootstrap-editable.js"
+                        "~/Scripts/bootstrap3-editable/js/bootstrap-editable.js",
+                        "~/Scripts/Libs/jquery.validate.js",
+                        "~/Scripts/Libs/jquery.validate.unobtrusive.js"
+                                         
                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/eptJS").Include(

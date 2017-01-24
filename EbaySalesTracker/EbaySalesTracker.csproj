@@ -93,8 +93,13 @@
       <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGridMail.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Stripe.net, Version=7.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.7.0.2\lib\net45\Stripe.net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -221,12 +226,14 @@
     <Compile Include="Controllers\ListingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StripeWebhookController.cs" />
+    <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CsvExport.cs" />
     <Compile Include="OAuthTokenResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\SubscriptionViewModel.cs" />
     <Content Include="Content\bootstrap-editable\css\bootstrap-editable.css" />
     <Content Include="Content\bootstrap-editable\img\clear.png" />
     <Content Include="Content\bootstrap-editable\img\loading.gif" />
@@ -261,6 +268,7 @@
     <Content Include="Content\jqueryui-editable\css\jqueryui-editable.css" />
     <Content Include="Content\jqueryui-editable\img\clear.png" />
     <Content Include="Content\jqueryui-editable\img\loading.gif" />
+    <Content Include="css\BillingPageCss\Site.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -315,6 +323,22 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="img\banner-bg.jpg" />
+    <Content Include="img\CreditCards\amex.png" />
+    <Content Include="img\CreditCards\credit.png" />
+    <Content Include="img\CreditCards\dankort.png" />
+    <Content Include="img\CreditCards\diners.png" />
+    <Content Include="img\CreditCards\discover.png" />
+    <Content Include="img\CreditCards\forbru.png" />
+    <Content Include="img\CreditCards\google.png" />
+    <Content Include="img\CreditCards\jcb.png" />
+    <Content Include="img\CreditCards\laser.png" />
+    <Content Include="img\CreditCards\maestro.png" />
+    <Content Include="img\CreditCards\mastercard.png" />
+    <Content Include="img\CreditCards\money.png" />
+    <Content Include="img\CreditCards\paypa.png" />
+    <Content Include="img\CreditCards\shopify.png" />
+    <Content Include="img\CreditCards\solo.png" />
+    <Content Include="img\CreditCards\visa.png" />
     <Content Include="img\dog.png" />
     <Content Include="img\ebay background.jpg" />
     <Content Include="img\intro-bg.jpg" />
@@ -348,6 +372,8 @@
     <Content Include="Scripts\Libs\jquery-ui-1.11.4.min.js" />
     <Content Include="Scripts\Libs\jquery-2.2.3.js" />
     <Content Include="Scripts\Libs\jquery-2.2.3.min.js" />
+    <Content Include="Scripts\Libs\jquery.payment.js" />
+    <Content Include="Scripts\Libs\payment-validations.js" />
     <Content Include="Scripts\scene.layoutservice.js" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -382,6 +408,7 @@
     <Content Include="Scripts\Libs\_references.js" />
     <Content Include="Scripts\scene.tile.binder.js" />
     <Content Include="Scripts\ui.helpers.js" />
+    <Content Include="Templates\EmailTemplate.html" />
     <Content Include="Templates\InventoryItem.html" />
     <Content Include="Templates\InventoryItemDrillDown.html" />
     <Content Include="Web.config">
@@ -433,13 +460,18 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Scripts\scene.tile.renderer.js" />
     <Content Include="Views\InventoryItems\_InventoryItemDrillDown.cshtml" />
-    <Content Include="Views\Account\EbayAuthenticationAccepted.cshtml" />
+    <Content Include="Views\Account\EbayAuthentication.cshtml" />
     <Content Include="Views\Shared\_LoginPartial_UsernamePassword.cshtml" />
     <Content Include="Views\InventoryItems\_CreateInventoryItem.cshtml" />
     <Content Include="Views\InventoryItems\_EditInventoryItem.cshtml" />
     <Content Include="Views\Shared\_SalesSummaries.cshtml" />
     <Content Include="Views\Shared\_ListingsFilter.cshtml" />
     <Content Include="Views\Shared\Info.cshtml" />
+    <Content Include="Views\Shared\_StripeSubscription.cshtml" />
+    <Content Include="Views\Subscription\Index.cshtml" />
+    <Content Include="Views\Shared\_RegisterPartial.cshtml" />
+    <Content Include="Views\Shared\_BillingPartial.cshtml" />
+    <Content Include="Views\Account\RegisterEmailAndPassword.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -491,7 +523,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51479</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost/EbaySalesTracker</IISUrl>
+          <IISUrl>https://localhost:2021</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

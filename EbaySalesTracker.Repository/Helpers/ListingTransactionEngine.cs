@@ -20,8 +20,11 @@ namespace EbaySalesTracker.Repository.Helpers
             var listingTransactions = new List<ListingTransaction>();
             foreach (TransactionType result in results)
             {
+                if (!string.IsNullOrEmpty(result.Item?.ItemID))
+                { 
                 var transaction = MapResultToListingTransaction(result);
                 listingTransactions.Add(transaction);
+                }
             }
             return listingTransactions;
         }

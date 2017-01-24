@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EbaySalesTracker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,8 @@ namespace EbaySalesTracker.Repository
         string GetSessionId(string userId);
         List<string> GetUserToken(string userId, string sessionId);
         bool TestUserToken(string userToken);
+        ApplicationUser GetUserByStripeId(string stripeUserId);
+        void SetNewActiveUntilDate(ApplicationUser user, DateTime newEndDate);
+        void SetUserCancelReason(ApplicationUser user, string cancellationReason);
     }
 }

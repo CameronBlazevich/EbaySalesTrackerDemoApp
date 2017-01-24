@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using eBay.Service.Call;
 using eBay.Service.Core.Soap;
+using System.Configuration;
 
 namespace EbaySalesTracker.Repository.Helpers
 {
@@ -31,6 +32,8 @@ namespace EbaySalesTracker.Repository.Helpers
         public List<ListingDetail> GetListingDetailsByItemIdFromEbay(long itemId, string userToken)
         {
             List <ListingDetail> listingDetails = new List<ListingDetail>();
+            if(ConfigurationManager.AppSettings["EbaySoapApiServerUrl"] != "https://api.sandbox.ebay.com/wsapi")
+                { 
             var context = RequestBuilder.CreateNewApiCall(userToken);
             GetAccountCall getAccountCall = new GetAccountCall(context);
             getAccountCall.ItemID = itemId.ToString();
@@ -44,7 +47,7 @@ namespace EbaySalesTracker.Repository.Helpers
                     listingDetails.Add(mapResultToListingDetail(accountEntry));
                 }
             }
-
+            }
             return listingDetails;
         }
 

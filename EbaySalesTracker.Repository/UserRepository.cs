@@ -2,6 +2,7 @@
 using EbaySalesTracker.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,13 @@ namespace EbaySalesTracker.Repository
             
         }
 
+        public ApplicationUser GetUserByStripeId(string stripeUserId)
+        {
+            using (var context = new ApplicationDbContext())
+            { 
+                return context.Users.Where(u => u.StripeCustomerId == stripeUserId).FirstOrDefault();
+            }
+        }
 
         public List<string> GetUserToken(string userId, string sessionId)
         {
@@ -52,6 +60,26 @@ namespace EbaySalesTracker.Repository
         public bool TestUserToken(string userToken)
         {
            return engine.GetEbayOfficialTime(userToken);
+        }
+
+        public void SetNewActiveUntilDate(ApplicationUser user, DateTime newEndDate)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                user.StripeActiveUntil = newEndDate;
+                context.Users.AddOrUpdate(user);
+                context.SaveChanges();
+            }
+        }
+
+        public void SetUserCancelReason(ApplicationUser user, string cancellationReason)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                user.CancelReason = cancellationReason;
+                context.Users.AddOrUpdate(user);
+                context.SaveChanges();
+            }
         }
     }
 }

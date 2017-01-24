@@ -79,6 +79,10 @@ namespace EbaySalesTracker.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        public SubscriptionPlan Plan { get; set; }
+        public bool HasActiveSubscription { get; set; }
+        public bool HasConfirmedEmail { get; set; }
+       
     }
 
     public class ResetPasswordViewModel

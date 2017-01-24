@@ -27,8 +27,11 @@ namespace EbaySalesTracker.Models
         public DateTime? TokenExpDate { get; set; }
         public DateTime? LastListingRefreshDate { get; set; }
         [MaxLength(500)]
-        //public string StripeCustomerId { get; set; }
-       // public Active
+        public string StripeCustomerId { get; set; }
+        public DateTime? StripeActiveUntil { get; set; }
+        public DateTime? CreditCardExpires { get; set; }
+        [MaxLength(500)]
+        public string CancelReason { get; set; }
     }
 
     
