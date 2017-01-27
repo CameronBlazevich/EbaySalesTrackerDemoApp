@@ -20,7 +20,8 @@ namespace EbaySalesTracker.Repository
                 if (_DataContext == null)
                 {
                     _DataContext = new C();
-                    this.AllowSerialization = true;
+                    this.AllowSerialization = false;
+
                     //Disable ProxyCreationDisabled to prevent the "In order to serialize the parameter, add the type to the known types collection for the operation using ServiceKnownTypeAttribute" error
                 }
                 return _DataContext;

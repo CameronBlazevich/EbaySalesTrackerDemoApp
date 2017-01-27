@@ -145,6 +145,22 @@
     <Compile Include="Migrations\201701230611439_changeIdForWebhooks.Designer.cs">
       <DependentUpon>201701230611439_changeIdForWebhooks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701240555233_GetReadyToCalculateCostsBetter.cs" />
+    <Compile Include="Migrations\201701240555233_GetReadyToCalculateCostsBetter.Designer.cs">
+      <DependentUpon>201701240555233_GetReadyToCalculateCostsBetter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701250313148_AddOrderIdToTransTable.cs" />
+    <Compile Include="Migrations\201701250313148_AddOrderIdToTransTable.Designer.cs">
+      <DependentUpon>201701250313148_AddOrderIdToTransTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701250344121_TransDateAndTransStatus.cs" />
+    <Compile Include="Migrations\201701250344121_TransDateAndTransStatus.Designer.cs">
+      <DependentUpon>201701250344121_TransDateAndTransStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701260221018_DecimalToDouble.cs" />
+    <Compile Include="Migrations\201701260221018_DecimalToDouble.Designer.cs">
+      <DependentUpon>201701260221018_DecimalToDouble.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="StripePlanService\IPlanService.cs" />
     <Compile Include="StripePlanService\PlanService.cs" />
@@ -1036,6 +1052,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701230611439_changeIdForWebhooks.resx">
       <DependentUpon>201701230611439_changeIdForWebhooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701240555233_GetReadyToCalculateCostsBetter.resx">
+      <DependentUpon>201701240555233_GetReadyToCalculateCostsBetter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701250313148_AddOrderIdToTransTable.resx">
+      <DependentUpon>201701250313148_AddOrderIdToTransTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701250344121_TransDateAndTransStatus.resx">
+      <DependentUpon>201701250344121_TransDateAndTransStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701260221018_DecimalToDouble.resx">
+      <DependentUpon>201701260221018_DecimalToDouble.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

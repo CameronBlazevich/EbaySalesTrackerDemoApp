@@ -61,6 +61,8 @@ namespace EbaySalesTracker.Repository.Helpers
             listingDetail.NetAmount = accountEntry.NetDetailAmount.Value;
             listingDetail.PostDate = accountEntry.Date;
             listingDetail.Type = accountEntry.AccountDetailsEntryType;
+            listingDetail.OrderLineItemId = accountEntry.OrderLineItemID;
+            listingDetail.Transactionid = accountEntry.TransactionID;
 
             return listingDetail;
         }

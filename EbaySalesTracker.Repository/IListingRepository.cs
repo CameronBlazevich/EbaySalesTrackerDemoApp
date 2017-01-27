@@ -19,13 +19,12 @@ namespace EbaySalesTracker.Repository
         IEnumerable<Listing> GetAllListingsByUser(int top, int skip,string userId);
         Listing GetListingById(long id);
         Listing AddListing(Listing listing);
-        void DeleteListing(long id);
-        void AssociateInventoryItem(long listingId, int inventoryItemId);
-        void DissociateInventoryItem(long listingId);
-        void UpdateListing(Listing listing);
+        void DeleteListing(long id);      
+        Listing UpdateListing(Listing listing);
         IEnumerable<Listing> GetSoldListingsByInventoryItem(int inventoryItemId, string userId);
         IEnumerable<Listing> GetListingsByEndDate(DateTime startDate, DateTime endDate, string userId);
         int GetListingsCountByUser(string userId);
-        DateTime? GetLastListingsUpdate(string userId);      
+        DateTime? GetLastListingsUpdate(string userId);
+        IEnumerable<Listing> GetListingsBySoldDate(DateTime startDate, DateTime endDate, string userId);
     }
 }

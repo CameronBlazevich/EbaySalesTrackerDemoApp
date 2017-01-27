@@ -23,6 +23,8 @@ namespace EbaySalesTracker.Models
         public double GrossAmount { get; set; }
         public double NetAmount { get; set; }
         public string Memo { get; set; }
+        public string OrderLineItemId { get; set; }
+        public string Transactionid { get; set; }
         
     }
 }

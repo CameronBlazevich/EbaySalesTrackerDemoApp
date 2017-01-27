@@ -74,7 +74,8 @@ namespace EbaySalesTracker.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                StripeActiveUntil = user.StripeActiveUntil
+                StripeActiveUntil = user.StripeActiveUntil,
+                Cancelled = user.Cancelled
             };
             return View(model);
         }

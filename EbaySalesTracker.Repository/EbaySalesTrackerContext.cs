@@ -8,6 +8,7 @@ namespace EbaySalesTracker.Repository
         public EbaySalesTrackerContext()
             : base("DefaultConnection")
         {
+            this.Configuration.LazyLoadingEnabled = true;
         }
         public virtual DbSet<Listing> Listings { get; set; }
         public virtual DbSet<ListingDetail> ListingDetails { get; set; }

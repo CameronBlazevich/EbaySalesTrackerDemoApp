@@ -166,6 +166,10 @@
     <Compile Include="Migrations\201701222351599_addCancelReasonField.Designer.cs">
       <DependentUpon>201701222351599_addCancelReasonField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701270256416_addCancelledFieldToUser.cs" />
+    <Compile Include="Migrations\201701270256416_addCancelledFieldToUser.Designer.cs">
+      <DependentUpon>201701270256416_addCancelledFieldToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OperationStatus.cs" />
     <Compile Include="Order.cs" />
@@ -189,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701222351599_addCancelReasonField.resx">
       <DependentUpon>201701222351599_addCancelReasonField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701270256416_addCancelledFieldToUser.resx">
+      <DependentUpon>201701270256416_addCancelledFieldToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

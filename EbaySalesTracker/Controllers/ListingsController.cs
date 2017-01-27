@@ -112,7 +112,17 @@ namespace EbaySalesTracker.Controllers
                 myExport["Title"] = listing.Title;
                 myExport["Start Date"] = listing.StartDate;
                 myExport["End Date"] = listing.EndDate;
-                myExport["Sale Price"] = Math.Round(listing.CurrentPrice,2);
+                var qtySold = listing.CalculateQuantitySold();
+                if(qtySold > 0)
+                { 
+                    myExport["Most Recent Sold Date"] = listing.Transactions.OrderByDescending(t=> t.CreatedDate).Select(t => t.CreatedDate).FirstOrDefault();
+                }
+                else
+                {
+                    myExport["Most Recent Sold Date"] = null;
+                }
+                myExport["Quantity Sold"] = qtySold;
+                myExport["Average Price"] = Math.Round(listing.AveragePrice,2);
                 myExport["Total Net Fees"] = Math.Round(listing.TotalNetFees,2);
                 myExport["Profit"] = Math.Round(listing.Profit,2);
                 myExport["Status"] = listing.ListingStatus;
@@ -158,17 +168,18 @@ namespace EbaySalesTracker.Controllers
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
             var listingId = Convert.ToInt64(listingItemId);
+            var listing = new Listing();
+            int? invItemId;
             if (inventoryItemId == "-1")
+            { 
+                invItemId = null;
+            }
+            else
             {
-                _ListingRepository.DissociateInventoryItem(listingId);
+                invItemId = int.Parse(inventoryItemId);
             }
-            else {
-                _InventoryBll.AssociateInventoryItemToListing(listingId, Convert.ToInt32(inventoryItemId), user.Id);
-            }
-
-            var profit = _InventoryBll.CalculateProfitPerListing(listingId, user.Id);
-            
-            return Json(new { profit = profit });
+            listing = _InventoryBll.AssociateInventoryItemToListing(listingId, invItemId, user.Id);
+            return Json(new { profit = listing.Profit, cost = listing.InventoryItem?.Cost ?? 0 });
         }
 
         //protected override void Dispose(bool disposing)

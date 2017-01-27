@@ -11,7 +11,7 @@ namespace EbaySalesTracker.Repository.Helpers
 {
     public class OrderEngine : Engine, IOrderEngine
     {
-        public Order GetOrderByOrderIdFromEbay(string orderId, string userToken)
+        public Order GetOrderByOrderIdFromEbay(long listingId,string orderId, string userToken)
         {
             var context = RequestBuilder.CreateNewApiCall(userToken);
             GetOrdersCall getOrdersCall = new GetOrdersCall(context);
@@ -19,11 +19,11 @@ namespace EbaySalesTracker.Repository.Helpers
             getOrdersCall.DetailLevelList.Add(DetailLevelCodeType.ReturnAll);
             getOrdersCall.Execute();
             if (getOrdersCall.ApiResponse.OrderArray.Count > 0)
-                return MapResultToOrder(getOrdersCall.ApiResponse.OrderArray[0]);
+                return MapResultToOrder(getOrdersCall.ApiResponse.OrderArray[0], listingId);
             //need to have plan for when no order is returned from ebay
             return new Order();
         }
-        private Order MapResultToOrder(OrderType result)
+        private Order MapResultToOrder(OrderType result, long listingId)
         {
             var orderId = result.OrderID;
             string[] orderIdSplit = orderId.Split('-');
@@ -33,7 +33,7 @@ namespace EbaySalesTracker.Repository.Helpers
             order.OrderStatus = result.OrderStatus;
             order.SalesPrice = result.Subtotal.Value;
             order.TotalCost = result.Total.Value;
-            order.ListingId = Convert.ToInt64(orderIdSplit[0]);
+            order.ListingId = listingId;
             if (result.MonetaryDetails?.Refunds?.Refund?.Count > 0)
             {
                 order.RefundAmount = result.MonetaryDetails.Refunds.Refund[0].RefundAmount.Value;

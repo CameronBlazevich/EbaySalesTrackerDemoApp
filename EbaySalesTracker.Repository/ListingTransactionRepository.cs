@@ -1,7 +1,9 @@
 ﻿using EbaySalesTracker.Models;
 using EbaySalesTracker.Repository.Helpers;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
+using System;
 
 namespace EbaySalesTracker.Repository
 {
@@ -9,6 +11,17 @@ namespace EbaySalesTracker.Repository
     {
         private ListingTransactionEngine listingTransactionEngine = new ListingTransactionEngine();
 
+        #region FromDatabase
+        public IEnumerable<ListingTransaction> GetTransactionsForListing(long listingId)
+        {
+            var transactions = DataContext.ListingTransactions.Where(lt => lt.ListingId == listingId).ToList();
+            return transactions;
+        }
+        #endregion
+
+
+
+        #region FromEbay
         public ICollection<ListingTransaction> GetListingTransactionsByListingIdFromEbay(long listingId, string userId)
         {
             ApplicationUser user = new ApplicationUser();
@@ -17,21 +30,22 @@ namespace EbaySalesTracker.Repository
             user = userContext.Users.Where(p => p.Id == userId).FirstOrDefault();
 
             ICollection<ListingTransaction> listingTransactions = listingTransactionEngine.GetListingTransactionByListingIdFromEbay(listingId, user.UserToken);
-            var existingTransactions = DataContext.ListingTransactions.Where(l => l.ListingId == listingId).ToList();
+            
             foreach (var transaction in listingTransactions)
-            {
-                if (!existingTransactions.Where(x => x.TransactionId == transaction.TransactionId).Any())
-                {
-                    AddListingTransaction(transaction);
-                }
+            {              
+                    AddListingTransaction(transaction);                
             }
             return listingTransactions;
         }
+        #endregion
+        #region Helpers
         public void AddListingTransaction(ListingTransaction listingTransaction)
         {
-            DataContext.ListingTransactions.Add(listingTransaction);
+            DataContext.ListingTransactions.AddOrUpdate(listingTransaction);
             DataContext.SaveChanges();
             //return listingTransaction;
         }
+
+        #endregion
     }
 }

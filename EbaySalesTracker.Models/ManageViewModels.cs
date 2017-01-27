@@ -15,6 +15,7 @@ namespace EbaySalesTracker.Models
         public bool BrowserRemembered { get; set; }
         public DateTime? StripeActiveUntil { get; set; }
         public int SubscriptionPrice { get; set; }
+        public bool Cancelled { get; set; }
         public IndexViewModel()
         {
             SubscriptionPrice = 9;

@@ -76,3 +76,5 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\obj\Debug\EbaySalesTrackerTests.csprojResolveAssemblyReference.cache
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\obj\Debug\EbaySalesTrackerTests.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\obj\Debug\EbaySalesTrackerTests.pdb
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.Owin.Security.OAuth.xml

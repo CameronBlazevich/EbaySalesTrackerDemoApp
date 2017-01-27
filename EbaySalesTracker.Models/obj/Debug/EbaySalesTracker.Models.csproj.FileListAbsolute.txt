@@ -55,3 +55,5 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Debug\EbaySalesTracker.Models.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Debug\EbaySalesTracker.Models.pdb
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Debug\EbaySalesTracker.Models.Migrations.addCancelReasonField.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Debug\EbaySalesTracker.Models.Migrations.addCancelledFieldToUser.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Debug\EbaySalesTracker.Models.csprojResolveAssemblyReference.cache

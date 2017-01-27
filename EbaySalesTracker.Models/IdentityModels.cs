@@ -32,6 +32,7 @@ namespace EbaySalesTracker.Models
         public DateTime? CreditCardExpires { get; set; }
         [MaxLength(500)]
         public string CancelReason { get; set; }
+        public bool Cancelled { get; set; }
     }
 
     

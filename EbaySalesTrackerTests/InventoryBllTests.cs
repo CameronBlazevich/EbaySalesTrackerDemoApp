@@ -32,8 +32,9 @@ namespace EbaySalesTrackerTests
             var inventoryRepo = new Mock<IInventoryRepository>();
             inventoryRepo.Setup(x => x.GetInventoryItemById(inventoryItemId, userId))
                 .Returns(expected);
+            var transRepo = new Mock<IListingTransactionRepository>();
 
-            var inventoryBll = new InventoryBll(listingBll.Object,inventoryRepo.Object);
+            var inventoryBll = new InventoryBll(listingBll.Object,inventoryRepo.Object, transRepo.Object);
 
             //Act
             var actual = inventoryBll.GetInventoryItemById(inventoryItemId, userId);
@@ -53,8 +54,9 @@ namespace EbaySalesTrackerTests
             var inventoryRepo = new Mock<IInventoryRepository>();
             inventoryRepo.Setup(x => x.GetInventoryItemById(inventoryItemId, userId))
                 .Returns(expected);
+            var transRepo = new Mock<IListingTransactionRepository>();
 
-            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object);
+            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object, transRepo.Object);
 
             //Act
             var actual = inventoryBll.GetInventoryItemById(inventoryItemId, userId);
@@ -83,8 +85,9 @@ namespace EbaySalesTrackerTests
             var inventoryRepo = new Mock<IInventoryRepository>();
             inventoryRepo.Setup(x => x.GetInventoryItemsByUser(userId))
                 .Returns(mockRepoReturnInventoryItem);
+            var transRepo = new Mock<IListingTransactionRepository>();
 
-            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object);
+            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object, transRepo.Object);
 
             //Act
             var actual = inventoryBll.GetInventoryItemsByUser(userId);
@@ -97,6 +100,7 @@ namespace EbaySalesTrackerTests
         { //Arrange
             var userId = "1";
             var inventoryItemId = 1;
+            var transaction1 = CreateTransaction(3, 1);
             
             var expected = InventoryRepositoryTestHelpers.CreateListOfInventoryItemsForTesting().Where(x=>x.Id == inventoryItemId).ToList();
 
@@ -106,8 +110,7 @@ namespace EbaySalesTrackerTests
                 InventoryItemId = 1,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 3.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction1 }
             };
 
             var listings = new List<Listing>() { listing1 };
@@ -118,8 +121,9 @@ namespace EbaySalesTrackerTests
             var inventoryRepo = new Mock<IInventoryRepository>();
             inventoryRepo.Setup(x => x.GetInventoryItemsByUser(userId))
                 .Returns(expected);
+            var transRepo = new Mock<IListingTransactionRepository>();
 
-            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object);
+            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object, transRepo.Object);
 
             //Act
             var actual = inventoryBll.GetInventoryItemsByUser(userId);
@@ -133,6 +137,7 @@ namespace EbaySalesTrackerTests
             //Arrange
             var userId = "1";
             var inventoryItemId = 2;
+            var transaction1 = CreateTransaction(3, 1);
 
             var mockRepoReturnInventoryItem = InventoryRepositoryTestHelpers.CreateListOfInventoryItemsForTesting().Where(x => x.Id == inventoryItemId).ToList();
             var expected = InventoryRepositoryTestHelpers.CreateListOfInventoryItemsForTesting().Where(x => x.Id == inventoryItemId).ToList();
@@ -147,8 +152,7 @@ namespace EbaySalesTrackerTests
                 InventoryItemId = 2,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 3.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction1 }
             };
             var listing2 = new Listing()
             {
@@ -156,8 +160,7 @@ namespace EbaySalesTrackerTests
                 InventoryItemId = 2,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 3.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction1 }
             };
 
             var listings = new List<Listing>() { listing1, listing2 };
@@ -168,9 +171,10 @@ namespace EbaySalesTrackerTests
             var inventoryRepo = new Mock<IInventoryRepository>();
             inventoryRepo.Setup(x => x.GetInventoryItemsByUser(userId))
                 .Returns(mockRepoReturnInventoryItem);
-            
 
-            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object);
+            var transRepo = new Mock<IListingTransactionRepository>();
+
+            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object, transRepo.Object);
 
             //Act
             var actual = inventoryBll.GetInventoryItemsByUser(userId);
@@ -185,8 +189,23 @@ namespace EbaySalesTrackerTests
             //Arrange
             var userId = "1";
             var inventoryItemId = 2;
-            var items = InventoryRepositoryTestHelpers.CreateListOfInventoryItemsForTesting();            
-           
+            var items = InventoryRepositoryTestHelpers.CreateListOfInventoryItemsForTesting();
+
+            var transaction1 = new ListingTransaction
+            {
+                QuantitySold = 3,
+                UnitPrice = 10
+            };
+            var transaction2 = new ListingTransaction
+            {
+                QuantitySold = 1,
+                UnitPrice = 10
+            };
+            var transaction3 = new ListingTransaction
+            {
+                QuantitySold = 0,
+                UnitPrice = 10
+            };
             var listing1 = new Listing()
             {
                 ItemId = 12345678910,
@@ -194,16 +213,17 @@ namespace EbaySalesTrackerTests
                 UserId = "1",
                 TotalNetFees = 1.00,
                 CurrentPrice = 3.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction1 }
+                
             };
             var listing2 = new Listing()
             {
                 ItemId = 12345678911,
-                InventoryItemId = 2,
+                InventoryItemId = 1,
                 UserId = "1",
                 TotalNetFees = 1.00,
                 CurrentPrice = 3.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction2 }
             };
             var listing3 = new Listing()
             {
@@ -212,19 +232,21 @@ namespace EbaySalesTrackerTests
                 UserId = "1",
                 TotalNetFees = 1.00,
                 CurrentPrice = 3.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction3 }
             };
 
             var listings = new List<Listing>() { listing1, listing2, listing3 };
             var listingBll = new Mock<IListingBll>();
             listingBll.Setup(x => x.GetSoldListingsByInventoryItem(inventoryItemId, It.IsAny<string>()))
-                .Returns(listings);
+                .Returns(listings.Where(l => l.InventoryItemId == inventoryItemId));
 
             var inventoryRepo = new Mock<IInventoryRepository>();
             inventoryRepo.Setup(x => x.GetInventoryItemsByUser(userId))
                 .Returns(items);
 
-            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object);
+            var transRepo = new Mock<IListingTransactionRepository>();
+
+            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object, transRepo.Object);
             var expected = items.Where(x => x.Id == 2).First();
 
             //Act
@@ -242,14 +264,18 @@ namespace EbaySalesTrackerTests
             var inventoryItemId = 2;
             var items = InventoryRepositoryTestHelpers.CreateListOfInventoryItemsForTesting();
 
+            var transaction1 = CreateTransaction(3, 1);
+            var transaction2 = CreateTransaction(5, 1);
+            var transaction3 = CreateTransaction(.01, 1);
+
+
             var listing1 = new Listing()
             {
                 ItemId = 12345678910,
                 InventoryItemId = 2,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 3.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction1 }
             };
             var listing2 = new Listing()
             {
@@ -257,8 +283,7 @@ namespace EbaySalesTrackerTests
                 InventoryItemId = 2,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 3.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction1 }
             };
             var listing3 = new Listing()
             {
@@ -266,8 +291,7 @@ namespace EbaySalesTrackerTests
                 InventoryItemId = 1,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 5.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction2 }
             };
             var listing4 = new Listing()
             {
@@ -275,8 +299,7 @@ namespace EbaySalesTrackerTests
                 InventoryItemId = 1,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 0.01,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction3 }
             };
 
             var listings = new List<Listing>() { listing1, listing2, listing3, listing4 };
@@ -287,8 +310,9 @@ namespace EbaySalesTrackerTests
             var inventoryRepo = new Mock<IInventoryRepository>();
             inventoryRepo.Setup(x => x.GetInventoryItemsByUser(userId))
                 .Returns(items);
+            var transRepo = new Mock<IListingTransactionRepository>();
 
-            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object);
+            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object, transRepo.Object);
             var expected = items.Where(x => x.Id == 2).First();
 
             //Act
@@ -297,20 +321,27 @@ namespace EbaySalesTrackerTests
             //Assert
             AssertHelper.HasEqualPropertyValues(expected, actual);
         }
+        private ListingTransaction CreateTransaction(double unitPrice, int qtySold)
+        {
+            return new ListingTransaction { UnitPrice = unitPrice, QuantitySold = qtySold };
+        }
        [TestMethod]
        public void GetProfitByMonth_Successful()
         {
             //Arrange
             var items = InventoryRepositoryTestHelpers.CreateListOfInventoryItemsForTesting();
 
+            var transaction1 = CreateTransaction(3, 1);
+            var transaction2 = CreateTransaction(5, 1);
+            var transaction3 = CreateTransaction(0.01, 1);
+            
             var listing1 = new Listing()
             {
                 ItemId = 12345678910,
                 InventoryItemId = 2,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 3.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction1}
             };
             var listing2 = new Listing()
             {
@@ -318,8 +349,7 @@ namespace EbaySalesTrackerTests
                 InventoryItemId = 2,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 3.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction1 }
             };
             var listing3 = new Listing()
             {
@@ -327,8 +357,7 @@ namespace EbaySalesTrackerTests
                 InventoryItemId = 1,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 5.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction2 }
             };
             var listing4 = new Listing()
             {
@@ -336,14 +365,13 @@ namespace EbaySalesTrackerTests
                 InventoryItemId = 1,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 0.01,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction3 }
             };
 
             var listings = new List<Listing>() { listing1, listing2, listing3, listing4 };
 
             var listingBll = new Mock<IListingBll>();
-            listingBll.Setup(x => x.GetListingsByEndDate(It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<string>()))
+            listingBll.Setup(x => x.GetListingsBySoldDate(It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<string>()))
                 .Returns(listings);
 
             var inventoryRepo = new Mock<IInventoryRepository>();
@@ -352,8 +380,9 @@ namespace EbaySalesTrackerTests
 
             inventoryRepo.Setup(x => x.GetInventoryItemById(2, (It.IsAny<string>())))
                 .Returns(items.Where(y => y.Id == 2).First());
+            var transRepo = new Mock<IListingTransactionRepository>();
 
-            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object);
+            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object, transRepo.Object);
             var expected = 5.01;
             //Act
             var actual = inventoryBll.GetProfitByMonth(2016, 1, "1");
@@ -365,14 +394,30 @@ namespace EbaySalesTrackerTests
         public void GetSalesByMonth_Successful()
         {
             //Arrange
+            var transaction1 = new ListingTransaction()
+            {
+                QuantitySold = 4,
+                UnitPrice = 8
+            };
+            var transaction2 = new ListingTransaction()
+            {
+                QuantitySold = 0,
+                UnitPrice = 10
+            };
+            var transaction3 = new ListingTransaction()
+            {
+                QuantitySold = 1,
+                UnitPrice = 5.01
+            };
+
             var listing1 = new Listing()
             {
                 ItemId = 12345678910,
                 InventoryItemId = 2,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 3.00,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction1 }
+
             };
             var listing2 = new Listing()
             {
@@ -380,37 +425,37 @@ namespace EbaySalesTrackerTests
                 InventoryItemId = 2,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 3.00,
-                QuantitySold = 1
-            };
+                Transactions = new List<ListingTransaction> { transaction2 }
+
+    };
             var listing3 = new Listing()
             {
                 ItemId = 12345678912,
                 InventoryItemId = 1,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 5.00,
-                QuantitySold = 1
-            };
+                Transactions = new List<ListingTransaction> { transaction3 }
+
+        };
             var listing4 = new Listing()
             {
                 ItemId = 12345678913,
                 InventoryItemId = 1,
                 UserId = "1",
                 TotalNetFees = 1.00,
-                CurrentPrice = 0.01,
-                QuantitySold = 1
+                Transactions = new List<ListingTransaction> { transaction2 }
             };
 
             var listings = new List<Listing>() { listing1, listing2, listing3, listing4 };
 
             var listingBll = new Mock<IListingBll>();
-            listingBll.Setup(x => x.GetListingsByEndDate(It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<string>()))
+            listingBll.Setup(x => x.GetListingsBySoldDate(It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<string>()))
                 .Returns(listings);
 
-          
-            var inventoryBll = new InventoryBll(listingBll.Object, null);
-            var expected = 11.01;
+          var transRepo = new Mock<IListingTransactionRepository>();
+
+            var inventoryBll = new InventoryBll(listingBll.Object, null, transRepo.Object);
+            var expected = 37.01;
             //Act
             var actual = inventoryBll.GetSalesByMonth(2016, 1, "1");
 
@@ -424,14 +469,22 @@ namespace EbaySalesTrackerTests
             var userId = "1";
             var listingId = 123456789;
             //Arrange 
+            var transaction = new ListingTransaction
+            {
+                QuantitySold = 1,
+                UnitPrice = 54.51
+            };
+            var transactions = new List<ListingTransaction>()
+            {
+                transaction
+            };
             var listing = new Listing()
             {
                 ItemId = listingId,
-                CurrentPrice = 54.51,
                 TotalNetFees = 13.24,
                 InventoryItemId = 1,
-                QuantitySold = 1,
-                UserId = userId
+                UserId = userId,
+                Transactions = transactions
             };
 
             var invItem = new InventoryItem()
@@ -441,16 +494,21 @@ namespace EbaySalesTrackerTests
                 Cost = 12.01
             };
 
-            var mockListingBll = new Mock<IListingBll>();
-            mockListingBll.Setup(x => x.GetListingById(listingId)).Returns(listing);
 
-            var mockInvRepo = new Mock<IInventoryRepository>();
-            mockInvRepo.Setup(x => x.GetInventoryItemById((int)listing.InventoryItemId, userId)).Returns(invItem);
 
-            var invBll = new InventoryBll(mockListingBll.Object, mockInvRepo.Object);
+
+            var listingBll = new Mock<IListingBll>();
+            listingBll.Setup(x => x.GetListingById(listingId)).Returns(listing);
+
+            var inventoryRepo = new Mock<IInventoryRepository>();
+            inventoryRepo.Setup(x => x.GetInventoryItemById((int)listing.InventoryItemId, userId)).Returns(invItem);
+            var transRepo = new Mock<IListingTransactionRepository>();
+            transRepo.Setup(x => x.GetTransactionsForListing(It.IsAny<long>())).Returns(transactions);
+
+            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object, transRepo.Object);
 
             //Act
-            var actual = invBll.CalculateProfitPerListing(listingId, userId);
+            var actual = inventoryBll.CalculateProfitPerListing(listing, userId);
             var expected = Math.Round(54.51 - 13.24 - 12.01,2);
 
             //Assert
@@ -462,14 +520,22 @@ namespace EbaySalesTrackerTests
             var userId = "1";
             var listingId = 123456789;
             //Arrange 
+            var transaction = new ListingTransaction()
+            {
+                QuantitySold = 1,
+                UnitPrice = 54.51
+            };
+            var transactions = new List<ListingTransaction>()
+            {
+                transaction
+            };
             var listing = new Listing()
             {
                 ItemId = listingId,
-                CurrentPrice = 54.51,
                 TotalNetFees = 13.24,
                 InventoryItemId = 1,
-                QuantitySold = 1,
-                UserId = userId
+                UserId = userId,
+                Transactions = transactions
             };
 
             var invItem = new InventoryItem()
@@ -479,16 +545,20 @@ namespace EbaySalesTrackerTests
                 Cost = 112.01
             };
 
-            var mockListingBll = new Mock<IListingBll>();
-            mockListingBll.Setup(x => x.GetListingById(listingId)).Returns(listing);
 
-            var mockInvRepo = new Mock<IInventoryRepository>();
-            mockInvRepo.Setup(x => x.GetInventoryItemById((int)listing.InventoryItemId, userId)).Returns(invItem);
 
-            var invBll = new InventoryBll(mockListingBll.Object, mockInvRepo.Object);
+            var listingBll = new Mock<IListingBll>();
+            listingBll.Setup(x => x.GetListingById(listingId)).Returns(listing);
 
+            var inventoryRepo = new Mock<IInventoryRepository>();
+            inventoryRepo.Setup(x => x.GetInventoryItemById((int)listing.InventoryItemId, userId)).Returns(invItem);
+
+            var transRepo = new Mock<IListingTransactionRepository>();
+            transRepo.Setup(x => x.GetTransactionsForListing(It.IsAny<long>())).Returns(transactions);
+
+            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object, transRepo.Object);
             //Act
-            var actual = invBll.CalculateProfitPerListing(listingId, userId);
+            var actual = inventoryBll.CalculateProfitPerListing(listing, userId);
             var expected = Math.Round(54.51 - 13.24 - 112.01, 2);
 
             //Assert
@@ -500,6 +570,15 @@ namespace EbaySalesTrackerTests
             var userId = "1";
             var listingId = 123456789;
             //Arrange 
+            var transaction = new ListingTransaction()
+            {
+                QuantitySold = 1,
+                UnitPrice = 54.51
+            };
+            var transactions = new List<ListingTransaction>()
+            {
+                transaction
+            };
             var listing = new Listing()
             {
                 ItemId = listingId,
@@ -507,21 +586,27 @@ namespace EbaySalesTrackerTests
                 TotalNetFees = 13.24,
                 InventoryItemId = 1,
                 QuantitySold = 1,
-                UserId = userId
+                UserId = userId,
+                Transactions = transactions
             };
+
+
 
             var invItem = new InventoryItem();
            
-            var mockListingBll = new Mock<IListingBll>();
-            mockListingBll.Setup(x => x.GetListingById(listingId)).Returns(listing);
+            var listingBll = new Mock<IListingBll>();
+            listingBll.Setup(x => x.GetListingById(listingId)).Returns(listing);
 
-            var mockInvRepo = new Mock<IInventoryRepository>();
-            mockInvRepo.Setup(x => x.GetInventoryItemById((int)listing.InventoryItemId, userId)).Returns(invItem);
+            var inventoryRepo = new Mock<IInventoryRepository>();
+            inventoryRepo.Setup(x => x.GetInventoryItemById((int)listing.InventoryItemId, userId)).Returns(invItem);
 
-            var invBll = new InventoryBll(mockListingBll.Object, mockInvRepo.Object);
+            var transRepo = new Mock<IListingTransactionRepository>();
+            transRepo.Setup(x => x.GetTransactionsForListing(It.IsAny<long>())).Returns(transactions);
+
+            var inventoryBll = new InventoryBll(listingBll.Object, inventoryRepo.Object, transRepo.Object);
 
             //Act
-            var actual = invBll.CalculateProfitPerListing(listingId, userId);
+            var actual = inventoryBll.CalculateProfitPerListing(listing, userId);
             var expected = Math.Round(54.51 - 13.24, 2);
 
             //Assert

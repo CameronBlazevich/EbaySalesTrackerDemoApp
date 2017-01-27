@@ -26,8 +26,9 @@ namespace EbaySalesTracker.Repository
                 _Instance.RegisterType<IListingRepository, ListingRepository>(new HierarchicalLifetimeManager());
                 _Instance.RegisterType<IListingDetailRepository, ListingDetailRepository>(new HierarchicalLifetimeManager());
                 _Instance.RegisterType<IUserRepository, UserRepository>(new HierarchicalLifetimeManager());
+                _Instance.RegisterType<IListingTransactionRepository, ListingTransactionRepository>(new HierarchicalLifetimeManager());
                 _Instance.RegisterType<IInventoryRepository, InventoryRepository>(new HierarchicalLifetimeManager());
-                _Instance.RegisterType<IWebHookRepository, WebHookRepository>(new HierarchicalLifetimeManager());
+                _Instance.RegisterType<IWebHookRepository, WebHookRepository>(new HierarchicalLifetimeManager());                
 
                 //_Instance.RegisterType<IMarketsAndNewsRepository, MarketsAndNewsRepository>(new HierarchicalLifetimeManager());
                 return _Instance;

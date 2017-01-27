@@ -220,7 +220,7 @@
         monthlyProfit = data;
         var today = new Date();
         
-        dataService.GetSalesByMonth(today.getFullYear(), today.getMonth(), populateMonthlySalesAmount);
+        dataService.GetSalesByMonth(today.getFullYear(), today.getMonth() + 1, populateMonthlySalesAmount);
 
     }
     function populateMonthlySalesAmount(data) {
@@ -235,7 +235,7 @@
         dataService.GetBestSellingItem(populateBestSellingItem);
         dataService.GetHighestAverageProfitItem(populateHighestAverageProfitItem);
         var today = new Date();
-        dataService.GetProfitByMonth(today.getFullYear(), today.getMonth(), populateMonthlyProfitAmount);
+        dataService.GetProfitByMonth(today.getFullYear(), today.getMonth() + 1, populateMonthlyProfitAmount);
 
         //startup.init('Z485739881');
         sceneLayoutService.get();

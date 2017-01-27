@@ -9,6 +9,6 @@ namespace EbaySalesTracker.Repository.Helpers
 {
     public interface IOrderEngine
     {
-        Order GetOrderByOrderIdFromEbay(string orderId, string userToken);
+        Order GetOrderByOrderIdFromEbay(long listingId,string orderId, string userToken);
     }
 }

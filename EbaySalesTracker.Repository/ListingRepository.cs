@@ -3,11 +3,30 @@ using EbaySalesTracker.Repository.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Practices.Unity;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace EbaySalesTracker.Repository
 {
     public class ListingRepository : RepositoryBase<EbaySalesTrackerContext>, IListingRepository
-    {      
+    {
+        public ListingRepository(IListingTransactionRepository transRepo)
+        {
+            TransRepo = transRepo;
+        }
+        private IListingTransactionRepository _transRepo;
+        public IListingTransactionRepository TransRepo
+        {
+            get
+            {
+                return _transRepo ?? ModelContainer.Instance.Resolve<IListingTransactionRepository>();
+            }
+            private set
+            {
+                _transRepo = value;
+            }
+        }
         //whats the best place to new up an engine?
         private ListingEngine engine = new ListingEngine();
         public Listing GetListingByItemIdFromEbay(long itemId, string userId)
@@ -167,26 +186,25 @@ namespace EbaySalesTracker.Repository
 
         }
 
-        
-
         private void UpdateTransactions(Listing listing, string userId)
         {
-            IListingTransactionRepository transRepo = new ListingTransactionRepository();
+            
             IOrderRepository orderRepo = new OrderRepository();
 
-            var transactions = transRepo.GetListingTransactionsByListingIdFromEbay(listing.ItemId, userId);
+            var transactions = TransRepo.GetListingTransactionsByListingIdFromEbay(listing.ItemId, userId);
             if (transactions.Count > 0)
             {
                 foreach (var transaction in transactions)
                 {
-                    var orderId = listing.ItemId.ToString() + "-" + transaction.Id.ToString();
-                    orderRepo.GetOrderByOrderIdFromEbay(orderId, userId);
+                    var orderId = transaction.OrderId;
+                    var listingId = listing.ItemId;
+                    orderRepo.GetOrderByOrderIdFromEbay(listingId,orderId, userId);
                 }
             }
             else
             {
                 var orderId = listing.ItemId.ToString() + "-" + "0";
-                orderRepo.GetOrderByOrderIdFromEbay(orderId, userId);
+                orderRepo.GetOrderByOrderIdFromEbay(listing.ItemId,orderId, userId);
             }
         }
 
@@ -199,9 +217,19 @@ namespace EbaySalesTracker.Repository
 
         public IEnumerable<Listing> GetListingsByEndDate(DateTime startDate, DateTime endDate, string userId)
         {           
-            return DataContext.Listings.Where(x => x.EndDate >= startDate && x.EndDate <= endDate).ToList();
+            return DataContext.Listings
+                .Where(x => x.EndDate >= startDate && x.EndDate <= endDate && x.UserId == userId)
+                .ToList();
         }
-       
+
+        public IEnumerable<Listing> GetListingsBySoldDate(DateTime startDate, DateTime endDate, string userId)
+        {           
+            return DataContext.Listings
+                .Where(listing => listing.UserId == userId && listing.Transactions
+                    .Any(transaction => transaction.CreatedDate >= startDate && transaction.CreatedDate <= endDate))
+                .ToList();
+        }
+
         public IEnumerable<Listing> GetAllListingsByUser(int top, int skip, string userId)
         {
             if (top == -1 && skip == -1)
@@ -229,28 +257,24 @@ namespace EbaySalesTracker.Repository
             DataContext.SaveChanges();
         }
 
-        public void AssociateInventoryItem(long listingId, int inventoryItemId)
+        public Listing UpdateListing(Listing listing)
         {
-            var listing = DataContext.Listings.Where(l => l.ItemId == listingId).FirstOrDefault();
-            listing.InventoryItemId = inventoryItemId;
+            DataContext.Listings.AddOrUpdate(listing);
             DataContext.SaveChanges();
-        }
+            return listing;
 
-        public void DissociateInventoryItem(long listingId)
-        {
-            var listing = DataContext.Listings.Where(l => l.ItemId == listingId).FirstOrDefault();
-            listing.InventoryItemId = null;
-            DataContext.SaveChanges();
-        }
-        public void UpdateListing(Listing listing)
-        {
-            DataContext.Entry(listing).State = System.Data.Entity.EntityState.Modified;
-            DataContext.SaveChanges();
         }
 
         public IEnumerable<Listing> GetSoldListingsByInventoryItem(int inventoryItemId, string userId)
         {
-            return DataContext.Listings.Where(x => x.InventoryItemId == inventoryItemId && x.TotalNetFees != 0 && x.QuantitySold > 0 && x.UserId == userId).OrderBy(x => x.EndDate).ToList(); 
+            //return DataContext.Listings.Where(x => x.InventoryItemId == inventoryItemId && x.TotalNetFees != 0 && x.QuantitySold > 0 && x.UserId == userId).OrderBy(x => x.EndDate).ToList(); 
+            var soldListings = DataContext.Listings                
+                .Include(l => l.Transactions)
+                .Where(x => x.InventoryItemId == inventoryItemId && x.Transactions.Count > 0 && x.UserId == userId)
+                .OrderBy(x => x.EndDate).ToList();
+
+
+            return soldListings;
         }
 
         public DateTime? GetLastListingsUpdate(string userId)
@@ -280,6 +304,8 @@ namespace EbaySalesTracker.Repository
 
             return user.UserToken;
         }
+
+
 
         #endregion
     }
