@@ -7,8 +7,8 @@ namespace EbaySalesTracker.Repository.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.ListingTransactions", "CreatedDate", c => c.DateTime(nullable: false));
-            AddColumn("dbo.ListingTransactions", "Status", c => c.Int(nullable: false));
+            AlterColumn("dbo.ListingTransactions", "CreatedDate", c => c.DateTime(nullable: false));
+            AlterColumn("dbo.ListingTransactions", "Status", c => c.Int(nullable: false));
         }
         
         public override void Down()

@@ -63,6 +63,7 @@ namespace EbaySalesTracker.Controllers
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : message == ManageMessageId.SubscriptionCancelled ? "Subscription cancelled. Your subscription will remain active until the date of your next charge."
+                : message == ManageMessageId.SubscriptionReactivated ? "Your subscription has been reactivated."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -385,7 +386,8 @@ namespace EbaySalesTracker.Controllers
             RemoveLoginSuccess,
             RemovePhoneSuccess,
             Error, 
-            SubscriptionCancelled
+            SubscriptionCancelled, 
+            SubscriptionReactivated
         }
 
 #endregion

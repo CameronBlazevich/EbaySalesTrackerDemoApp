@@ -109,9 +109,24 @@ namespace EbaySalesTracker.Models
         }
         public void CancelSubscription(string stripeUserId)
         {
-            var usersSubscriptions = StripeSubscriptionService.List(stripeUserId);
-            var subscriptionId = usersSubscriptions.First().Id;
+            var userSubscription = GetUserSubscription(stripeUserId);
+            var subscriptionId = userSubscription.Id;
             StripeSubscriptionService.Cancel(stripeUserId, subscriptionId, cancelAtPeriodEnd: true);
+        }
+
+        public void ReactivateSubscription(string stripeCustomerId)
+        {
+            var userSubscription = GetUserSubscription(stripeCustomerId);
+            var updateOptions = new StripeSubscriptionUpdateOptions()
+            {
+                PlanId = userSubscription.StripePlan.Id
+            };
+            StripeSubscriptionService.Update(stripeCustomerId, userSubscription.Id, updateOptions);
+        }
+
+        public StripeSubscription GetUserSubscription(string stripeUserId)
+        {
+            return StripeSubscriptionService.List(stripeUserId).FirstOrDefault();           
         }
     }
 }

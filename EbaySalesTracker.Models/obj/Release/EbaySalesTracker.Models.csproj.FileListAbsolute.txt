@@ -51,3 +51,9 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Release\EbaySalesTracker.Models.csproj.GenerateResource.Cache
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Release\EbaySalesTracker.Models.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Release\EbaySalesTracker.Models.pdb
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\bin\Release\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\bin\Release\Stripe.net.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\bin\Release\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Release\EbaySalesTracker.Models.Migrations.AddStripesColumnsToUserTable.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Release\EbaySalesTracker.Models.Migrations.addCancelReasonField.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Models\obj\Release\EbaySalesTracker.Models.Migrations.addCancelledFieldToUser.resources

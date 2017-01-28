@@ -7,10 +7,10 @@ namespace EbaySalesTracker.Repository.Migrations
     {
         public override void Up()
         {
-            Sql("ALTER TABLE dbo.ListingTransactions DROP CONSTRAINT DF__ListingTr__Total__6383C8BA");
-            Sql("ALTER TABLE dbo.ListingTransactions DROP CONSTRAINT DF__ListingTr__UnitP__6477ECF3");
-            Sql("ALTER TABLE dbo.ListingTransactions DROP CONSTRAINT DF__ListingTr__Buyer__656C112C");
-            Sql("ALTER TABLE dbo.ListingTransactions DROP CONSTRAINT DF__ListingTr__Buyer__66603565"); 
+            //Sql("ALTER TABLE dbo.ListingTransactions DROP CONSTRAINT DF__ListingTr__Total__6383C8BA");
+            //Sql("ALTER TABLE dbo.ListingTransactions DROP CONSTRAINT DF__ListingTr__UnitP__6477ECF3");
+            //Sql("ALTER TABLE dbo.ListingTransactions DROP CONSTRAINT DF__ListingTr__Buyer__656C112C");
+            //Sql("ALTER TABLE dbo.ListingTransactions DROP CONSTRAINT DF__ListingTr__Buyer__66603565"); 
 
 
             AlterColumn("dbo.ListingTransactions", "TotalAmountPaid", c => c.Double(nullable: false));

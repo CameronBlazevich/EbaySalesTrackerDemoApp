@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
+  <DbDacFx path="C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker\obj\Release\AutoScripts\DefaultConnection_DatabasePublish_IncrementalSchemaOnly.dacpac" dacpacAction="Deploy" />
   <IisApp path="C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker\obj\Release\Package\PackageTmp" />
   <setAcl path="C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
   <setAcl path="C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />

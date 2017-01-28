@@ -1,0 +1,107 @@
+﻿<div class="panel">
+    <div class="panel-body">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a id="sales-tab" data-toggle="tab" href="#sales">Sales</a>
+            </li>
+            <li>
+                <a id="fees-tab" data-toggle="tab" href="#fees">Fees</a>
+            </li>
+            <li>
+                <a id="profit-tab" data-toggle="tab" href="#profit">Profit</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="sales" class="tab-pane fade in active">
+                <table class="table table-striped sidebar-table">
+                    <tr>
+                        <td><label>This Week:</label></td>
+                        <td id="weekly-sales-value"></td>
+                    </tr>
+                    <tr>
+                        <td><label>This Month:</label></td>
+                        <td id="monthly-sales-value"></td>
+                    </tr>
+                    <tr>
+                        <td><label>This Year:</label></td>
+                        <td id="yearly-sales-value"></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="fees" class="tab-pane fade">
+                <table class="table table-striped sidebar-table">
+                    <tr>
+                        <td><label>This Week:</label></td>
+                        <td id="weekly-fees-value"></td>
+                    </tr>
+                    <tr>
+                        <td><label>This Month:</label></td>
+                        <td id="monthly-fees-value"></td>
+                    </tr>
+                    <tr>
+                        <td><label>This Year:</label></td>
+                        <td id="yearly-fees-value"></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="profit" class="tab-pane fade">
+                <table class="table table-striped sidebar-table">
+                    <tr>
+                        <td><label>This Week:</label></td>
+                        <td id="weekly-profit-value"></td>
+                    </tr>
+                    <tr>
+                        <td><label>This Month:</label></td>
+                        <td id="monthly-profit-value"></td>
+                    </tr>
+                    <tr>
+                        <td><label>This Year:</label></td>
+                        <td id="yearly-profit-value"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sales-tab').trigger('click');
+    })
+
+    $('#sales-tab').click(function () {
+        dataService.GetSalesSummaries(populateSalesSummaries);
+    });
+
+    $('#profit-tab').click(function () {
+        dataService.GetProfitSummaries(populateProfitSummaries);
+    });
+
+    $('#fees-tab').click(function () {
+        dataService.GetFeesSummarites(populateFeesSummaries);
+    });
+
+    function populateSalesSummaries(data) {
+        $('#weekly-sales-value').html(data.salesLastSevenDays);
+        $('#monthly-sales-value').html(data.salesThisMonth);
+        $('#yearly-sales-value').html(data.salesThisYear);
+
+    }
+
+    function populateProfitSummaries(data) {
+        $('#weekly-profit-value').html(data.profitLastSevenDays);
+        $('#monthly-profit-value').html(data.profitThisMonth);
+        $('#yearly-profit-value').html(data.profitThisYear);
+    }
+
+    function populateFeesSummaries(data) {
+        $('#weekly-fees-value').html(data.feesLastSevenDays);
+        $('#monthly-fees-value').html(data.feesThisMonth);
+        $('#yearly-fees-value').html(data.feesThisYear);
+    }
+
+</script>

@@ -85,8 +85,20 @@ namespace EbaySalesTracker.Controllers
 
         private void HandleSubscriptionUpdated(StripeEvent stripeEvent)
         {
-            throw new NotImplementedException();
+            if (stripeEvent?.Data?.Object?.cancel_at_period_end?.Value != null)
+            {
+                if (stripeEvent.Data.Object.cancel_at_period_end.Value)
+                { 
+                HandleSubscriptionCancellactionEvent(stripeEvent);
+                }
+                else
+                {
+                    HandleSubscriptionReactivationEvent(stripeEvent);
+                }
+            }
         }
+
+
 
         private bool HasEventBeenProcessPreviously(StripeEvent stripeEvent)
         {
@@ -102,7 +114,7 @@ namespace EbaySalesTracker.Controllers
 
         public void HandleSubscriptionTrialWillEndEvent(StripeEvent stripeEvent)
         {
-            var user = GetUserByStripeId(stripeEvent.UserId);
+            var user = GetUserByStripeId(stripeEvent.Data.Object.customer.Value);
             var toAddress = user.Email;
             var subject = "Your trial will end soon";
             var body = "trial ending soon";
@@ -111,7 +123,7 @@ namespace EbaySalesTracker.Controllers
 
         public void HandleInvoicePaymentSucceededEvent(StripeEvent stripeEvent)
         {
-            var user = GetUserByStripeId(stripeEvent.UserId);
+            var user = GetUserByStripeId(stripeEvent.Data.Object.customer.Value);
 
             var newEndDate = ((DateTime)user.StripeActiveUntil).AddMonths(1);
             _UserRepository.SetNewActiveUntilDate(user, newEndDate);
@@ -125,7 +137,7 @@ namespace EbaySalesTracker.Controllers
 
         public void HandleInvoicePaymentFailedEvent(StripeEvent stripeEvent)
         {
-            var user = GetUserByStripeId(stripeEvent.UserId);
+            var user = GetUserByStripeId(stripeEvent.Data.Object.customer.Value);
 
             var newEndDate = ((DateTime)user.StripeActiveUntil).AddDays(-1);
             _UserRepository.SetNewActiveUntilDate(user, newEndDate);
@@ -138,12 +150,22 @@ namespace EbaySalesTracker.Controllers
         }
         private void HandleSubscriptionCancellactionEvent(StripeEvent stripeEvent)
         {
-            var user = GetUserByStripeId(stripeEvent.UserId);
+            var user = GetUserByStripeId(stripeEvent.Data.Object.customer.Value);
             var toAddress = user.Email;
             var subject = "Your eProfitTracker subscription has been cancelled.";
             var body = "At your request, your eProfitTracker subscription has been cancelled as of " +
                 stripeEvent.Created + ". You can reactivate your subscription at any time.";
 
+            SendEmail(toAddress, subject, body);
+        }
+
+        private void HandleSubscriptionReactivationEvent(StripeEvent stripeEvent)
+        {
+            ApplicationUser user = GetUserByStripeId(stripeEvent.Data.Object.customer.Value);
+                      
+            var toAddress = user.Email;
+            var subject = "Your eProfitTracker Subscription has been Reactivated";
+            var body = "At your request, your eProfitTracker subscription has been reactivated.";
             SendEmail(toAddress, subject, body);
         }
         private void SendEmail(string toAddress, string subject, string body)
@@ -167,7 +189,7 @@ namespace EbaySalesTracker.Controllers
         {
             var eventToLog = new WebhookLog();
             eventToLog.CreatedDate = stripeEvent.Created;
-            eventToLog.StripeUserId = stripeEvent.UserId;
+            eventToLog.StripeUserId = stripeEvent?.Data?.Object?.customer?.Value;
             eventToLog.EventType = stripeEvent.Type;
             eventToLog.EventId = stripeEvent.Id;
             eventToLog.LoggedDate = DateTime.Now;

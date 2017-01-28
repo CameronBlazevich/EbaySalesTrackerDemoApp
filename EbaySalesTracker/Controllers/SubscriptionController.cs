@@ -92,11 +92,24 @@ namespace EbaySalesTracker.Controllers
         public ActionResult CancelSubscription(string cancellationReason)
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            UserRepository.SetUserCancelReason(user,cancellationReason);
+            
             var stripeUserId = user.StripeCustomerId;
             SubscriptionService.CancelSubscription(stripeUserId);
-
+            UserRepository.CancelUser(user, cancellationReason);
             return RedirectToAction("Index", "Manage", new { message = 7 });
+        }
+
+        public ActionResult Resubscribe()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user.StripeActiveUntil > DateTime.UtcNow)
+            {
+                SubscriptionService.ReactivateSubscription(user.StripeCustomerId);
+                UserRepository.ReactivateUser(user);
+                return RedirectToAction("Index", "Manage", new { message = 8 });
+            }
+
+            return RedirectToAction("Index", "Subscription");
         }
     }
 }

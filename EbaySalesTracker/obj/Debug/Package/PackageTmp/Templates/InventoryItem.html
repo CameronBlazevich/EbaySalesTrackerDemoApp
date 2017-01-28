@@ -1,0 +1,76 @@
+﻿<script id="InventoryItemTemplate_Small" type="text/x-jquery-tmpl">
+    <div class="content">
+        <header>
+            <span>ACCOUNT TOTAL</span>
+        </header>
+        <section>
+            <span class="Currency Positive" style="font-size: 20pt">{{:Cost}}</span>
+        </section>
+    </div>
+</script>
+
+<script id="InventoryItemTemplate_Medium" type="text/x-jquery-tmpl">
+    <div class="content">
+        <header>
+            <span>{{:Description}}</span>
+        </header>
+        <section style="padding-top:10px;">
+            {{include tmpl ='#InventoryItemTemplate_Base'/}}
+        </section>
+    </div>
+
+    {{if AverageProfit>0}}
+        <div class="stickyfooter" style="background-color: #00ff21;">
+            {{else}}
+            <div class="stickyfooter" style="background-color: #ff0000;">
+                {{/if}}
+                <!--<div class="row">-->
+                    <div class="pull-left">Average Profit:</div>
+                   <!-- <div class="pull-right">Sold</div>-->
+                <!--</div>-->
+                <div class="pull-right">
+                    <span>{{:AverageProfit}}</span>
+                </div>
+                
+                <!--<span class="pull-right">{{:QuantitySold}}</span>-->
+                <div class="Clear" />
+            </div>
+
+</script>
+
+<script id="InventoryItemTemplate_Large" type="text/x-jquery-tmpl">
+    <div class="content">
+        <header>
+            <span>{{:Description}}</span>
+        </header>
+        <section style="padding-top:5px;">
+            {{include tmpl='#InventoryItemTemplate_Base'/}}
+            <div style="margin-top:0px;">
+                <div id="AccountPositionsSVG" />
+            </div>
+        </section>
+    </div>
+    <div class="stickyfooter" style="background-color: #fbcccc; ">
+        <div class="Left Bold">Total:</div>
+        <div class="Right">
+            <span class="Currency">{{:Cost}}</span>
+        </div>
+        <div class="Clear" />
+    </div>
+</script>
+
+<script id="InventoryItemTemplate_Base" type="text/x-jquery-tmpl">
+    <div class="Left">Avg. Sales Price</div>
+    <div class="Right">
+        <span class="Currency">{{:AverageSalesPrice}}</span>
+    </div>
+    <div class="Clear" />
+
+   
+
+    <div class="Left" style="margin-top:6px;">Cost</div>
+    <div class="Right" style="margin-top:6px;">
+        <span class="Currency">{{:Cost}}</span>
+    </div>
+    <div class="Clear" />
+</script>

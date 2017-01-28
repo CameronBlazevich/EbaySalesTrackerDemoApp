@@ -9,5 +9,6 @@ namespace EbaySalesTracker.Models
         Stripe.StripeSubscriptionService StripeSubscriptionService { get; }
         UserManager<ApplicationUser> UserManager { get; }
         void CancelSubscription(string stripeUserId);
+        void ReactivateSubscription(string stripeCustomerId);
     }
 }

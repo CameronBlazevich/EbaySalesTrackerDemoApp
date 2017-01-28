@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "EbayAuthentication";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel">
+            <div class="panel-body">
+                <div>
+                    <div>
+                        <h3>3: Authenticate with eBay!</h3>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p>The following button will take you to eBay where you will log in and be asked to give our app permission to import your data from eBay.</p>
+                    <a href="@Url.Action("AuthenticateUserWithEbay","Account", new { target = "_new" })" class="btn btn-primary">Authenticate</a>
+                    <div class="clearfix"></div>
+                    <br /><br />
+                    <p>Once authenticated, you can automatically import all of your listing information.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

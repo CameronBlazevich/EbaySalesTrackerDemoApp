@@ -40,3 +40,17 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.csproj.GenerateResource.Cache
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.pdb
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Release\Newtonsoft.Json.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Release\Stripe.net.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Release\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\bin\Release\Newtonsoft.Json.xml
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.Migrations.StripeSubFeaturesandPlanTables.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.Migrations.FixSubscriptionPlanTableNamesArentDateTimes.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.Migrations.createWebHookLogsTable.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.Migrations.createWebHookLogsTable_correction.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.Migrations.createWebHookLogsTable_correction_2.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.Migrations.changeIdForWebhooks.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.Migrations.GetReadyToCalculateCostsBetter.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.Migrations.AddOrderIdToTransTable.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.Migrations.TransDateAndTransStatus.resources
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker.Repository\obj\Release\EbaySalesTracker.Repository.Migrations.DecimalToDouble.resources

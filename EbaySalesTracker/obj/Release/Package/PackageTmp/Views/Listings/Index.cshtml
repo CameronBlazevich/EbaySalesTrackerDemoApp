@@ -31,17 +31,17 @@
 
     .sidebar-table {
         margin: 10px;
-
     }
 
         .sidebar-table td {
-                    text-align:left;
+            text-align: left;
         }
 </style>
 <div class="row">
     <!-- Sidebar -->
-    <div id="sidebar-wrapper" class="col-md-2">        
-       @Html.Partial("_SalesSummaries")
+    <div id="sidebar-wrapper" class="col-md-2">
+        @*@Html.Partial("_ListingsFilter")*@
+        @Html.Partial("_SalesSummaries")
     </div>
     <!-- /#sidebar-wrapper -->
 
@@ -49,13 +49,18 @@
         <div class="panel">
             <div class="panel-heading text-right">
                 <h3 class="pull-left">All Listings</h3>
-
-                @Html.ActionLink("Update Listings", "UpdateListings", null, new { @class = "btn btn-primary" })
-
+                @if (Model.IsAuthenticatedWithEbay)
+                {
+                    @Html.ActionLink("Update Listings", "UpdateListings", null, new { @class = "btn btn-primary" })
+                }
+                else
+                {
+                    <a href="@Url.Action("AuthenticateUserWithEbay","Account", new { target = "_new" })" class="btn btn-primary" title="Authenticate your account with eBay so that we can automatically import your listing information.">Authenticate with Ebay</a>
+                }
             </div>
             <div class="panel-body col-md-12">
 
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover table-bordered">
                     <tr>
                         <th>
                             @Html.DisplayNameFor(model => model.Listing.StartDate)
@@ -64,19 +69,25 @@
                             @Html.DisplayNameFor(model => model.Listing.EndDate)
                         </th>
                         <th>
+                            @Html.DisplayNameFor(model => model.Listing.Type)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.Listing.Title)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Listing.CurrentPrice)
+                            @Html.DisplayNameFor(model => model.Listing.QuantitySold)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Listing.AveragePrice)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Listing.TotalNetFees)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Listing.Profit)
+                            @Html.DisplayNameFor(model => model.Listing.InventoryItem.Cost)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Listing.QuantitySold)
+                            @Html.DisplayNameFor(model => model.Listing.Profit)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Listing.ListingStatus)
@@ -84,13 +95,10 @@
                         <th nowrap>
                             @Html.DisplayNameFor(model => model.InventoryItems) <a href="#" data-toggle="modal" data-target="#create-inventory-item" class=""><i class="glyphicon glyphicon-plus"></i></a>
                         </th>
-
-
-                        <th></th>
                     </tr>
 
                     @foreach (var item in Model.Listings)
-            {
+                    {
                         <tr>
                             <td>
                                 @{string convertedStartDate = item.StartDate.ToString("MM/dd/yyyy");}
@@ -100,21 +108,38 @@
                                 @{string convertedEndDate = item.EndDate.ToString("MM/dd/yyyy");}
                                 @Html.DisplayFor(modelItem => convertedEndDate)
                             </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
                             <td style="text-align:left;">
                                 @Html.DisplayFor(modelItem => item.Title)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.CurrentPrice)
+                                @Html.DisplayFor(modelItem => item.QuantitySold)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AveragePrice)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.TotalNetFees)
                             </td>
-                            <td>
-                                <p id="@("profit_" + item.ItemId)">@item.Profit</p>
+                            <td id="@("cost_" + item.ItemId)">
+                                @{ var cost = item.InventoryItem?.Cost ?? 0.00;
+                                    if (cost == 0)
+                                    {
+                                        var costString = cost.ToString("0.00");
+                                        @Html.DisplayFor(modelItem => costString)
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.InventoryItem.Cost)
+                                    }
+                                }
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.QuantitySold)
+                            <td id="@("profit_" + item.ItemId)">
+                                @Html.DisplayFor(modelItem => item.Profit)
                             </td>
+
                             <td>
                                 @Html.DisplayFor(modelItem => item.ListingStatus)
                             </td>
@@ -133,7 +158,6 @@
                                     }
                                 }
                             </td>
-                            <td></td>
                         </tr>
                                     }
 
@@ -211,12 +235,12 @@
         $('#pagination li:nth-child(' + pageToHighlight + ')').addClass('highlight');
 
         dataService.GetInventoryItems(setupInventoryItemArrayForDdl);
-       
+
     });
 
-    
 
-    
+
+
 
 
 
@@ -262,6 +286,7 @@
             cache: false,
             success: function (result) {
                 $('#profit_' + listingItemId).text(result.profit.toFixed(2));
+                $('#cost_' + listingItemId).text(result.cost.toFixed(2));
             }
         });
     }

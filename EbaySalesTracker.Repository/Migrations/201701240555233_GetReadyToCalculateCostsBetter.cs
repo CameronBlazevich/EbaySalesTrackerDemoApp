@@ -8,16 +8,16 @@ namespace EbaySalesTracker.Repository.Migrations
         public override void Up()
         {
             DropPrimaryKey("dbo.ListingTransactions");
-            AddColumn("dbo.ListingDetails", "OrderLineItemId", c => c.String());
-            AddColumn("dbo.ListingDetails", "Transactionid", c => c.String());
-            AddColumn("dbo.ListingTransactions", "TotalAmountPaid", c => c.Decimal(nullable: false, precision: 18, scale: 2));
-            AddColumn("dbo.ListingTransactions", "UnitPrice", c => c.Decimal(nullable: false, precision: 18, scale: 2));
-            AddColumn("dbo.ListingTransactions", "BuyerShippingCost", c => c.Decimal(nullable: false, precision: 18, scale: 2));
-            AddColumn("dbo.ListingTransactions", "BuyerHandlingCost", c => c.Decimal(nullable: false, precision: 18, scale: 2));
-            AddColumn("dbo.ListingTransactions", "QuantitySold", c => c.Int(nullable: false));
+            AlterColumn("dbo.ListingDetails", "OrderLineItemId", c => c.String());
+            AlterColumn("dbo.ListingDetails", "Transactionid", c => c.String());
+            AlterColumn("dbo.ListingTransactions", "TotalAmountPaid", c => c.Decimal(nullable: false, precision: 18, scale: 2));
+            AlterColumn("dbo.ListingTransactions", "UnitPrice", c => c.Decimal(nullable: false, precision: 18, scale: 2));
+            AlterColumn("dbo.ListingTransactions", "BuyerShippingCost", c => c.Decimal(nullable: false, precision: 18, scale: 2));
+            AlterColumn("dbo.ListingTransactions", "BuyerHandlingCost", c => c.Decimal(nullable: false, precision: 18, scale: 2));
+            AlterColumn("dbo.ListingTransactions", "QuantitySold", c => c.Int(nullable: false));
             AlterColumn("dbo.ListingTransactions", "TransactionId", c => c.String(nullable: false, maxLength: 128));
             AddPrimaryKey("dbo.ListingTransactions", "TransactionId");
-            DropColumn("dbo.ListingTransactions", "Id");
+            //DropColumn("dbo.ListingTransactions", "Id");
         }
         
         public override void Down()

@@ -7,7 +7,7 @@ namespace EbaySalesTracker.Repository.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.ListingTransactions", "OrderId", c => c.String());
+            AlterColumn("dbo.ListingTransactions", "OrderId", c => c.String());
         }
         
         public override void Down()

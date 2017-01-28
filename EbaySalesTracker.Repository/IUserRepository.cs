@@ -14,6 +14,7 @@ namespace EbaySalesTracker.Repository
         bool TestUserToken(string userToken);
         ApplicationUser GetUserByStripeId(string stripeUserId);
         void SetNewActiveUntilDate(ApplicationUser user, DateTime newEndDate);
-        void SetUserCancelReason(ApplicationUser user, string cancellationReason);
+        void CancelUser(ApplicationUser user, string cancellationReason);
+        void ReactivateUser(ApplicationUser user);
     }
 }

@@ -72,11 +72,23 @@ namespace EbaySalesTracker.Repository
             }
         }
 
-        public void SetUserCancelReason(ApplicationUser user, string cancellationReason)
+        public void CancelUser(ApplicationUser user, string cancellationReason)
         {
             using (var context = new ApplicationDbContext())
             {
                 user.CancelReason = cancellationReason;
+                user.Cancelled = true;
+                context.Users.AddOrUpdate(user);
+                context.SaveChanges();
+            }
+        }
+
+        public void ReactivateUser(ApplicationUser user)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                
+                user.Cancelled = false;
                 context.Users.AddOrUpdate(user);
                 context.SaveChanges();
             }
