@@ -98,7 +98,7 @@ namespace EbaySalesTracker.Repository.Helpers
             listing.StartDate = res.ListingDetails.StartTime;
             listing.EndDate = res.ListingDetails.EndTime;
             listing.Title = res.Title;
-            //listing.QuantitySold = res.SellingStatus.QuantitySold;
+            listing.QuantitySold = res.SellingStatus.QuantitySold;
             listing.ListingStatus = res.SellingStatus.ListingStatus;
             listing.Type = res.ListingType;
             return listing;

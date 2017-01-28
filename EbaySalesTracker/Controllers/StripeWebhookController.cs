@@ -38,7 +38,7 @@ namespace EbaySalesTracker.Controllers
             {
                 stripeEvent = StripeEventUtility.ParseEvent(json);
                 //Comment this out when using test webhooks -> they dont have real ids
-                //stripeEvent = VerifyEventSentFromStripe(stripeEvent);
+                stripeEvent = VerifyEventSentFromStripe(stripeEvent);
                 if (HasEventBeenProcessPreviously(stripeEvent))
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.OK);
@@ -55,10 +55,12 @@ namespace EbaySalesTracker.Controllers
 
             switch (stripeEvent.Type)
             {
+                case StripeEvents.CustomerCreated:
+                    //HandleCustomerCreatedEvent(stripeEvent);
+                    break;
                 case StripeEvents.CustomerSubscriptionTrialWillEnd:
                     HandleSubscriptionTrialWillEndEvent(stripeEvent);
                     break;
-
                 case StripeEvents.InvoicePaymentSucceeded:
                     HandleInvoicePaymentSucceededEvent(stripeEvent);
                     break;
@@ -71,20 +73,11 @@ namespace EbaySalesTracker.Controllers
                 case StripeEvents.CustomerSubscriptionUpdated:
                     HandleSubscriptionUpdated(stripeEvent);
                     break;
-
-
-
                 case StripeEvents.ChargeRefunded:
-
                 default:
                     break;
             }
 
-
-
-
-
-            //TODO: Log stripe event id to stripe event table
             LogEvent(stripeEvent);
 
             return new HttpStatusCodeResult(HttpStatusCode.OK);
@@ -97,8 +90,7 @@ namespace EbaySalesTracker.Controllers
 
         private bool HasEventBeenProcessPreviously(StripeEvent stripeEvent)
         {
-            //lookup event by event id
-            return false;
+           return  _WebHookRepository.HasBeenProcessed(stripeEvent.Id);           
         }
 
         private static StripeEvent VerifyEventSentFromStripe(StripeEvent stripeEvent)

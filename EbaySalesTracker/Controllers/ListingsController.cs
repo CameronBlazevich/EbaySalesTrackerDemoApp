@@ -109,11 +109,13 @@ namespace EbaySalesTracker.Controllers
             {
                 myExport.AddRow();
                 myExport["Listing Id"] = listing.ItemId;
-                myExport["Title"] = listing.Title;
                 myExport["Start Date"] = listing.StartDate;
                 myExport["End Date"] = listing.EndDate;
+                myExport["Listing Type"] = listing.Type;
+                myExport["Title"] = listing.Title;                
                 var qtySold = listing.CalculateQuantitySold();
-                if(qtySold > 0)
+
+                if (qtySold > 0)
                 { 
                     myExport["Most Recent Sold Date"] = listing.Transactions.OrderByDescending(t=> t.CreatedDate).Select(t => t.CreatedDate).FirstOrDefault();
                 }
@@ -122,12 +124,12 @@ namespace EbaySalesTracker.Controllers
                     myExport["Most Recent Sold Date"] = null;
                 }
                 myExport["Quantity Sold"] = qtySold;
-                myExport["Average Price"] = Math.Round(listing.AveragePrice,2);
-                myExport["Total Net Fees"] = Math.Round(listing.TotalNetFees,2);
+                myExport["Average Sale Price"] = Math.Round(listing.AveragePrice,2);
+                myExport["Total Fees"] = Math.Round(listing.TotalNetFees,2);
                 myExport["Profit"] = Math.Round(listing.Profit,2);
                 myExport["Status"] = listing.ListingStatus;
                 myExport["Associated Item"] = listing.InventoryItem?.Description;
-                myExport["Item Cost"] = listing.InventoryItem?.Cost;
+                myExport["Product Cost"] = listing.InventoryItem?.Cost;
             }
             var listingsCsv =  File(myExport.ExportToBytes(), "text/csv", "Listings_" + DateTime.Now + ".csv");
 
