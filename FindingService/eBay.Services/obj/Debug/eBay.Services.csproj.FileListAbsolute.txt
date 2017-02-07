@@ -1,0 +1,6 @@
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\FindingService\eBay.Services\bin\Debug\eBay.Services.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\FindingService\eBay.Services\bin\Debug\eBay.Services.pdb
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\FindingService\eBay.Services\bin\Debug\SLF.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\FindingService\eBay.Services\obj\Debug\eBay.Services.csprojResolveAssemblyReference.cache
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\FindingService\eBay.Services\obj\Debug\eBay.Services.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\FindingService\eBay.Services\obj\Debug\eBay.Services.pdb

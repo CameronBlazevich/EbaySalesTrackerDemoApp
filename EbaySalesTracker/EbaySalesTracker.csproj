@@ -225,6 +225,7 @@
     <Compile Include="Controllers\InventoryItemsController.cs" />
     <Compile Include="Controllers\ListingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SearcherController.cs" />
     <Compile Include="Controllers\StripeWebhookController.cs" />
     <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Global.asax.cs">
@@ -233,6 +234,7 @@
     <Compile Include="Helpers\CsvExport.cs" />
     <Compile Include="OAuthTokenResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\SearchResultsViewModel.cs" />
     <Compile Include="ViewModels\SubscriptionViewModel.cs" />
     <Content Include="Content\bootstrap-editable\css\bootstrap-editable.css" />
     <Content Include="Content\bootstrap-editable\img\clear.png" />
@@ -472,6 +474,7 @@
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
     <Content Include="Views\Shared\_BillingPartial.cshtml" />
     <Content Include="Views\Account\RegisterEmailAndPassword.cshtml" />
+    <Content Include="Views\Searcher\Index.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -500,6 +503,10 @@
     <ProjectReference Include="..\EbaySalesTracker.Repository\EbaySalesTracker.Repository.csproj">
       <Project>{675e3e39-ef7b-46eb-b970-aea53b15011b}</Project>
       <Name>EbaySalesTracker.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FindingService\eBay.Services\eBay.Services.csproj">
+      <Project>{742D29F1-BBCE-4C7F-ABA8-239DE44F8D60}</Project>
+      <Name>eBay.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

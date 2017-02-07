@@ -20,13 +20,11 @@ namespace EbaySalesTracker.Models
         public DateTime? PaidTime { get; set; }
         public DateTime? ShippedTime { get; set; }
         public double TotalTaxAmount { get; set; }
-        public OrderStatusCodeType OrderStatus { get; set; }
-        public long ListingId { get; set; }
-        [ForeignKey("ListingId")]
-        public Listing listing { get; set; }
+        public OrderStatusCodeType OrderStatus { get; set; }       
         public double? RefundAmount { get; set; }
         public DateTime? RefundTime { get; set; }
         public PaymentTransactionStatusCodeType? RefundStatus { get; set; }
+        public virtual ICollection<ListingTransaction> Transactions { get; set; }
 
     }
 }

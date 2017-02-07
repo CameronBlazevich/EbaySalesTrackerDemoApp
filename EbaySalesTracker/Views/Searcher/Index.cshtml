@@ -1,0 +1,62 @@
+﻿@using eBay.Service.Core.Soap;
+@model EbaySalesTracker.ViewModels.SearchResultsViewModel
+@{
+    ViewBag.Title = "Researcher";
+}
+<div class="panel">
+    <div class="panel-heading"></div>
+    <div class="panel-body">
+        <div class="row">
+            @using (Html.BeginForm("Index", "Searcher", FormMethod.Post, new { id = "SearchTerm"}))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="searchTerm" class="control-label">SearchTerm</label>
+                        <input form="SearchTerm" id="searchTerm" value="@Model.SearchTerm" name="searchTerm" type="text" class="input-lg form-control" placeholder="keywords">
+                    </div>
+                </div>
+            }
+            @if (Model.Categories?.Count > 0)
+            {
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Percentage of Listings</th>
+                    </tr>
+
+                    @foreach (SuggestedCategoryType cat in Model.Categories)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(cat.Category.CategoryName, "GetSearchItemsByCategory", new { categoryId = cat.Category.CategoryID, searchTerm = Model.SearchTerm })</td>
+                            @*<td>@cat.Category.CategoryName</td>*@
+                            <td>@cat.PercentItemFound</td>
+                        </tr>
+                    }
+                </table>
+            }
+            @if (Model.SearchResultBreakdowns?.Count > 0)
+            {
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>Type</th>
+                        <th>Number Listed</th>
+                        <th>Number Sold</th>
+                        <th>Sell Through Percent</th>
+                        <th>Avg. Sales Price</th>
+                    </tr>
+                    @foreach (var breakdown in Model.SearchResultBreakdowns)
+                    {
+                        <tr>
+                            <td>@breakdown.Type</td>
+                            <td>@breakdown.Listings.Count()</td>
+                            <td>@breakdown.SoldListings.Count()</td>
+                            <td>@breakdown.SellThroughPct</td>
+                            <td>@breakdown.AverageSalePrice</td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</div>

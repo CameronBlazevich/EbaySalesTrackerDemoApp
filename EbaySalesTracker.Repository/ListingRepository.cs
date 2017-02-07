@@ -178,35 +178,38 @@ namespace EbaySalesTracker.Repository
                             }
                         }
                         UpdateFeesById(listing.ItemId, userId);
-                        UpdateTransactions(listing, userId);                        
+                        //UpdateTransactions(listing, userId);
+                                          
                     }
                 }
                 SetLastUpdateDate(userId);
+                IOrderRepository orderRepo = new OrderRepository();
+                orderRepo.GetAllOrdersSinceDateFromEbay(sinceDate, userId);
             }
 
         }
 
-        private void UpdateTransactions(Listing listing, string userId)
-        {
+        //private void UpdateTransactions(Listing listing, string userId)
+        //{
             
-            IOrderRepository orderRepo = new OrderRepository();
+        //    IOrderRepository orderRepo = new OrderRepository();
 
-            var transactions = TransRepo.GetListingTransactionsByListingIdFromEbay(listing.ItemId, userId);
-            if (transactions.Count > 0)
-            {
-                foreach (var transaction in transactions)
-                {
-                    var orderId = transaction.OrderId;
-                    var listingId = listing.ItemId;
-                    orderRepo.GetOrderByOrderIdFromEbay(listingId,orderId, userId);
-                }
-            }
-            else
-            {
-                var orderId = listing.ItemId.ToString() + "-" + "0";
-                orderRepo.GetOrderByOrderIdFromEbay(listing.ItemId,orderId, userId);
-            }
-        }
+        //    var transactions = TransRepo.GetListingTransactionsByListingIdFromEbay(listing.ItemId, userId);
+        //    if (transactions.Count > 0)
+        //    {
+        //        foreach (var transaction in transactions)
+        //        {
+        //            var orderId = transaction.OrderId;
+        //            var listingId = listing.ItemId;
+        //            orderRepo.GetOrderByOrderIdFromEbay(listingId,orderId, userId);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        var orderId = listing.ItemId.ToString() + "-" + "0";
+        //        orderRepo.GetOrderByOrderIdFromEbay(listing.ItemId,orderId, userId);
+        //    }
+        //}
 
         #region FromDb
 

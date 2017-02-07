@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbaySalesTracker.Bll", "Eba
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EbaySalesTracker2012Azurev12", "..\EbaySalesTracker2012Azurev12\EbaySalesTracker2012Azurev12.sqlproj", "{E53FEB0D-FBBD-4B91-9635-79983545D7A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eBay.Services", "FindingService\eBay.Services\eBay.Services.csproj", "{742D29F1-BBCE-4C7F-ABA8-239DE44F8D60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{E53FEB0D-FBBD-4B91-9635-79983545D7A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E53FEB0D-FBBD-4B91-9635-79983545D7A0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E53FEB0D-FBBD-4B91-9635-79983545D7A0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{742D29F1-BBCE-4C7F-ABA8-239DE44F8D60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{742D29F1-BBCE-4C7F-ABA8-239DE44F8D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{742D29F1-BBCE-4C7F-ABA8-239DE44F8D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{742D29F1-BBCE-4C7F-ABA8-239DE44F8D60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

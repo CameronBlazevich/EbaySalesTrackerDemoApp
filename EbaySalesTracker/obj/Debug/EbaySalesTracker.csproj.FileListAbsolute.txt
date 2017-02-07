@@ -91,3 +91,6 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker\obj\Debug\EbaySalesTracker.csprojResolveAssemblyReference.cache
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker\obj\Debug\EbaySalesTracker.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker\obj\Debug\EbaySalesTracker.pdb
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker\bin\eBay.Services.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker\bin\SLF.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTracker\bin\eBay.Services.pdb

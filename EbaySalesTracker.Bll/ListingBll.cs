@@ -75,7 +75,7 @@ namespace EbaySalesTracker.Bll
             
             if (lastListingUpdate == null)
             {
-                var twoYearsAgo = DateTime.Now.AddYears(-2);
+                var twoYearsAgo = DateTime.Now.AddDays(-90);
                 lastListingUpdate = twoYearsAgo;
             }
             

@@ -11,7 +11,7 @@ namespace EbaySalesTracker.Repository.Helpers
 {
     public class OrderEngine : Engine, IOrderEngine
     {
-        public Order GetOrderByOrderIdFromEbay(long listingId,string orderId, string userToken)
+        public Order GetOrderByOrderIdFromEbay(long listingId, string orderId, string userToken)
         {
             var context = RequestBuilder.CreateNewApiCall(userToken);
             GetOrdersCall getOrdersCall = new GetOrdersCall(context);
@@ -19,21 +19,49 @@ namespace EbaySalesTracker.Repository.Helpers
             getOrdersCall.DetailLevelList.Add(DetailLevelCodeType.ReturnAll);
             getOrdersCall.Execute();
             if (getOrdersCall.ApiResponse.OrderArray.Count > 0)
-                return MapResultToOrder(getOrdersCall.ApiResponse.OrderArray[0], listingId);
+            {
+                var mappedOrder = MapResultToOrder(getOrdersCall.ApiResponse.OrderArray[0]);                
+                return mappedOrder;
+                }
             //need to have plan for when no order is returned from ebay
             return new Order();
         }
-        private Order MapResultToOrder(OrderType result, long listingId)
+
+        public IEnumerable<Order> GetOrdersByModTimeFromEbay(DateTime modTimeFrom, DateTime modTimeTo, string userToken)
+        {
+            var context = RequestBuilder.CreateNewApiCall(userToken);
+            var getOrdersCall = new GetOrdersCall(context);
+            getOrdersCall.ModTimeFrom = modTimeFrom;
+            getOrdersCall.ModTimeTo = modTimeTo;
+            getOrdersCall.DetailLevelList.Add(DetailLevelCodeType.ReturnAll);
+            //getOrdersCall.OutputSelector(new string[] { "OrderArray" })
+            getOrdersCall.Execute();
+            var orders = new List<Order>();           
+            if (getOrdersCall.ApiResponse.Ack == AckCodeType.Success)
+            {
+                var ordersFromCall = getOrdersCall.ApiResponse.OrderArray;
+                if (ordersFromCall.Count > 0)
+                {
+                    
+                    foreach (OrderType orderFromCall in ordersFromCall)
+                    {
+                        orders.Add(MapResultToOrder(orderFromCall));
+                    }
+
+                }
+            }
+            return orders;
+        }
+
+        private Order MapResultToOrder(OrderType result)
         {
             var orderId = result.OrderID;
-            string[] orderIdSplit = orderId.Split('-');
 
             var order = new Order();
             order.OrderId = result.OrderID;
             order.OrderStatus = result.OrderStatus;
             order.SalesPrice = result.Subtotal.Value;
-            order.TotalCost = result.Total.Value;
-            order.ListingId = listingId;
+            order.TotalCost = result.Total.Value;            
             if (result.MonetaryDetails?.Refunds?.Refund?.Count > 0)
             {
                 order.RefundAmount = result.MonetaryDetails.Refunds.Refund[0].RefundAmount.Value;
@@ -58,15 +86,18 @@ namespace EbaySalesTracker.Repository.Helpers
                 order.ShippedTime = result.ShippedTime;
             }
 
-            double? totalTaxAmount = result.TransactionArray[0]?.Taxes?.TotalTaxAmount?.Value;
-            double? shipping = result.TransactionArray[0]?.ActualShippingCost?.Value;
-            double? handling = result.TransactionArray[0]?.ActualHandlingCost?.Value;
-
-            order.TotalTaxAmount = totalTaxAmount == null ?  0 : result.TransactionArray[0].Taxes.TotalTaxAmount.Value;
-            order.Shipping = shipping == null ? 0 : result.TransactionArray[0].ActualShippingCost.Value;
-            order.Handling = handling == null ? 0 : result.TransactionArray[0].ActualHandlingCost.Value;
+            var transactionsFromCall = result.TransactionArray;
+            if (transactionsFromCall.Count > 0)
+            {
+                var listingTransEngine = new ListingTransactionEngine();
+                var transactions = new List<ListingTransaction>();
+                foreach (TransactionType transFromCall in transactionsFromCall)
+                {
+                    transactions.Add(listingTransEngine.MapResultToListingTransaction(transFromCall));
+                }
+                order.Transactions = transactions;
+            }
             
-
             return order;
         }
     }

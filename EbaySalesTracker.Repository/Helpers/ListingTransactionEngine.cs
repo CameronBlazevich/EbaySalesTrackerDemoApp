@@ -21,21 +21,23 @@ namespace EbaySalesTracker.Repository.Helpers
             var listingTransactions = new List<ListingTransaction>();
             foreach (TransactionType result in results)
             {               
-                var transaction = MapResultToListingTransaction(result, listingId);
-                listingTransactions.Add(transaction);                
+                var transaction = MapResultToListingTransaction(result);
+                transaction.ListingId = listingId;
+                listingTransactions.Add(transaction);   
+                             
             }
             return listingTransactions;
         }
-        private ListingTransaction MapResultToListingTransaction(TransactionType result, long listingId)
+        public ListingTransaction MapResultToListingTransaction(TransactionType result)
         {
             var listingTransaction = new ListingTransaction();
-            listingTransaction.ListingId = listingId;
             listingTransaction.TransactionId = result.TransactionID;
+            listingTransaction.ListingId = long.Parse(result.Item.ItemID);
             listingTransaction.BuyerHandlingCost = result.ActualHandlingCost?.Value ?? 0;
             listingTransaction.BuyerShippingCost = result.ActualShippingCost?.Value ?? 0;
             listingTransaction.QuantitySold = result.QuantityPurchased;
-            listingTransaction.UnitPrice = result.TransactionPrice.Value;
-            listingTransaction.TotalAmountPaid = result.AmountPaid.Value;
+            listingTransaction.UnitPrice = result.TransactionPrice?.Value ?? 0;
+            listingTransaction.TotalAmountPaid = result.AmountPaid?.Value ?? 0;
             listingTransaction.OrderId = result.ContainingOrder?.OrderID;
             listingTransaction.CreatedDate = result.CreatedDate;
             listingTransaction.Status = result.Status.CompleteStatus;

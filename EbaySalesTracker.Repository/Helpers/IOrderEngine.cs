@@ -10,5 +10,6 @@ namespace EbaySalesTracker.Repository.Helpers
     public interface IOrderEngine
     {
         Order GetOrderByOrderIdFromEbay(long listingId,string orderId, string userToken);
+        IEnumerable<Order> GetOrdersByModTimeFromEbay(DateTime modTimeFrom, DateTime modTimeTo, string userToken);
     }
 }

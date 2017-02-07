@@ -25,10 +25,10 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.Practices.Unity.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Moq.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\eBay.Service.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\System.Web.Mvc.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.AspNet.Identity.Core.dll
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\eBay.Service.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.Owin.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Stripe.net.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\System.Web.Optimization.dll
@@ -58,10 +58,10 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Moq.xml
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\eBay.Service.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\System.Web.Mvc.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.AspNet.Identity.Core.xml
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\eBay.Service.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.Owin.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\System.Web.Optimization.xml
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
@@ -76,5 +76,6 @@ C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\E
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\obj\Debug\EbaySalesTrackerTests.csprojResolveAssemblyReference.cache
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\obj\Debug\EbaySalesTrackerTests.dll
 C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\obj\Debug\EbaySalesTrackerTests.pdb
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.Owin.Security.OAuth.dll
-C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\eBay.Services.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\SLF.dll
+C:\Users\cblaz\OneDrive\Documents\Visual Studio 2015\Projects\EbaySalesTracker\EbaySalesTrackerTests\bin\Debug\eBay.Services.pdb

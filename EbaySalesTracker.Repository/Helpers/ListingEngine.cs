@@ -1,5 +1,4 @@
 ﻿using eBay.Service.Call;
-using eBay.Service.Core.Sdk;
 using eBay.Service.Core.Soap;
 using EbaySalesTracker.Models;
 using System;

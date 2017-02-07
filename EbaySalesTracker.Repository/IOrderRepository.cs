@@ -10,5 +10,6 @@ namespace EbaySalesTracker.Repository
     public interface IOrderRepository
     {
         Order GetOrderByOrderIdFromEbay(long listingId,string orderId, string userId);
+        IEnumerable<Order> GetAllOrdersSinceDateFromEbay(DateTime sinceDate, string userId);
     }
 }
