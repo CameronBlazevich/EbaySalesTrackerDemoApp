@@ -109,15 +109,15 @@ namespace EbaySalesTracker.Controllers
 
                 //New + 
                 var newFixedPriceListings = newItemListings.Intersect(fixedPriceListings).ToList();
-                var newFixedPriceListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.UsedFixedPrice, usedFixedPriceListings);
+                var newFixedPriceListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.NewFixedPrice, usedFixedPriceListings);
                 vM.SearchResultBreakdowns.Add(newFixedPriceListingsBreakdown);
 
                 var newAuctionListings = newItemListings.Intersect(auctionListings).ToList();
-                var newAuctionListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.UsedAuction, usedAuctionListings);
+                var newAuctionListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.NewAuction, usedAuctionListings);
                 vM.SearchResultBreakdowns.Add(newAuctionListingsBreakdown);
 
                 var newStoreInventoryListings = newItemListings.Intersect(storeInventoryListings).ToList();
-                var newStoreInventoryListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.UsedStoreInventory, usedStoreInventoryListings);
+                var newStoreInventoryListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.NewStoreInventory, usedStoreInventoryListings);
                 vM.SearchResultBreakdowns.Add(newStoreInventoryListingsBreakdown);
 
             }

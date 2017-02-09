@@ -11,14 +11,16 @@ namespace EbaySalesTracker.Models
     public class SearchItem
     {
 
-            public string ItemId { get; set; }
-            public string Title { get; set; }
-            public double CurrentPrice { get; set; }
-            public Category PrimaryCategory { get; set; }
-            public Category SecondaryCategory { get; set; }
-            public Condition Condition { get; set; }
-            public ListingInfo ListingInfo { get; set; }
-            public SellingStatus SellingStatus { get; set; }
+        public string ItemId { get; set; }
+        public string Title { get; set; }
+        public double CurrentPrice { get; set; }
+        public Category PrimaryCategory { get; set; }
+        public Category SecondaryCategory { get; set; }
+        public Condition Condition { get; set; }
+        public ListingInfo ListingInfo { get; set; }
+        public SellingStatus SellingStatus { get; set; }
+        public string ViewItemUrl { get; set; }
+        public string GalleryImageUrl { get; set; }
 
     }
 }

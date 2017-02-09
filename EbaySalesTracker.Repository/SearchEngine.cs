@@ -101,6 +101,8 @@ namespace EbaySalesTracker.Repository
             searchItem.ListingInfo = result.listingInfo;
             searchItem.SellingStatus = result.sellingStatus;
             searchItem.Condition = result.condition;
+            searchItem.GalleryImageUrl = result.galleryURL;
+            searchItem.ViewItemUrl = result.viewItemURL;
 
             return searchItem;
         }

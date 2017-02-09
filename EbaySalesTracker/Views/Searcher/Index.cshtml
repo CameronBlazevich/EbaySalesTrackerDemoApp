@@ -1,5 +1,6 @@
 ﻿@using eBay.Service.Core.Soap;
 @using EbaySalesTracker.ViewModels;
+
 @model EbaySalesTracker.ViewModels.SearchResultsViewModel
 @{
     ViewBag.Title = "Researcher";
@@ -48,16 +49,92 @@
                     </tr>
                     @foreach (var breakdown in Model.SearchResultBreakdowns)
                     {
-                        <tr>
+                        <tr class="accordion-toggle" data-toggle="collapse" data-target="#@breakdown.Type">
                             <td>@breakdown.Type.ToDescriptionString()</td>
                             <td>@breakdown.Listings.Count()</td>
                             <td>@breakdown.SoldListings.Count()</td>
                             <td>@breakdown.SellThroughPct</td>
-                            <td>@breakdown.AverageSalePrice</td>
+                            <td>@breakdown.AverageSalePrice</td>     
+                                                   
+                        </tr>
+                        <tr class="accordion-body collapse" id="@breakdown.Type">
+                            <td colspan="2" >
+                                <table class="table table-sm table-bordered">
+                                    <caption>Highest Selling Price</caption>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Price</th>
+                                        <th>Picture</th>
+                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="@breakdown.HighestPricedListing.ViewItemUrl" target="_blank">@(breakdown.HighestPricedListing.Title)</a></td>
+                                            <td>@breakdown.HighestPricedListing.CurrentPrice</td>
+                                            <td><img src="@(breakdown.HighestPricedListing.GalleryImageUrl)" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td colspan="2">
+                                <table class="table table-sm table-bordered">
+                                    <caption>Recently Sold</caption>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Price</th>
+                                        <th>End Date</th>
+                                    </tr>
+                                    <tbody>
+                                        @if (breakdown.MostRecentSoldListings != null)
+                                        {
+                                            foreach (var listing in breakdown.MostRecentSoldListings)
+                                            {
+                                                <tr>
+                                                    <td><a href="@listing.ViewItemUrl" target="_blank">@(listing.Title)</a></td>
+                                                    <td class="@(listing.CurrentPrice > breakdown.AverageSalePrice ? "success" : "danger")">@listing.CurrentPrice</td>
+                                                    <td>@listing.ListingInfo.endTime</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="table table-sm table-bordered">
+                                    <caption>Listings</caption>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Price</th>
+                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="@breakdown.HighestPricedListing.ViewItemUrl" target="_blank">@(breakdown.HighestPricedListing.Title)</a></td>
+                                            <td>@breakdown.HighestPricedListing.CurrentPrice</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="@breakdown.HighestPricedListing.ViewItemUrl" target="_blank">@(breakdown.HighestPricedListing.Title)</a></td>
+                                            <td>@breakdown.HighestPricedListing.CurrentPrice</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="@breakdown.HighestPricedListing.ViewItemUrl" target="_blank">@(breakdown.HighestPricedListing.Title)</a></td>
+                                            <td>@breakdown.HighestPricedListing.CurrentPrice</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                               
+                            </td>
                         </tr>
                     }
                 </table>
             }
+            <div id="listings"></div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#listings').html();
+
+    })
+</script>

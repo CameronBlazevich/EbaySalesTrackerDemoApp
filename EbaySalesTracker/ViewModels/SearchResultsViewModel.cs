@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using MoreLinq;
 
 namespace EbaySalesTracker.ViewModels
 {
@@ -26,7 +27,7 @@ namespace EbaySalesTracker.ViewModels
         {
             get
             {
-                return Listings.Where(r => r.SellingStatus.sellingState == "EndedWithSales").ToList();
+                return Listings.Where(r => r.SellingStatus.sellingState == "EndedWithSales").OrderByDescending(l => l.ListingInfo.endTime).ToList();
             }
         }
         public SearchResultBreakdownType Type { get; set; }
@@ -48,6 +49,26 @@ namespace EbaySalesTracker.ViewModels
                     return Math.Round((double)SoldListings.Count() / Listings.Count(), 3) * 100;
 
                 return 0;
+            }
+        }
+        public Models.SearchItem HighestPricedListing
+        {
+            get
+            {
+                if(SoldListings.Any())
+                    return SoldListings.MaxBy(l => l.CurrentPrice);
+
+                return new Models.SearchItem();
+            }
+        }
+        public IEnumerable<Models.SearchItem> MostRecentSoldListings
+        {
+            get
+            {
+                if(SoldListings.Any())
+                    return SoldListings.Take(3);
+
+                return null;
             }
         }
     }
