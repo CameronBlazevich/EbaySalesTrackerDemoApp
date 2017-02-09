@@ -1,0 +1,88 @@
+﻿.container{
+    margin-left:0px;
+    margin-right:0px;
+    max-width:2000px;
+}
+
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: #dcdcdc;
+    /*background-color: black;*/
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+/*.table-striped>tbody>tr:nth-child(even)>td, 
+.table-striped>tbody>tr:nth-child(even)>th {
+   background-color: #fff;
+ }*/
+
+.topnav {
+    font-size: 14px; 
+}
+.registration-pitch {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url('../img/../img/Logomakr_9RcNsT.png') no-repeat center center;
+    background-size: contain;
+}
+.panel {
+    margin-top:10px;
+}
+.navbar {
+    background-color:#ffffff;
+    color:black;
+}
+.greyed-out{
+    color:lightgray;                 
+}
+.create-inventory-modal {
+    width:450px;
+}
+
+.inventory-items .editable {
+    color: black;
+    border: none;
+}
+
+.hover-delete:hover{
+    color:red;
+}
+.hover-pointer {
+    cursor:pointer;
+}
+.editable-cost-input {
+    width:60px !important;
+}
+
+.modal-header{
+    border: none;
+}
+.modal-body {
+  border-top: 1px solid #e5e5e5;
+}
+.table {
+    font-size:small
+}

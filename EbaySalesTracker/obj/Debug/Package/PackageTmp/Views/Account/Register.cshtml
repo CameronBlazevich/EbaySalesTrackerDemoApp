@@ -1,0 +1,80 @@
+﻿
+@using Microsoft.AspNet.Identity
+
+@model EbaySalesTracker.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Get Started With a Risk-Free 30 Day Free Trial";
+}
+
+
+
+
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row">
+                <div class="registration-pitch">
+                </div>
+                <div class="clearfix"></div>
+                <hr />
+            </div>
+            <div class="row">
+                @{ if (!Request.IsAuthenticated)
+                    {
+                        <div class="col-md-4">
+                            @Html.Partial("_RegisterPartial")
+                        </div>
+                        <div class="col-md-4  greyed-out">
+                           
+                            <div>
+                                <h3>2: Activate your Free Trial</h3>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 greyed-out">
+                            <div>
+                                <h3>3: Authenticate with eBay<br /> And Import your Listings!</h3>
+                            </div>
+                        </div>
+                    }
+                    else if (!Model.HasActiveSubscription)
+                    {
+                        <div class="col-md-7 billing-partial">
+                            @Html.Partial("_BillingPartial", new EbaySalesTracker.ViewModels.Subscription.BillingViewModel { Plan = Model.Plan })
+                        </div>
+                        <div class="col-md-4 greyed-out">
+                            <div>
+                                <h3>3: Authenticate with eBay<br /> And Import your Listings!</h3>
+                            </div>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="col-md-4 greyed-out">
+                            <div>
+                                <h3>3: Authenticate with eBay:</h3>
+                            </div>
+                            <div class="clearfix"></div>
+                            <p>The following button will take you to eBay where you will log in and be asked to give our app permission to import your data from eBay.</p>
+                            <a href="@Url.Action("AuthenticateUserWithEbay","Account", new { target = "_new" })" class="btn btn-primary">Authenticate</a>
+                            <div class="clearfix"></div>
+                            <br /><br />
+                            <p>Once authenticated, you're one click away from importing all of your listing information.</p>
+                        </div>
+                    }
+                    @Html.HiddenFor(m => m.Plan.Id);
+                }
+
+          </div>
+        </div>
+    </div>
+                    
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+
+
+</script>

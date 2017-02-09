@@ -2,6 +2,7 @@
 using eBay.Services.Finding;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -52,17 +53,38 @@ namespace EbaySalesTracker.ViewModels
     }
     public enum SearchResultBreakdownType
     {
+        [Description("All Listings")]
         All,
+        [Description("New")]
         NewCondition,
+        [Description("Used")]
         UsedCondition,
+        [Description("Fixed Price")]
         FixedPriced,
+        [Description("Auction")]
         Auctions,
+        [Description("Store")]
         StoreInventory,
+        [Description("Used-Fixed")]
         UsedFixedPrice,
+        [Description("Used-Auction")]
         UsedAuction,
+        [Description("Used-Store")]
         UsedStoreInventory,
+        [Description("New-Fixed")]
         NewFixedPrice,
+        [Description("New-Auction")]
         NewAuction,
+        [Description("New-Store")]
         NewStoreInventory
+    }
+
+    public static class SearchResultBreakdownTypeExtensions
+    {
+        public static string ToDescriptionString(this SearchResultBreakdownType val)
+        {
+            DescriptionAttribute[] attributes = (DescriptionAttribute[])val.GetType().GetField(val.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
+            return attributes.Length > 0 ? attributes[0].Description : string.Empty;
+        }
     }
 }

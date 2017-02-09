@@ -69,27 +69,27 @@ namespace EbaySalesTracker.Controllers
 
 
                 //New Item Listings
-                var newItemListings = results.Where(l => l.Condition.conditionIdSpecified && l.Condition.conditionId == (int)ConditionId.New).ToList();
+                var newItemListings = results.Where(l => l.Condition != null && l.Condition.conditionIdSpecified && l.Condition.conditionId == (int)ConditionId.New).ToList();
                 var newItemListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.NewCondition, newItemListings);
                 vM.SearchResultBreakdowns.Add(newItemListingsBreakdown);
 
                 //Used Item Listings
-                var usedItemListings = results.Where(l => l.Condition.conditionIdSpecified && l.Condition.conditionId == (int)ConditionId.Used).ToList();
+                var usedItemListings = results.Where(l => l.Condition != null && l.Condition.conditionIdSpecified && l.Condition.conditionId == (int)ConditionId.Used).ToList();
                 var usedItemListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.UsedCondition, usedItemListings);
                 vM.SearchResultBreakdowns.Add(usedItemListingsBreakdown);
 
                 //FixedPrice Listings
-                var fixedPriceListings = results.Where(l => l.ListingInfo.listingType == "FixedPrice").ToList();
+                var fixedPriceListings = results.Where(l => l.ListingInfo != null && l.ListingInfo.listingType == "FixedPrice").ToList();
                 var fixedPriceListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.FixedPriced, fixedPriceListings);
                 vM.SearchResultBreakdowns.Add(fixedPriceListingsBreakdown);
 
                 //Auction Listings
-                var auctionListings = results.Where(l => l.ListingInfo.listingType == "Auction").ToList();
+                var auctionListings = results.Where(l => l.ListingInfo != null && l.ListingInfo.listingType == "Auction").ToList();
                 var auctionListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.Auctions, auctionListings);
                 vM.SearchResultBreakdowns.Add(auctionListingsBreakdown);
 
                 //Store Inventory Listings
-                var storeInventoryListings = results.Where(l => l.ListingInfo.listingType == "StoreInventory").ToList();
+                var storeInventoryListings = results.Where(l => l.ListingInfo != null && l.ListingInfo.listingType == "StoreInventory").ToList();
                 var storeInventoryListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.StoreInventory, storeInventoryListings);
                 vM.SearchResultBreakdowns.Add(storeInventoryListingsBreakdown);
 
@@ -119,12 +119,6 @@ namespace EbaySalesTracker.Controllers
                 var newStoreInventoryListings = newItemListings.Intersect(storeInventoryListings).ToList();
                 var newStoreInventoryListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.UsedStoreInventory, usedStoreInventoryListings);
                 vM.SearchResultBreakdowns.Add(newStoreInventoryListingsBreakdown);
-
-
-
-
-
-
 
             }
             return View("Index", vM);
