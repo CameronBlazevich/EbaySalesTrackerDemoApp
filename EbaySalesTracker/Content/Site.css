@@ -90,3 +90,17 @@ textarea {
 caption {
     font-weight:700
 }
+#searcher-breakdown-table .accordion-toggle
+{
+    cursor:pointer;
+}
+.searcher-drilldown{
+    height:100%;
+}
+.accordion-toggle:not(.collapsed)
+{
+    background-color:#428bca;
+}
+.accordion-toggle:hover{
+    background-color:#428bca;
+}

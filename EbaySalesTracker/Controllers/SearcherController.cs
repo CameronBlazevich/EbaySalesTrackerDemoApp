@@ -80,7 +80,7 @@ namespace EbaySalesTracker.Controllers
 
                 //FixedPrice Listings
                 var fixedPriceListings = results.Where(l => l.ListingInfo != null && l.ListingInfo.listingType == "FixedPrice").ToList();
-                var fixedPriceListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.FixedPriced, fixedPriceListings);
+                var fixedPriceListingsBreakdown = new SearchResultBreakdown(SearchResultBreakdownType.FixedPrice, fixedPriceListings);
                 vM.SearchResultBreakdowns.Add(fixedPriceListingsBreakdown);
 
                 //Auction Listings

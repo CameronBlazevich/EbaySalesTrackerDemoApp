@@ -71,6 +71,25 @@ namespace EbaySalesTracker.ViewModels
                 return null;
             }
         }
+        public List<Tuple<DateTime,double>> DataPointsForPriceTrendGraph {
+            get
+            {
+                return GetDataPointsForGraph(SoldListings);
+            }
+        }
+
+        public List<Tuple<DateTime, double>> GetDataPointsForGraph(IEnumerable<Models.SearchItem> listings)
+        {
+            var data = new List<Tuple<DateTime, double>>();
+            var i = 0;
+            foreach (var listing in listings)
+            {
+                var point = Tuple.Create(listing.ListingInfo.endTime, listing.CurrentPrice);
+                data.Add(point);
+                i++;
+            }
+            return data;
+        }
     }
     public enum SearchResultBreakdownType
     {
@@ -81,7 +100,7 @@ namespace EbaySalesTracker.ViewModels
         [Description("Used")]
         UsedCondition,
         [Description("Fixed Price")]
-        FixedPriced,
+        FixedPrice,
         [Description("Auction")]
         Auctions,
         [Description("Store")]

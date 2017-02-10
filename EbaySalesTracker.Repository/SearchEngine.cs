@@ -49,7 +49,7 @@ namespace EbaySalesTracker.Repository
                     FindCompletedItemsRequest request = new FindCompletedItemsRequest();
                     //FindItemsByKeywordsRequest request = new FindItemsByKeywordsRequest();
                     request.keywords = keyword;
-                    //request.categoryId = new string[] { "9355" };
+                    request.categoryId = new string[] { categoryId };
 
                     //var itemFilter = new ItemFilter();
                     //itemFilter.name = ItemFilterType.Condition;

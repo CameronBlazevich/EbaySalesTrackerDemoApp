@@ -1,5 +1,6 @@
 ﻿@using eBay.Service.Core.Soap;
 @using EbaySalesTracker.ViewModels;
+
 @model EbaySalesTracker.ViewModels.SearchResultsViewModel
 @{
     ViewBag.Title = "Researcher";
@@ -8,7 +9,7 @@
     <div class="panel-heading"></div>
     <div class="panel-body">
         <div class="row">
-            @using (Html.BeginForm("Index", "Searcher", FormMethod.Post, new { id = "SearchTerm"}))
+            @using (Html.BeginForm("Index", "Searcher", FormMethod.Post, new { id = "SearchTerm" }))
             {
                 @Html.AntiForgeryToken()
                 <div class="row">
@@ -38,26 +39,189 @@
             }
             @if (Model.SearchResultBreakdowns?.Count > 0)
             {
-                <table class="table table-striped table-bordered">
+                <table id="searcher-breakdown-table"class="table table-striped table-bordered" style="table-layout:fixed; width:100%;">
                     <tr>
                         <th>Type</th>
                         <th>Number Listed</th>
                         <th>Number Sold</th>
-                        <th >Sell Through Percent</th>
+                        <th>Sell Through Percent</th>
                         <th>Avg. Sales Price</th>
                     </tr>
+                    @{ var i = 0;}
                     @foreach (var breakdown in Model.SearchResultBreakdowns)
                     {
-                        <tr>
+                        <tr class="accordion-toggle collapsed" data-toggle="collapse" data-target="#@breakdown.Type">
                             <td>@breakdown.Type.ToDescriptionString()</td>
                             <td>@breakdown.Listings.Count()</td>
                             <td>@breakdown.SoldListings.Count()</td>
                             <td>@breakdown.SellThroughPct</td>
                             <td>@breakdown.AverageSalePrice</td>
+
                         </tr>
+                        <tr class="accordion-body collapse" id="@breakdown.Type">
+                            <td colspan="5">
+                                <div class="col-xs-12 col-sm-12 col-md-4 searcher-drilldown">
+                                    <table class="table table-sm table-bordered">
+                                        <caption>Highest Selling Price</caption>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Price</th>
+                                            <th>Picture</th>
+                                        </tr>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="@breakdown.HighestPricedListing.ViewItemUrl" target="_blank">@(breakdown.HighestPricedListing.Title)</a></td>
+                                                <td>@breakdown.HighestPricedListing.CurrentPrice</td>
+                                                <td><img src="@(breakdown.HighestPricedListing.GalleryImageUrl)" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 searcher-drilldown">
+                                    <table class="table table-sm table-bordered">
+                                        <caption>Recently Sold</caption>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Price</th>
+                                            <th>End Date</th>
+                                        </tr>
+                                        <tbody>
+                                            @if (breakdown.MostRecentSoldListings != null)
+                                            {
+                                                foreach (var listing in breakdown.MostRecentSoldListings)
+                                                {
+                                                    <tr>
+                                                        <td><a href="@listing.ViewItemUrl" target="_blank">@(listing.Title)</a></td>
+                                                        <td class="@(listing.CurrentPrice > breakdown.AverageSalePrice ? "success" : "danger")">@listing.CurrentPrice</td>
+                                                        <td>@listing.ListingInfo.endTime</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-4 searcher-drilldown">
+                                    <table style="table-layout:fixed; width:100%">
+                                        <caption>Price Trend</caption>
+                                        <tr>
+                                            <td><div id=@("curve_chart" + i)></div></td>
+                                        </tr>
+                                    </table>
+                                    @*@Html.Hidden("hiddenDataFor_"+breakdown.Type, @Html.Raw(Json.Encode(@breakdown.DataPointsForPriceTrendGraph)), new { id = "hiddenDataFor_"+breakdown.Type })*@
+                                    @Html.Hidden("hiddenDataFor_" + breakdown.Type, @Html.Raw(Json.Encode(@breakdown.SoldListings)), new { id = "hiddenDataFor_" + breakdown.Type })
+                                </div>
+                            </td>
+                        </tr>
+                        i++;
                     }
                 </table>
             }
-        </div>
+        </div>        
     </div>
 </div>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(prepareDataForGraphs);
+    })
+
+    function prepareDataForGraphs()
+    {
+        var allListingsJson = JSON.parse($('#hiddenDataFor_All').val());
+        var newCondtionListingsJson = JSON.parse($('#hiddenDataFor_NewCondition').val());
+        var usedCondtionListingsJson = JSON.parse($('#hiddenDataFor_UsedCondition').val());
+        var fixedPriceListingsJson = JSON.parse($('#hiddenDataFor_FixedPrice').val());
+        var auctionsListingsJson = JSON.parse($('#hiddenDataFor_Auctions').val());
+        var storeInventoryListingsJson = JSON.parse($('#hiddenDataFor_StoreInventory').val());
+        var usedFixedPriceListingsJson = JSON.parse($('#hiddenDataFor_UsedFixedPrice').val());
+        var usedAuctionListingsJson = JSON.parse($('#hiddenDataFor_UsedAuction').val());
+        var usedStoreInventoryListings = JSON.parse($('#hiddenDataFor_UsedStoreInventory').val());
+        var newFixedPriceListings = JSON.parse($('#hiddenDataFor_NewFixedPrice').val());
+        var newAuctionListings = JSON.parse($('#hiddenDataFor_NewAuction').val());
+        var newStoreInventoryListings = JSON.parse($('#hiddenDataFor_NewStoreInventory').val());
+
+
+
+
+
+        var listingsJsonArray = new Array();
+        listingsJsonArray.push(allListingsJson, newCondtionListingsJson, usedCondtionListingsJson, fixedPriceListingsJson,
+            auctionsListingsJson, storeInventoryListingsJson, usedFixedPriceListingsJson,usedAuctionListingsJson,
+            usedStoreInventoryListings, newFixedPriceListings, newAuctionListings, newStoreInventoryListings);
+        
+        $(listingsJsonArray).each(function (index) {
+            var dataFormattedForChart = convertArrayOfObjectsToArrayOfArrays(this);            
+            if (dataFormattedForChart.length > 0) {
+                drawChart(dataFormattedForChart, index);
+            }           
+        });
+    }
+    function convertArrayOfObjectsToArrayOfArrays(objectArray) {
+        var array = new Array();
+        $(objectArray).each(function (index) {           
+            var formattedEndTime = parseJsonDate(this.ListingInfo.endTime);
+            var formattedStartTime = parseJsonDate(this.ListingInfo.startTime);
+            var point = [formattedEndTime, this.CurrentPrice, createCustomHTMLContent(this.Title, this.GalleryImageUrl, formattedStartTime,
+                formattedEndTime, this.SellingStatus.currentPrice.Value + ' ' + this.SellingStatus.currentPrice.currencyId)];
+            array.push(point);
+        });
+        return array;
+    }
+    function parseJsonDate(jsonDateString) {
+        return new Date(parseInt(jsonDateString.replace('/Date(', '')));
+    }
+    function drawChart(dataArray, index) {
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Price');
+        data.addColumn({ 'type': 'string', 'role': 'tooltip', 'p': { 'html': true } })
+        data.addRows(dataArray);
+      
+        var options = {
+            //title: 'Trend',
+            curveType: 'function',
+            legend: { position: 'top' },
+            pointShape: 'diamond',
+            pointSize: 7,
+            tooltip: {isHtml: true},
+            hAxis: { showTextEvery: 2 },
+            trendlines: { 0: { pointSize: 0, tooltip: false,  color: 'red' } }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart' + index));
+
+        chart.draw(data, options);
+
+        google.visualization.events.addListener(chart, 'select', function () {
+
+        });
+    }
+
+    function createCustomHTMLContent(title, imageUrl, startDate, endDate, price) {
+        var html = '<div class="panel">' +
+            '<div class="panel-heading">' +
+                '<h5>'+ title + '</h5>' +
+            '</div>' +
+            '<div class="panel-body">' +
+                '<div class="row">' +
+                    '<div class="col-md-3">' +
+                        '<img src="'+ imageUrl +'"/>' +
+                    '</div>' +
+                    '<div class="col-md-offset-1 col-md-8">' +
+                        '<ul>' +
+                            '<li><strong>Start Date:</strong> ' + startDate + '</li>' +
+                            '<li><strong>End Date:</strong> ' + endDate + '</li>' +
+                            '<li><strong>Price:</strong> ' + price + '</li>' +
+                        '</ul>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+            '</div>';
+        return html;
+    }
+    
+
+</script>
