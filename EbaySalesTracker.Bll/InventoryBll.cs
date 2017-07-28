@@ -64,7 +64,7 @@ namespace EbaySalesTracker.Bll
             {
                 var listings = ListingBll.GetSoldListingsByInventoryItem(inventoryItem.Id, userId);
                 inventoryItem.QuantitySold = listings.Count();
-                SetInventoryItemAverages(listings, inventoryItem, userId);
+                SetInventoryItemAverages(inventoryItem, userId);
             }
             return inventoryItem;
         }
@@ -74,18 +74,7 @@ namespace EbaySalesTracker.Bll
             var inventoryItems = InventoryRepository.GetInventoryItemsByUser(userId);
             foreach (var inventoryItem in inventoryItems)
             {
-                var listings = ListingBll.GetSoldListingsByInventoryItem(inventoryItem.Id, userId);
-                if (listings.Count() == 0)
-                {
-                    inventoryItem.QuantitySold = 0;
-                    inventoryItem.AverageProfit = 0;
-                    inventoryItem.AverageSalesPrice = 0;
-                    
-                }
-                else {                    
-                    inventoryItem.QuantitySold = listings.Sum(l => l.CalculateQuantitySold());
-                    SetInventoryItemAverages(listings, inventoryItem, userId);
-                }
+                    SetInventoryItemAverages(inventoryItem, userId);               
             }
             return inventoryItems.OrderByDescending(x => x.QuantitySold).ToList(); ;
         }
@@ -101,7 +90,7 @@ namespace EbaySalesTracker.Bll
         }
 
         //listings should always only be listings associated to the inventory item being passed in
-        public void SetInventoryItemAverages(IEnumerable<Listing> listings, InventoryItem inventoryItem, string userId)
+        public void SetInventoryItemAverages(InventoryItem inventoryItem, string userId)
         {           
             double avgPrice = 0;
             double avgPriceNumerator = 0;
@@ -109,21 +98,34 @@ namespace EbaySalesTracker.Bll
             double totalFees = 0;
             double avgTotalFees = 0;
 
-            foreach (var listing in listings)
+            var listings = ListingBll.GetSoldListingsByInventoryItem(inventoryItem.Id, userId);
+            if (listings.Count() == 0)
             {
-                foreach (var trans in listing.Transactions)
-                {
-                    avgPriceNumerator += trans.QuantitySold * trans.UnitPrice;
-                }
-                totalFees += listing.TotalNetFees;
+                inventoryItem.QuantitySold = 0;
+                inventoryItem.AverageProfit = 0;
+                inventoryItem.AverageSalesPrice = 0;
+
             }
+            else
+            {
+                inventoryItem.QuantitySold = listings.Sum(l => l.CalculateQuantitySold());
 
-            avgTotalFees = totalFees / inventoryItem.QuantitySold;
-            avgPrice = avgPriceNumerator / inventoryItem.QuantitySold;
-            avgProfitBeforeCost = avgPrice - avgTotalFees;
+                foreach (var listing in listings)
+                {
+                    foreach (var trans in listing.Transactions)
+                    {
+                        avgPriceNumerator += trans.QuantitySold * trans.UnitPrice;
+                    }
+                    totalFees += listing.TotalNetFees;
+                }
 
-            inventoryItem.AverageProfit = Math.Round(avgProfitBeforeCost - inventoryItem.Cost, 2);
-            inventoryItem.AverageSalesPrice = Math.Round(avgPrice, 2);
+                avgTotalFees = totalFees / inventoryItem.QuantitySold;
+                avgPrice = avgPriceNumerator / inventoryItem.QuantitySold;
+                avgProfitBeforeCost = avgPrice - avgTotalFees;
+
+                inventoryItem.AverageProfit = Math.Round(avgProfitBeforeCost - inventoryItem.Cost, 2);
+                inventoryItem.AverageSalesPrice = Math.Round(avgPrice, 2);
+            }
         }
 
         public InventoryItem GetBestSellingItem(string userId)

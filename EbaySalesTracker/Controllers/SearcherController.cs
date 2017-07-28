@@ -1,4 +1,4 @@
-﻿using EbaySalesTracker.Bll;
+﻿    using EbaySalesTracker.Bll;
 using EbaySalesTracker.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using eBay.Service.Core.Soap;
+using EbaySalesTracker.Models;
 
 namespace EbaySalesTracker.Controllers
 {
@@ -47,12 +48,71 @@ namespace EbaySalesTracker.Controllers
             if (searchTerm != null)
             {
                 vM.SearchTerm = searchTerm;
-                vM.Categories = SearcherBll.GetSuggestedCategories(searchTerm, "AgAAAA**AQAAAA**aAAAAA**5aFyWA**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AFl4enAJGBpAqdj6x9nY+seQ**JUgDAA**AAMAAA**kpn6ddRezaL9hKw9yeKXpVk4E6vO4fvDpeViYkVIaS0A5J0sP0jAX9ZWfVY34BqCgBgNKdKECco5LmoX1QxWWvD0OaFreyvT5ROo9PepEces++SuKgvAmS2JZBgxdPeAJtOrIZ1sbDSqMvMjxO/733g+iA3VuXw3XLY+y6S9rEGjyVh0AFGvLPvXEDdxnHHbspo4gB1SrHbRPkuz1tVv9KVaPonWw6Pjvrz4+HhRxGOLDmRPpuEZCCNJKj29VuWnLhNKNAzOYo4apXlGbQoTa7y/W6wnI/9Sqb6QfbyYSoqNkQFlZtPgLas4Z6SFhEF86JlhctHzBD+QqYrcE9lU3SJS8TaQcwM18i3PaG0qO2UYcDgygChFtXwSgHKE45q4qpFO16GLvfl3VQoMYasT9xBw65/2f4AWa3s0XZt7zhPo18famPCsTnEr6NvfFLyrCMi3X20faqjvnAlQhtA3RpoLdOLNVjR0ttCBAj08KqXBtEQ31r97ExlU01JBHkwpDvT26SNVvU9h8Pc9bISOskPVYdh31Gfa80XukvZrkL8L3hDJMc7DAK0V4lMQVGHrnJ9cyNVNo/KULkcXRYKkQYGhWdXAR5PuYPATWH7q6FNg4GpdETcgBv7kNdWVm197dCYVFmo4EAB9jA5q1nO26M7Sx3p70ZizFXcX0EqZuB1c7Mhkx2gllApq+2c+IF4SuRfEeRIC6JyxQzx7Yhd4N3wfOan3KfPnXfxXbPqR7MEe89dMHSCLqHSnROhh004Q");
+                var suggestedCategoryResults = SearcherBll.GetSuggestedCategories(searchTerm, "AgAAAA**AQAAAA**aAAAAA**5aFyWA**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AFl4enAJGBpAqdj6x9nY+seQ**JUgDAA**AAMAAA**kpn6ddRezaL9hKw9yeKXpVk4E6vO4fvDpeViYkVIaS0A5J0sP0jAX9ZWfVY34BqCgBgNKdKECco5LmoX1QxWWvD0OaFreyvT5ROo9PepEces++SuKgvAmS2JZBgxdPeAJtOrIZ1sbDSqMvMjxO/733g+iA3VuXw3XLY+y6S9rEGjyVh0AFGvLPvXEDdxnHHbspo4gB1SrHbRPkuz1tVv9KVaPonWw6Pjvrz4+HhRxGOLDmRPpuEZCCNJKj29VuWnLhNKNAzOYo4apXlGbQoTa7y/W6wnI/9Sqb6QfbyYSoqNkQFlZtPgLas4Z6SFhEF86JlhctHzBD+QqYrcE9lU3SJS8TaQcwM18i3PaG0qO2UYcDgygChFtXwSgHKE45q4qpFO16GLvfl3VQoMYasT9xBw65/2f4AWa3s0XZt7zhPo18famPCsTnEr6NvfFLyrCMi3X20faqjvnAlQhtA3RpoLdOLNVjR0ttCBAj08KqXBtEQ31r97ExlU01JBHkwpDvT26SNVvU9h8Pc9bISOskPVYdh31Gfa80XukvZrkL8L3hDJMc7DAK0V4lMQVGHrnJ9cyNVNo/KULkcXRYKkQYGhWdXAR5PuYPATWH7q6FNg4GpdETcgBv7kNdWVm197dCYVFmo4EAB9jA5q1nO26M7Sx3p70ZizFXcX0EqZuB1c7Mhkx2gllApq+2c+IF4SuRfEeRIC6JyxQzx7Yhd4N3wfOan3KfPnXfxXbPqR7MEe89dMHSCLqHSnROhh004Q");
+                //vM.Categories = new List<ChildCategory>();
+                var childCategories = new List<ChildCategory>();
+
+
+                var parentNamesProcessed = new List<string>();
+                var uniqueParents = new List<ParentCategory>();
+                
+
+                foreach (SuggestedCategoryType suggestedCategory in suggestedCategoryResults)
+                {
+                    var childCategory = new ChildCategory();
+                    childCategory.CategoryName = suggestedCategory.Category.CategoryName;
+                    childCategory.CategoryId = suggestedCategory.Category.CategoryID;
+                    childCategory.PercentFound = suggestedCategory.PercentItemFound;
+                    childCategory.ParentCategories = new List<Category>();
+
+                    foreach(string parentName in suggestedCategory.Category.CategoryParentName)
+                    {
+                        
+                        
+
+
+                        var parentCatIndex = suggestedCategory.Category.CategoryParentName.IndexOf(parentName);
+                        var parentCategory = new Category();
+                        parentCategory.CategoryName = parentName;
+                        parentCategory.CategoryId = suggestedCategory.Category.CategoryParentID[parentCatIndex];
+
+                        childCategory.ParentCategories.Add(parentCategory);
+
+                        //build unique parents
+                        if (!parentNamesProcessed.Contains(parentName))
+                        {
+                            parentNamesProcessed.Add(parentName);
+                            var parentParent = new ParentCategory();
+                            parentParent.CategoryName = parentCategory.CategoryName;
+                            parentParent.CategoryId = parentCategory.CategoryId;
+                            parentParent.ChildCategories = new List<ChildCategory>();
+                            parentParent.ChildCategories.Add(childCategory);                            
+                            uniqueParents.Add(parentParent);
+                        }
+                        else
+                        {
+                            uniqueParents.Where(p => p.CategoryName == parentName).First().ChildCategories.Add(childCategory);
+                        }
+                    }
+                    childCategories.Add(childCategory);
+
+                    //foreach(var parentCategory in uniqueParents)
+                    //{
+                    //    var parentCategory
+                    //    foreach(var uniqueChild in childCategories)
+                    //    {
+                    //        if(uniqueChild.ParentCategories.)
+                    //    }
+                    //}
+                }
+                vM.Categories = uniqueParents;
             }
+
                 return View(vM);
         }
 
-        public ActionResult GetSearchItemsByCategory(string categoryId, string searchTerm)
+      
+        public ActionResult GetCompletedSearchItemsByCategory(string categoryId, string searchTerm)
         {
             var vM = new SearchResultsViewModel();
             vM.SearchResultBreakdowns = new List<SearchResultBreakdown>();
@@ -122,6 +182,25 @@ namespace EbaySalesTracker.Controllers
 
             }
             return View("Index", vM);
+        }
+
+        [HttpGet]
+        public ActionResult DealAlerts()
+        {
+            var vM = new DealAlertsViewModel();
+            return View(vM);
+        }
+        [HttpPost]
+        public ActionResult DealAlerts(DealAlertsViewModel dealAlertViewModel)
+        {
+            var searchFilter = new EbayItemSearchFilter();
+            searchFilter.SearchTerm = dealAlertViewModel.SearchTerm;
+            searchFilter.PriceLimit = dealAlertViewModel.PriceLimit;
+            //searchFilter.CategoryId = dealAlertViewModel.CategoryId;
+            searchFilter.CategoryId = "267";
+            var results = SearcherBll.FindActiveItemsMatchingCriteria(searchFilter);
+            dealAlertViewModel.SearchResults = results.ToList();
+            return View(dealAlertViewModel);
         }
     }
 }

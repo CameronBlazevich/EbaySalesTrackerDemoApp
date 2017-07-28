@@ -11,7 +11,7 @@ using EbaySalesTracker.Models;
 using EbaySalesTracker.Repository;
 using Microsoft.Practices.Unity;
 
-namespace EbaySalesTracker.Controllers
+namespace EbaySalesTracker.Controllers  
 {
     public class StripeWebhookController : Controller
     {

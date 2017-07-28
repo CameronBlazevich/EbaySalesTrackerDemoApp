@@ -11,7 +11,8 @@ namespace EbaySalesTracker.ViewModels
 {
     public class SearchResultsViewModel
     {
-        public SuggestedCategoryTypeCollection Categories { get; set; }
+        //public SuggestedCategoryTypeCollection Categories { get; set; }
+        public List<ParentCategory> Categories { get; set; } 
         public List<SearchResultBreakdown> SearchResultBreakdowns { get; set; }
         public string SearchTerm { get; set; }
     }
@@ -51,12 +52,22 @@ namespace EbaySalesTracker.ViewModels
                 return 0;
             }
         }
-        public Models.SearchItem HighestPricedListing
+        public Models.SearchItem HighestPricedSoldListing
         {
             get
             {
                 if(SoldListings.Any())
                     return SoldListings.MaxBy(l => l.CurrentPrice);
+
+                return new Models.SearchItem();
+            }
+        }
+        public Models.SearchItem HighestPricedListing
+        {
+            get
+            {
+                if (Listings.Any())
+                    return Listings.MaxBy(l => l.CurrentPrice);
 
                 return new Models.SearchItem();
             }
@@ -67,6 +78,16 @@ namespace EbaySalesTracker.ViewModels
             {
                 if(SoldListings.Any())
                     return SoldListings.Take(3);
+
+                return null;
+            }
+        }
+        public IEnumerable<Models.SearchItem> MostRecentUnsoldListings
+        {
+            get
+            {
+                if (Listings.Any())
+                    return Listings.Take(3).Where(l => l.SellingStatus.sellingState != "EndedWithSales").ToList();
 
                 return null;
             }
@@ -117,6 +138,29 @@ namespace EbaySalesTracker.ViewModels
         NewAuction,
         [Description("New-Store")]
         NewStoreInventory
+    }
+
+    public class Category
+    {
+        public string CategoryName { get; set; }
+        public string CategoryId { get; set; }       
+    }
+
+    public class ChildCategory : Category
+    {
+        public List<Category> ParentCategories { get; set; }
+        public int PercentFound { get; set; }
+    }
+    public class ParentCategory : Category
+    {
+        public List<ChildCategory> ChildCategories { get; set; }
+        public int? PercentFound
+        {
+            get
+            {
+                return ChildCategories?.Sum(c => c.PercentFound) ?? 0;
+            }
+        }
     }
 
     public static class SearchResultBreakdownTypeExtensions

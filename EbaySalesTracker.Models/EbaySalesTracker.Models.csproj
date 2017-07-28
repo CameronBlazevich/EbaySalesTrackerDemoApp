@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountViewModels.cs" />
+    <Compile Include="EbayItemSearchFilter.cs" />
     <Compile Include="Enums\FileType.cs" />
     <Compile Include="File.cs" />
     <Compile Include="IdentityModels.cs" />

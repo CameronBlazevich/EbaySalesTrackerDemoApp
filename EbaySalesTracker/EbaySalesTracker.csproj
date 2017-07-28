@@ -238,6 +238,7 @@
     <Compile Include="Helpers\CsvExport.cs" />
     <Compile Include="OAuthTokenResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DealAlertsViewModel.cs" />
     <Compile Include="ViewModels\SearchResultsViewModel.cs" />
     <Compile Include="ViewModels\SubscriptionViewModel.cs" />
     <Content Include="Content\bootstrap-editable\css\bootstrap-editable.css" />
@@ -329,6 +330,7 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="img\banner-bg.jpg" />
+    <Content Include="img\cameron_2.jpg" />
     <Content Include="img\CreditCards\amex.png" />
     <Content Include="img\CreditCards\credit.png" />
     <Content Include="img\CreditCards\dankort.png" />
@@ -349,10 +351,15 @@
     <Content Include="img\ebay background.jpg" />
     <Content Include="img\intro-bg.jpg" />
     <Content Include="img\ipad.png" />
+    <Content Include="img\ListingsScreenshot.PNG" />
     <Content Include="img\Logomakr_0KNSYp.png" />
     <Content Include="img\Logomakr_9RcNsT.png" />
+    <Content Include="img\no-spreadsheets.jpg" />
     <Content Include="img\phones.png" />
+    <Content Include="img\ProductsScreenshot.PNG" />
     <Content Include="img\SampleDashboardPhoto.PNG" />
+    <Content Include="img\SearcherScreenshot.PNG" />
+    <Content Include="img\spreadsheet_stock.jpg" />
     <Content Include="Scripts\bootstrap-editable\js\bootstrap-editable.js" />
     <Content Include="Scripts\bootstrap-editable\js\bootstrap-editable.min.js" />
     <Content Include="Scripts\bootstrap3-editable\js\bootstrap-editable.js" />
@@ -479,6 +486,7 @@
     <Content Include="Views\Shared\_BillingPartial.cshtml" />
     <Content Include="Views\Account\RegisterEmailAndPassword.cshtml" />
     <Content Include="Views\Searcher\Index.cshtml" />
+    <Content Include="Views\Searcher\DealAlerts.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

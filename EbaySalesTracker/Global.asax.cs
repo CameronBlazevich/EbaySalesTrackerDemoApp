@@ -19,7 +19,7 @@ namespace EbaySalesTracker
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            StripeConfiguration.SetApiKey(ConfigurationManager.AppSettings["stripeSecretKeyTest"]);
+            StripeConfiguration.SetApiKey(ConfigurationManager.AppSettings["stripeSecretKeyProd"]);
         }
     }
 }

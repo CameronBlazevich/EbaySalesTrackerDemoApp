@@ -1,0 +1,69 @@
+﻿@model EbaySalesTracker.ViewModels.DealAlertsViewModel
+@{
+    ViewBag.Title = "Deal Alerts";
+}
+
+<div>
+    <div class="panel" id="search-filter-panel">
+        <div class="panel-heading">
+            <h4>Search Filter</h4>
+        </div>
+        <div class="panel-body">
+@using (Html.BeginForm("DealAlerts", "Searcher", FormMethod.Post, new { id = "deal-alerts-form", @class="form-inline" }))
+{
+    <div class="form-group">
+        <div>
+            @Html.LabelFor(model => model.SearchTerm, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.SearchTerm, new { @class = "form-control", @placeholder = "Keywords" })
+        </div>
+        <div>
+            @Html.LabelFor(model => model.PriceLimit, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.PriceLimit, new { @class = "form-control", @placeholder = "Price Limit" })
+        </div>
+        @*<div>
+            @Html.LabelFor(model => model.CategoryName, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control", @placeholder = "Price Limit" })
+        </div>*@
+        <button class="btn btn-primary btn-lg" form="deal-alerts-form" type="submit">Search</button>
+    </div>
+}
+
+        </div>
+    </div>
+    @if (Model?.SearchResults != null)
+    {
+    <div class="panel" id="search-results-panel">
+        <div class="panel-heading">
+            <h4>Results</h4>
+        </div>
+        <div class="panel-body">
+            <table class="table-bordered table-striped table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Buy-It-Now Price</th>
+                        <th>Current Price</th>
+                        <th>List Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var result in Model.SearchResults)
+                    {
+                        <tr>
+                            <td><a href="@result.ViewItemUrl" target="_blank">@result.Title</a></td>
+                            <td>@result.ListingInfo.listingType</td>
+                            <td>@(result.ListingInfo?.buyItNowPrice?.Value ?? 0)</td>
+                            <td>@result.SellingStatus.currentPrice.Value</td>
+                            <td>@result.ListingInfo.startTime</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+    }
+</div>
+

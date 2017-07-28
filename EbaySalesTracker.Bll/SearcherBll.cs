@@ -25,7 +25,13 @@ namespace EbaySalesTracker.Bll
             }
         }
 
-     public SuggestedCategoryTypeCollection GetSuggestedCategories(string searchTerm, string userToken)
+        public ICollection<SearchItem> FindActiveItemsMatchingCriteria(EbayItemSearchFilter searchFilter)
+        {
+            var results = SearchEngine.FindItemsAdvanced(searchFilter);
+            return results;
+        }
+
+        public SuggestedCategoryTypeCollection GetSuggestedCategories(string searchTerm, string userToken)
         {
 
             var suggestedCategories = SearchEngine.GetSuggestedCategories(searchTerm, userToken);

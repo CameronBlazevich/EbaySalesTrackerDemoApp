@@ -99,8 +99,21 @@ caption {
 }
 .accordion-toggle:not(.collapsed)
 {
-    background-color:#428bca;
+    background-color:lightblue;
 }
 .accordion-toggle:hover{
-    background-color:#428bca;
+    background-color:lightblue;
 }
+.parent-category {
+    background-color:#F9F9F9
+}
+
+#category-list-table th{
+    background-color:#dcdcdc;
+}
+#SearchTerm {
+    margin-bottom:10px;
+}
+
+svg > g > g:last-child { pointer-events: none }
+div.google-visualization-tooltip { pointer-events: none }

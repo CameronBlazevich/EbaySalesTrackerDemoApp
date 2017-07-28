@@ -235,14 +235,12 @@ namespace EbaySalesTracker.Controllers
 
                     ViewBag.Message = user.Email.ToString();
 
-
-                    //return View("Info");
-
-
-                    //return RedirectToAction("Register", "Account");
-                    //return RedirectToAction("RegisterStripeSubscription", "Account");
-                    //return RedirectToAction("RegisterEmailAndPassword", "Account");
+                    //if (ConfigurationManager.AppSettings["RequireSubscriptionOnRegistration"] == "true")
+                    //{ 
                     return RedirectToAction("Index", "Subscription");
+                    //}
+
+                    return RedirectToAction("Index", "Listings");
                 }
                 AddErrors(result);
             }

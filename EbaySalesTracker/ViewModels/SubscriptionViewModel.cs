@@ -18,7 +18,7 @@ namespace EbaySalesTracker.ViewModels.Subscription
         public string StripePublishableKey {
             get
             {
-                return ConfigurationManager.AppSettings["stripePublishableKeyTest"];
+                return ConfigurationManager.AppSettings["stripePublishableKeyProd"];
             }
 
         }
